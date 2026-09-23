@@ -1,0 +1,191 @@
+---
+import imgKey from "@/assets/logo.webp";
+---
+<!-- HEADER CORPORATIVO FIJO -->
+<header
+    id="main-header"
+    class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-text/10"
+>
+    <div
+        class="max-w-7xl mx-auto flex justify-between items-center text-background"
+    >
+        <!-- Logo + Brand Name -->
+        <a
+            href="#hero-container"
+            class="flex items-center gap-3 group focus:outline-none"
+        >
+            <div
+                class="p-1 rounded-xl bg-primary/5 border border-accent1/30 transition-transform group-hover:scale-105"
+            >
+                <img
+                    src={imgKey.src}
+                    alt="Jalsuri Logo"
+                    class="h-9 w-auto object-contain"
+                />
+            </div>
+            <div class="flex flex-col">
+                <span
+                    class="text-background font-extrabold text-lg tracking-tight font-display leading-tight group-hover:text-primary transition-colors"
+                >
+                    JALSURI
+                </span>
+                <span
+                    class="text-[10px] tracking-widest uppercase font-semibold text-accent1"
+                >
+                    Agua Purificada
+                </span>
+            </div>
+        </a>
+
+        <!-- Navigation Menu (Desktop) -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+            <a
+                href="#hero-container"
+                class="text-text hover:text-primary transition-colors py-1 relative group"
+            >
+                Inicio
+                <span
+                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
+                ></span>
+            </a>
+            <a
+                href="#compromiso"
+                class="text-text hover:text-primary transition-colors py-1 relative group"
+            >
+                Nosotros
+                <span
+                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
+                ></span>
+            </a>
+            <a
+                href="#productos"
+                class="text-text hover:text-primary transition-colors py-1 relative group"
+            >
+                Productos
+                <span
+                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
+                ></span>
+            </a>
+            <a
+                href="#maquila"
+                class="text-text hover:text-primary transition-colors py-1 relative group"
+            >
+                Maquila & Empresas
+                <span
+                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
+                ></span>
+            </a>
+            <a
+                href="#contacto"
+                class="text-text hover:text-primary transition-colors py-1 relative group"
+            >
+                Contacto
+                <span
+                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
+                ></span>
+            </a>
+        </nav>
+
+        <!-- Right CTA Button & Mobile Toggle -->
+        <div class="flex items-center gap-4">
+            <a
+                href="https://wa.me/51997673300"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent1 to-primary hover:from-primary hover:to-text text-background font-semibold text-xs tracking-wider uppercase shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+            >
+                <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    ></path>
+                </svg>
+                Cotizar Ahora
+            </a>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button
+                id="mobile-menu-btn"
+                aria-label="Toggle Navigation Menu"
+                class="md:hidden p-2 rounded-xl text-text hover:text-primary hover:bg-primary/10 focus:outline-none transition-colors"
+            >
+                <svg
+                    id="menu-icon-open"
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                </svg>
+                <svg
+                    id="menu-icon-close"
+                    class="w-6 h-6 hidden"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div
+        id="mobile-menu"
+        class="hidden md:hidden mt-3 pt-4 border-t border-accent1/20 flex flex-col gap-3 pb-2 text-text font-medium text-sm animate-fadeIn bg-background"
+    >
+        <a
+            href="#hero-container"
+            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
+            >Inicio</a
+        >
+        <a
+            href="#compromiso"
+            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
+            >Nosotros</a
+        >
+        <a
+            href="#productos"
+            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
+            >Productos</a
+        >
+        <a
+            href="#maquila"
+            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
+            >Maquila & Empresas</a
+        >
+        <a
+            href="#contacto"
+            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
+            >Contacto</a
+        >
+        <a
+            href="https://wa.me/51997673300"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-2 text-center py-2.5 rounded-full bg-gradient-to-r from-accent1 to-primary text-background font-semibold text-xs uppercase tracking-wider shadow-md"
+        >
+            Cotizar Vía WhatsApp
+        </a>
+    </div>
+</header>

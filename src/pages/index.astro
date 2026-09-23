@@ -1,214 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import VideoKey from "@/assets/video-optimizado.mp4";
-import imgKey from "@/assets/logo.webp";
 import ChevronDown from "@/components/icons/ChevronDown.astro";
-
-// Images from src/assets/img/
-import imgBidon20L from "@/assets/img/20LT-OKAS.webp";
-import imgMaquila from "@/assets/img/AGUA-MAQUILA.webp";
-import imgPortadaBidon from "@/assets/img/PORTADA-WEB-JALSURI-BIDON-8.5-LITROS_2.webp";
-import imgDispensador from "@/assets/img/Dispensador-Jalsuri-1024x867.webp";
-import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.webp";
+import imgKey from "@/assets/logo.webp";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import SectionValores from "@/components/section-valores/SectionValores.astro";
 ---
 
 <Layout>
-	<!-- HEADER CORPORATIVO FIJO -->
-	<header
-		id="main-header"
-		class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-sky-900/5"
-	>
-		<div class="max-w-7xl mx-auto flex justify-between items-center text-sky-100">
-			<!-- Logo + Brand Name -->
-			<a
-				href="#hero-container"
-				class="flex items-center gap-3 group focus:outline-none"
-			>
-				<div
-					class="p-1 rounded-xl bg-sky-50 border border-sky-200/80 transition-transform group-hover:scale-105"
-				>
-					<img
-						src={imgKey.src}
-						alt="Jalsuri Logo"
-						class="h-9 w-auto object-contain"
-					/>
-				</div>
-				<div class="flex flex-col">
-					<span
-						class="text-slate-900 font-extrabold text-lg tracking-tight font-display leading-tight group-hover:text-sky-600 transition-colors"
-					>
-						JALSURI
-					</span>
-					<span
-						class="text-[10px] tracking-widest uppercase font-semibold text-sky-500"
-					>
-						Agua Purificada
-					</span>
-				</div>
-			</a>
-
-			<!-- Navigation Menu (Desktop) -->
-			<nav
-				class="hidden md:flex items-center gap-8 text-sm font-medium"
-			>
-				<a
-					href="#hero-container"
-					class="hover:text-sky-600 transition-colors py-1 relative group"
-				>
-					Inicio
-					<span
-						class="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300 group-hover:w-full"
-					></span>
-				</a>
-				<a
-					href="#compromiso"
-					class="hover:text-sky-600 transition-colors py-1 relative group"
-				>
-					Nosotros
-					<span
-						class="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300 group-hover:w-full"
-					></span>
-				</a>
-				<a
-					href="#productos"
-					class="hover:text-sky-600 transition-colors py-1 relative group"
-				>
-					Productos
-					<span
-						class="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300 group-hover:w-full"
-					></span>
-				</a>
-				<a
-					href="#maquila"
-					class="hover:text-sky-600 transition-colors py-1 relative group"
-				>
-					Maquila & Empresas
-					<span
-						class="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300 group-hover:w-full"
-					></span>
-				</a>
-				<a
-					href="#contacto"
-					class="hover:text-sky-600 transition-colors py-1 relative group"
-				>
-					Contacto
-					<span
-						class="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300 group-hover:w-full"
-					></span>
-				</a>
-			</nav>
-
-			<!-- Right CTA Button & Mobile Toggle -->
-			<div class="flex items-center gap-4">
-				<a
-					href="https://wa.me/51997673300"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-sky-500 via-sky-600 to-blue-700 hover:from-sky-400 hover:to-blue-800 text-white font-semibold text-xs tracking-wider uppercase shadow-lg shadow-sky-500/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-				>
-					<svg
-						class="w-4 h-4"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-						></path>
-					</svg>
-					Cotizar Ahora
-				</a>
-
-				<!-- Mobile Menu Toggle Button -->
-				<button
-					id="mobile-menu-btn"
-					aria-label="Toggle Navigation Menu"
-					class="md:hidden p-2 rounded-xl text-slate-700 hover:text-sky-600 hover:bg-sky-50 focus:outline-none transition-colors"
-				>
-					<svg
-						id="menu-icon-open"
-						class="w-6 h-6"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16M4 18h16"></path>
-					</svg>
-					<svg
-						id="menu-icon-close"
-						class="w-6 h-6 hidden"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M6 18L18 6M6 6l12 12"></path>
-					</svg>
-				</button>
-			</div>
-		</div>
-
-		<!-- Mobile Navigation Drawer -->
-		<div
-			id="mobile-menu"
-			class="hidden md:hidden mt-3 pt-4 border-t border-sky-100 flex flex-col gap-3 pb-2 text-slate-700 font-medium text-sm animate-fadeIn"
-		>
-			<a
-				href="#hero-container"
-				class="px-3 py-2 rounded-lg hover:bg-sky-50 hover:text-sky-600 transition-colors"
-				>Inicio</a
-			>
-			<a
-				href="#compromiso"
-				class="px-3 py-2 rounded-lg hover:bg-sky-50 hover:text-sky-600 transition-colors"
-				>Nosotros</a
-			>
-			<a
-				href="#productos"
-				class="px-3 py-2 rounded-lg hover:bg-sky-50 hover:text-sky-600 transition-colors"
-				>Productos</a
-			>
-			<a
-				href="#maquila"
-				class="px-3 py-2 rounded-lg hover:bg-sky-50 hover:text-sky-600 transition-colors"
-				>Maquila & Empresas</a
-			>
-			<a
-				href="#contacto"
-				class="px-3 py-2 rounded-lg hover:bg-sky-50 hover:text-sky-600 transition-colors"
-				>Contacto</a
-			>
-			<a
-				href="https://wa.me/51997673300"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="mt-2 text-center py-2.5 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold text-xs uppercase tracking-wider shadow-md"
-			>
-				Cotizar Vía WhatsApp
-			</a>
-		</div>
-	</header>
-
+	<Header />
+	
 	<!-- 1. HERO SECTION CON MÁSCARA Y VIDEO (SIN OVERLAY) -->
 	<section
 		id="hero-container"
-		class="relative w-full h-screen overflow-hidden bg-slate-950"
+		class="relative w-full h-screen overflow-hidden"
 	>
+		
 		<!-- Máscara con el logo y el video de fondo -->
 		<div
 			id="logo-mask"
-			class="w-full h-full absolute top-0 left-0 bg-white shadow-[0px_100px_32px_0px_rgba(207,207,207,0.2)]"
+			class="w-full h-full absolute top-0 left-0 bg-black"
 			style={`--mask-url: url('${imgKey.src}');`}
 		>
 			<picture
@@ -217,7 +29,7 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 			>
 				<!-- SIN OVERLAY DE OSCURECIMIENTO - Video 100% nítido y libre de capas oscuras -->
 				<div
-					class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60 z-[1] pointer-events-none"
+					class="absolute inset-0 bg-linear-to-t from-black/40 via-black/20 to-black/30 z-[1] pointer-events-none"
 				>
 				</div>
 				<!-- Textos principales del Hero Corporativo -->
@@ -229,7 +41,7 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 					<span
 						class="px-5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-sky-300 text-sky-700 text-xs md:text-sm font-bold tracking-[0.25em] uppercase mb-4 shadow-xl shadow-sky-900/10"
 					>
-						💧 Pureza & Calidad Certificada
+						Pureza & Calidad Certificada
 					</span>
 
 					<!-- Título Principal Limpio -->
@@ -246,24 +58,6 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 						Tecnología de microfiltración y ozonización para una
 						hidratación pura, ligera y saludable.
 					</p>
-
-					<!-- Action Buttons inside Hero -->
-					<div
-						class="mt-8 flex flex-wrap items-center justify-center gap-4 pointer-events-auto"
-					>
-						<a
-							href="#productos"
-							class="px-7 py-3 rounded-full bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs sm:text-sm tracking-wider uppercase shadow-lg shadow-sky-500/30 transition-all hover:scale-105"
-						>
-							Explorar Productos
-						</a>
-						<a
-							href="#maquila"
-							class="px-7 py-3 rounded-full bg-white/90 hover:bg-white text-slate-900 font-bold text-xs sm:text-sm tracking-wider uppercase shadow-lg shadow-black/10 transition-all hover:scale-105"
-						>
-							Servicio Maquila
-						</a>
-					</div>
 				</div>
 
 				<video
@@ -278,232 +72,129 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 				</video>
 			</picture>
 		</div>
-		<div id="hero-subtitle"
-			class="fixed bottom-6 left-0 right-0 z-20 text-white opacity-0"
+		<section
+			id="compromiso"
+			class="absolute bottom-20 w-full py-20 lg:py-32 overflow-hidden opacity-0"
 		>
-			Brindamos el mejor servicio de calidad y pureza en agua purificada |
-			Envasado de bebidas para empresas
-		</div>
+			<div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+				<div
+					class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
+				>
+					<!-- Columna Izquierda: Título Principal y Subtítulo -->
+					<div class="lg:col-span-5 flex flex-col gap-6">
+						<!-- Etiqueta superior -->
+						<div class="inline-flex items-center gap-3">
+							<span class="w-8 h-[2px] bg-accent1"></span>
+							<span
+								class="text-accent1 font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
+							>
+								Para tu equipo
+							</span>
+						</div>
 
+						<!-- Título impactante con palabra resaltada en gradiente -->
+						<h2
+							class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text font-display leading-[1.1] tracking-tight"
+						>
+							Soluciones que <span
+								class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent1"
+								>fluyen</span
+							> con tu ritmo laboral.
+						</h2>
+
+						<!-- Intro -->
+						<p
+							class="text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
+						>
+							Agua pura, práctica y pensada para el día a día de
+							tu equipo.
+						</p>
+					</div>
+
+					<!-- Columna Derecha: Contenido profundo y CTA -->
+					<div
+						class="lg:col-span-6 lg:col-start-7 flex flex-col gap-6 text-text/80 leading-relaxed"
+					>
+						<!-- Frase Destacada con borde lateral -->
+						<p
+							class="text-xl md:text-2xl text-text font-semibold border-l-4 border-accent1 pl-6 py-1"
+						>
+							En Jalsuri no solo entregamos agua: <br
+								class="hidden sm:block"
+							/>
+							<span class="text-primary"
+								>brindamos tranquilidad.</span
+							>
+						</p>
+
+						<!-- Párrafos descriptivos -->
+						<div
+							class="flex flex-col gap-4 pl-0 sm:pl-7 text-[15px] sm:text-base"
+						>
+							<p>
+								Nos especializamos en abastecer espacios
+								corporativos con <strong
+									>agua ozonizada segura y de alta calidad</strong
+								>, diseñada para acompañar cada jornada en
+								oficinas, hospitales, clínicas y más.
+							</p>
+							<p>
+								Nuestros bidones y dispensadores ergonómicos
+								están pensados para ofrecer comodidad,
+								eficiencia y un <strong
+									>menor impacto ambiental</strong
+								>.
+							</p>
+						</div>
+
+						<!-- Llamada a la Acción (Botón) -->
+						<div class="pt-6 pl-0 sm:pl-7">
+							<a
+								href="#contacto"
+								class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-background font-bold rounded-full hover:bg-accent1 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+							>
+								Solicita tu propuesta
+								<svg
+									class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+								</svg>
+							</a>
+							<p class="mt-4 text-xs text-text/50 font-medium">
+								Descubre cómo hidratar tu entorno de forma más
+								consciente y responsable.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 		<!-- Indicador Inferior de Scroll -->
 		<div
-			class="fixed bottom-6 left-0 right-0 z-20 flex flex-col items-center justify-end pointer-events-none"
+			id="scroll-indicator"
+			class="fixed bottom-6 left-0 right-0 z-20 flex flex-col items-center justify-end pointer-events-none text-sky-50"
 		>
-			<div
-				class="flex flex-col items-center gap-1.5 px-4 py-2"
-			>
+			<div class="flex flex-col items-center gap-1.5 px-4 py-2">
 				<span
-					class="text-[10px] tracking-[0.3em] uppercase text-sky-200 font-bold drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+					class="text-[10px] tracking-[0.3em] uppercase font-bold drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]"
 				>
 					Desliza para explorar
 				</span>
 				<ChevronDown
-					class="h-auto w-10 text-sky-400 animate-bounce drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]"
+					class="h-auto w-10 animate-bounce drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]"
 				/>
 			</div>
 		</div>
 	</section>
-
-	<!-- 2. SECCIÓN: COMPROMISO Y CALIDAD JALSURI -->
-	<section
-		id="compromiso"
-		class="relative z-30 bg-gradient-to-b from-slate-950 via-slate-900 to-sky-950 text-slate-100 py-28 px-6 md:px-12 overflow-hidden border-t border-sky-500/20"
-	>
-		<!-- Resplandor Ambiental en Tonos Celeste, Azul e Ice -->
-		<div
-			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-sky-600/20 via-blue-700/20 to-cyan-400/15 rounded-full blur-3xl pointer-events-none"
-		>
-		</div>
-
-		<div class="relative max-w-6xl mx-auto space-y-16">
-			<!-- Header de Sección -->
-			<div class="text-center max-w-3xl mx-auto space-y-4">
-				<div
-					class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-950/80 border border-sky-400/40 text-xs font-semibold tracking-[0.25em] uppercase shadow-md shadow-sky-900/30"
-				>
-					<span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"
-					></span>
-					<span
-						class="bg-gradient-to-r from-sky-200 via-cyan-200 to-white bg-clip-text text-transparent"
-					>
-						Calidad Garantizada
-					</span>
-				</div>
-
-				<h2
-					class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white font-display"
-				>
-					Pureza Excepcional para Tu Estilo de Vida
-				</h2>
-				<p
-					class="text-sky-200/80 font-normal text-base sm:text-lg leading-relaxed"
-				>
-					En Jalsuri combinamos los estándares más estrictos de
-					purificación con tecnología ozonizada de última generación
-					para entregar agua 100% limpia, liviana y confiable.
-				</p>
-			</div>
-
-			<!-- Tarjeta Principal Corporativa -->
-			<div
-				class="relative bg-slate-900/80 backdrop-blur-2xl border border-sky-300/20 rounded-3xl p-8 md:p-14 shadow-2xl shadow-slate-950/80 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
-			>
-				<div class="lg:col-span-7 space-y-6">
-					<span
-						class="text-sky-400 text-xs font-bold tracking-[0.3em] uppercase block"
-					>
-						Proceso Certificado
-					</span>
-					<h3
-						class="text-2xl sm:text-4xl font-bold text-white font-display leading-tight"
-					>
-						Sistema de Triple Ozonización & Microfiltración
-					</h3>
-					<p
-						class="text-slate-300 font-light text-base leading-relaxed"
-					>
-						Nuestras plantas cuentan con procesos automatizados de
-						llenado y envasado en ambientes esterilizados.
-						Garantizamos que cada gota mantenga su frescura natural
-						y equilibrio mineral.
-					</p>
-
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-						<div
-							class="p-4 rounded-2xl bg-slate-800/60 border border-sky-400/15 flex items-start gap-3"
-						>
-							<div
-								class="p-2 rounded-xl bg-sky-500/20 text-sky-400 shrink-0"
-							>
-								<svg
-									class="w-5 h-5"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									><path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M5 13l4 4L19 7"></path></svg
-								>
-							</div>
-							<div>
-								<h4 class="text-white font-semibold text-sm">
-									Libre de Sodio
-								</h4>
-								<p class="text-xs text-slate-400 mt-0.5">
-									Ideal para una hidratación saludable diaria.
-								</p>
-							</div>
-						</div>
-
-						<div
-							class="p-4 rounded-2xl bg-slate-800/60 border border-sky-400/15 flex items-start gap-3"
-						>
-							<div
-								class="p-2 rounded-xl bg-sky-500/20 text-sky-400 shrink-0"
-							>
-								<svg
-									class="w-5 h-5"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									><path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-									></path></svg
-								>
-							</div>
-							<div>
-								<h4 class="text-white font-semibold text-sm">
-									Registro DIGESA
-								</h4>
-								<p class="text-xs text-slate-400 mt-0.5">
-									Cumplimiento total de normas sanitarias.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="lg:col-span-5 relative flex justify-center">
-					<div
-						class="relative w-full max-w-xs aspect-square rounded-2xl overflow-hidden border border-sky-300/30 p-2 bg-gradient-to-b from-sky-500/20 to-blue-900/40 shadow-2xl"
-					>
-						<img
-							src={imgPortadaBidon.src}
-							alt="Bidon Jalsuri 8.5L y 20L"
-							class="w-full h-full object-contain rounded-xl transition-transform duration-700 hover:scale-105"
-						/>
-					</div>
-				</div>
-			</div>
-
-			<!-- 4 Métricas Clave Corporativas -->
-			<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-				<div
-					class="bg-slate-900/60 backdrop-blur-md p-6 rounded-2xl border border-sky-400/20 text-center space-y-2"
-				>
-					<div
-						class="text-3xl sm:text-4xl font-extrabold text-sky-400 font-display"
-					>
-						99.9%
-					</div>
-					<div
-						class="text-xs text-sky-100/80 uppercase font-semibold tracking-wider"
-					>
-						Pureza Ozonizada
-					</div>
-				</div>
-				<div
-					class="bg-slate-900/60 backdrop-blur-md p-6 rounded-2xl border border-sky-400/20 text-center space-y-2"
-				>
-					<div
-						class="text-3xl sm:text-4xl font-extrabold text-sky-400 font-display"
-					>
-						7
-					</div>
-					<div
-						class="text-xs text-sky-100/80 uppercase font-semibold tracking-wider"
-					>
-						Etapas Filtración
-					</div>
-				</div>
-				<div
-					class="bg-slate-900/60 backdrop-blur-md p-6 rounded-2xl border border-sky-400/20 text-center space-y-2"
-				>
-					<div
-						class="text-3xl sm:text-4xl font-extrabold text-sky-400 font-display"
-					>
-						+500
-					</div>
-					<div
-						class="text-xs text-sky-100/80 uppercase font-semibold tracking-wider"
-					>
-						Clientes Empresas
-					</div>
-				</div>
-				<div
-					class="bg-slate-900/60 backdrop-blur-md p-6 rounded-2xl border border-sky-400/20 text-center space-y-2"
-				>
-					<div
-						class="text-3xl sm:text-4xl font-extrabold text-sky-400 font-display"
-					>
-						24/7
-					</div>
-					<div
-						class="text-xs text-sky-100/80 uppercase font-semibold tracking-wider"
-					>
-						Despacho Continuo
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- 3. CATÁLOGO CORPORATIVO DE PRODUCTOS -->
+	<SectionValores />
+	<!-- 3. CATÁLOGO CORPORATIVO DE PRODUCTOS 
 	<section
 		id="productos"
 		class="relative z-30 bg-slate-50 text-slate-900 py-28 px-6 md:px-16"
@@ -527,7 +218,6 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<!-- Producto 1: Bidones de 20L -->
 				<article
 					class="group bg-white p-6 rounded-3xl border border-slate-200/80 shadow-lg shadow-sky-950/5 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/15 transition-all duration-500 flex flex-col justify-between"
 				>
@@ -575,8 +265,6 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 						</a>
 					</div>
 				</article>
-
-				<!-- Producto 2: Maquila & Botellas Personalizadas -->
 				<article
 					class="group bg-white p-6 rounded-3xl border border-slate-200/80 shadow-lg shadow-sky-950/5 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/15 transition-all duration-500 flex flex-col justify-between"
 				>
@@ -626,7 +314,6 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 					</div>
 				</article>
 
-				<!-- Producto 3: Dispensadores & Racks -->
 				<article
 					class="group bg-white p-6 rounded-3xl border border-slate-200/80 shadow-lg shadow-sky-950/5 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/15 transition-all duration-500 flex flex-col justify-between"
 				>
@@ -671,9 +358,9 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 				</article>
 			</div>
 		</div>
-	</section>
+	</section>-->
 
-	<!-- 4. SOLUCIONES CORPORATIVAS Y MAQUILA (BANNER CTA) -->
+	<!-- 4. SOLUCIONES CORPORATIVAS Y MAQUILA (BANNER CTA)
 	<section id="maquila" class="relative z-30 bg-slate-900 py-20 px-6">
 		<div
 			class="max-w-5xl mx-auto bg-gradient-to-r from-blue-900 via-sky-900 to-slate-900 border border-sky-400/30 p-8 sm:p-14 rounded-3xl text-center space-y-8 shadow-2xl relative overflow-hidden"
@@ -718,193 +405,21 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 				</a>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
-	<!-- FOOTER CORPORATIVO -->
-	<footer
-		id="contacto"
-		class="relative z-30 bg-slate-950 text-slate-400 py-16 px-6 md:px-16 border-t border-sky-900/30 text-xs font-light tracking-wider"
-	>
-		<div
-			class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12"
-		>
-			<!-- Columna 1: Marca & Descripción -->
-			<div class="space-y-4">
-				<div class="flex items-center gap-3">
-					<img
-						src={imgKey.src}
-						alt="Jalsuri Logo"
-						class="h-8 w-auto"
-					/>
-					<h3
-						class="text-white font-display font-extrabold text-xl tracking-tight"
-					>
-						JALSURI
-					</h3>
-				</div>
-				<p class="text-slate-400 leading-relaxed max-w-sm">
-					Empresa líder en purificación de agua y envasado
-					corporativo. Garantizamos agua ozonizada con los más altos
-					estándares de calidad y salud.
-				</p>
-				<p class="text-sky-400 font-medium text-[11px]">
-					📍 Lima, Perú
-				</p>
-			</div>
-
-			<!-- Columna 2: Contacto Directo -->
-			<div class="space-y-3">
-				<h4
-					class="text-sky-400 uppercase tracking-[0.2em] font-bold text-[11px]"
-				>
-					Contacto Corporativo
-				</h4>
-				<ul class="space-y-3 text-slate-300">
-					<li>
-						<a
-							href="mailto:bytewolf626@gmail.com"
-							class="hover:text-white transition-colors flex items-center gap-2.5"
-						>
-							<svg
-								class="w-4 h-4 text-sky-400 shrink-0"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="1.5"
-									d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-								></path>
-							</svg>
-							bytewolf626@gmail.com
-						</a>
-					</li>
-					<li>
-						<a
-							href="https://wa.me/51997673300"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover:text-white transition-colors flex items-center gap-2.5"
-						>
-							<svg
-								class="w-4 h-4 text-sky-400 shrink-0"
-								fill="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.762.459 3.48 1.332 5.001l-1.416 5.176 5.297-1.389c1.463.798 3.111 1.218 4.773 1.219h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.668-1.037-5.177-2.923-7.062a9.925 9.925 0 0-0-7.066-2.944zm0 1.832c4.494 0 8.156 3.659 8.157 8.152 0 2.181-.849 4.232-2.391 5.772a8.106 8.106 0 0-1-5.766 2.406h-.003c-1.488 0-2.943-.399-4.212-1.153l-.302-.18-3.132.821.836-3.056-.197-.313a8.134 8.134 0 0-1-1.246-4.298c0-4.492 3.662-8.152 8.156-8.152z"
-								></path>
-							</svg>
-							+51 997 673 300
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<!-- Columna 3: Redes & Desarrollo -->
-			<div class="space-y-3">
-				<h4
-					class="text-sky-400 uppercase tracking-[0.2em] font-bold text-[11px]"
-				>
-					Desarrollo & Redes
-				</h4>
-				<p class="text-slate-400 text-xs">
-					Sitio web desarrollado por <span
-						class="text-white font-medium"
-						>Exon Gabriel Rosas (PixelPulse)</span
-					>.
-				</p>
-				<div class="flex items-center gap-3 pt-2">
-					<!-- LinkedIn -->
-					<a
-						href="https://linkedin.com/in/Gabriel-Rosas"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="LinkedIn Exon Gabriel Rosas"
-						class="p-2.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-sky-400 hover:border-sky-400/40 transition-all duration-300"
-					>
-						<svg
-							class="w-4 h-4"
-							fill="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.78a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z"
-							></path>
-						</svg>
-					</a>
-
-					<!-- GitHub -->
-					<a
-						href="https://github.com/bytewolf626"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="GitHub Exon Gabriel Rosas"
-						class="p-2.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-sky-400 hover:border-sky-400/40 transition-all duration-300"
-					>
-						<svg
-							class="w-4 h-4"
-							fill="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								fill-rule="evenodd"
-								clip-rule="evenodd"
-								d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-							></path>
-						</svg>
-					</a>
-
-					<!-- WhatsApp -->
-					<a
-						href="https://wa.me/51997673300"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="WhatsApp Exon Gabriel Rosas"
-						class="p-2.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-sky-400 hover:border-sky-400/40 transition-all duration-300"
-					>
-						<svg
-							class="w-4 h-4"
-							fill="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"
-							></path>
-						</svg>
-					</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Barra Inferior -->
-		<div
-			class="max-w-7xl mx-auto border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-3 text-[11px] text-slate-500"
-		>
-			<p>
-				&copy; 2026 Jalsuri. Creado por <span class="text-slate-400"
-					>Exon Gabriel Rosas</span
-				>. Todos los derechos reservados.
-			</p>
-			<p class="text-slate-500">
-				Agua Purificada de Alta Calidad & Maquila Corporativa.
-			</p>
-		</div>
-	</footer>
+	<Footer />
 </Layout>
 
 <style>
 	#logo-mask {
 		mask-image: var(--mask-url);
 		-webkit-mask-image: var(--mask-url);
-		mask-position: center 16%;
-		-webkit-mask-position: center 16%;
+		mask-position: center 18%;
+		-webkit-mask-position: center 18%;
 		mask-repeat: no-repeat;
 		-webkit-mask-repeat: no-repeat;
-		mask-size: clamp(20000vh, 4500%, 0vh);
-		-webkit-mask-size: clamp(20000vh, 4500%, 0vh);
+		mask-size: clamp(10000vh, 4500%, 0vh);
+		-webkit-mask-size: clamp(10000vh, 4500%, 0vh);
 	}
 </style>
 
@@ -915,18 +430,23 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 
 	gsap.registerPlugin(ScrollTrigger);
 
-	// Setup Lenis Smooth Scroll
+	// =========================================================================
+	// 1. CONFIGURACIÓN DE SCROLL SUAVE (LENIS)
+	// =========================================================================
 	const lenis = new Lenis();
 
+	// Sincroniza Lenis con el motor de ScrollTrigger de GSAP
 	lenis.on("scroll", ScrollTrigger.update);
 
+	// Integra el "ticker" (reloj interno) de GSAP con Lenis para mayor fluidez
 	gsap.ticker.add((time) => {
 		lenis.raf(time * 1000);
 	});
-
 	gsap.ticker.lagSmoothing(0);
 
-	// Setup GSAP Mask Scroll Animation
+	// =========================================================================
+	// 2. ANIMACIÓN PRINCIPAL DEL HERO (GSAP TIMELINE)
+	// =========================================================================
 	const video = document.getElementById(
 		"hero-video",
 	) as HTMLVideoElement | null;
@@ -934,27 +454,36 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 	const initTimeline = () => {
 		if (!video) return;
 
-		video.pause();
-
+		video.pause(); // Pausamos el video porque GSAP controlará su reproducción
+		console.log(video.duration);
+		// Objeto proxy para animar el tiempo del video sin modificar el DOM directamente en cada frame
 		const videoProxy = { currentTime: 0 };
 
+		// Creamos la línea de tiempo. Scrub: 0.5 hace que la animación siga el scroll
+		// del usuario con un pequeño retraso suavizado de medio segundo.
 		const tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#hero-container",
-				start: "top top",
-				end: "+=300%",
-				scrub: 0.5,
-				pin: true,
+				start: "top top", // Empieza cuando el hero toca el borde superior
+				end: "+=400%", // Termina después de scrollear el equivalente a 3 pantallas
+				scrub: 0.5, // Suavizado del scroll
+				pin: true, // Fija la pantalla (no bajas de página hasta que acabe)
 				anticipatePin: 1,
 			},
 		});
 
+		/* 
+           LÓGICA DE TIEMPOS (De 0.0 a 1.0):
+           Imagina que toda la animación dura 1 "segundo" virtual.
+           Le decimos a GSAP en qué momento exacto arranca cada efecto.
+        */
 		tl
-			// 1. Scrub video time sync
+			// A. REPRODUCCIÓN DEL VIDEO (0.0 a 1.0)
+			// Cubre todo el recorrido del scroll. El video avanza a medida que bajas.
 			.to(
 				videoProxy,
 				{
-					currentTime: video.duration || 0,
+					currentTime: video.duration * 1.2 || 0,
 					ease: "none",
 					duration: 1,
 					onUpdate: () => {
@@ -964,33 +493,78 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 					},
 				},
 				0,
-			)
-			// 2. Desvanecimiento suave del texto inicial "Agua Purificada Jalsuri"
+			) // El '0' al final significa que empieza en el segundo 0
+
+			// B. DESVANECER TEXTOS E INDICADOR (0.0 a 0.1)
+			// Apenas el usuario roza el mouse para bajar, los textos desaparecen rápido.
 			.to(
 				"#hero-description",
 				{
 					opacity: 0,
 					y: -40,
-					duration: 0.3,
+					duration: 0.1,
 					ease: "power1.out",
 				},
-				0.05,
+				0.1,
 			)
-			// 3. Reducción de la máscara del logo
+			.to(
+				"#scroll-indicator",
+				{
+					color: "#000",
+					duration: 0.1,
+				},
+				0.5,
+			)
+
+			// C. ACHICAR MÁSCARA DEL LOGO (0.1 a 0.7)
+			// Una vez que el texto se fue (0.1), el logo empieza a encogerse.
 			.to(
 				"#logo-mask",
 				{
 					maskSize: "clamp(20vh, 25%, 30vh)",
-					duration: 1,
+					duration: 0.6,
+					ease: "power2.inOut", // Acelera suave y frena suave
 				},
-				0.15,
+				0.1,
 			)
-			// 4. Salida suave del hero key
-			.to("#hero-key", { opacity: 0, ease: "none", duration: 1 }, 0.4);
+
+			// D. OSCURECER EL VIDEO DE FONDO (0.5 a 0.8)
+			// A la mitad del achicamiento, el video empieza a apagarse para no distraer.
+			.to(
+				"#hero-key",
+				{
+					opacity: 0,
+					ease: "power1.inOut",
+					duration: 0.3,
+				},
+				0.5,
+			)
+			.to(
+				"#water-fall",
+				{
+					opacity: 1,
+					ease: "power1.inOut",
+					duration: 0.3,
+				},
+				0.5,
+			)
+
+			// E. REVELAR SECCIÓN "COMPROMISO" (0.7 a 1.0)
+			// Cuando la máscara ya casi terminó de achicarse, el nuevo texto aparece de la nada.
+			.to(
+				"#compromiso",
+				{
+					opacity: 1,
+					duration: 0.3,
+					ease: "power2.out",
+				},
+				0.7,
+			);
 
 		ScrollTrigger.refresh();
 	};
 
+	// Asegurarnos de que el video haya cargado sus metadatos (duración) antes de iniciar
 	if (video) {
 		if (video.readyState >= 1) {
 			initTimeline();
@@ -999,7 +573,9 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 		}
 	}
 
-	// Mobile Menu Toggle Script
+	// =========================================================================
+	// 3. MENÚ MÓVIL (LÓGICA DE APERTURA/CIERRE)
+	// =========================================================================
 	const mobileBtn = document.getElementById("mobile-menu-btn");
 	const mobileMenu = document.getElementById("mobile-menu");
 	const iconOpen = document.getElementById("menu-icon-open");
@@ -1019,7 +595,7 @@ import imgRack from "@/assets/img/Rack-para-bidondes2-1024x867-removebg-preview.
 			}
 		});
 
-		// Close menu when clicking links
+		// Cerrar el menú automáticamente si se hace clic en un enlace (útil para Single Page Applications)
 		mobileMenu.querySelectorAll("a").forEach((link) => {
 			link.addEventListener("click", () => {
 				mobileMenu.classList.add("hidden");

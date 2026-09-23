@@ -1,0 +1,129 @@
+---
+import Reload from "./icons/Reload.astro";
+import type { ValorCardProps } from "./types";
+
+type Props = ValorCardProps;
+
+const {
+    title,
+    description,
+    badge,
+    icon: Icon,
+    backTitle,
+    backDescription,
+    features = [],
+    ctaText = "Saber más",
+    ctaLink = "#contacto",
+} = Astro.props;
+---
+
+<!-- Contenedor Principal con Perspectiva 3D -->
+<div class="valor-card-container group h-[380px] w-full [perspective:1000px]">
+    <!-- Elemento Giratorio (Sigue el hover del grupo) -->
+    <div
+        class="relative w-full h-full rounded-3xl transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-sm hover:shadow-xl"
+    >
+        <!-- ================= FRENTE DE LA TARJETA ================= -->
+        <div
+            class="absolute inset-0 w-full h-full bg-background p-8 rounded-3xl border border-sky-100 [backface-visibility:hidden] flex flex-col justify-between"
+        >
+            <span
+                class="absolute top-4 right-4 items-center gap-1.5 text-accent1 group-hover:opacity-0 transition-opacity"
+            >
+                <Reload class="size-4 animate-pulse"/>
+            </span>
+            <div class="relative flex flex-col justify-center items-center">
+                <div
+                    class="w-40 h-40 rounded-2xl bg-linear-to-br from-primary to-accent1 flex items-center justify-center text-background mb-6 shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform"
+                >
+                    {Icon && <Icon class="size-20 text-white" />}
+                </div>
+                <h3 class="text-xl font-bold text-text mb-3 text-center">{title}</h3>
+            </div>
+
+            <!-- Footer del frente con pista de interacción -->
+            <div
+                class="mt-6 pt-4 border-t border-sky-50 flex items-center justify-center text-xs font-bold text-primary tracking-wide"
+            >
+                <span class="px-2 py-1 rounded-full bg-accent1 text-text"
+                    >{badge}</span
+                >
+            </div>
+        </div>
+
+        <!-- ================= REVERSO DE LA TARJETA ================= -->
+        <div
+            class="absolute inset-0 w-full h-full bg-linear-to-br from-text via-slate-900 to-sky-950 p-8 rounded-3xl border border-sky-800 text-white [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-between overflow-hidden"
+        >
+            <!-- Brillo sutil de fondo -->
+            <div
+                class="absolute -top-12 -right-12 w-32 h-32 bg-accent1/20 rounded-full blur-2xl pointer-events-none"
+            >
+            </div>
+
+            <div class="relative z-10">
+                <span
+                    class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent1 block mb-2"
+                >
+                    Detalles del Pilar
+                </span>
+                <h4 class="text-lg font-bold text-white mb-3">
+                    {backTitle || title}
+                </h4>
+                <p class="text-sky-100/80 text-xs leading-relaxed mb-4">
+                    {backDescription || description}
+                </p>
+
+                <!-- Lista de viñetas si existen -->
+                {
+                    features.length > 0 && (
+                        <ul class="space-y-2 my-2">
+                            {features.map((item) => (
+                                <li class="flex items-center gap-2 text-xs text-sky-200">
+                                    <svg
+                                        class="w-3.5 h-3.5 text-accent1 shrink-0"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2.5"
+                                            d="M5 13l4 4L19 7"
+                                        />
+                                    </svg>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    )
+                }
+            </div>
+
+            <!-- Botón / CTA de acción en el reverso -->
+            <div
+                class="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between"
+            >
+                <a
+                    href={ctaLink}
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent1 text-text text-xs font-bold hover:bg-white hover:shadow-lg transition-all duration-300"
+                >
+                    {ctaText}
+                    <svg
+                        class="w-3.5 h-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

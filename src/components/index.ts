@@ -1,0 +1,14 @@
+export { default as ChevronDown } from "./icons/ChevronDown.astro";
+export { default as FbIcon } from "./icons/FbIcon.astro";
+export { default as Google, default as GoogleIcon } from "./icons/Google.astro";
+export { default as IgIcon } from "./icons/IgIcon.astro";
+export { default as LinkedIcon } from "./icons/LinkedIcon.astro";
+export { default as TiktokIcon } from "./icons/TiktokIcon.astro";
+export { default as YoutubeIcon } from "./icons/YoutubeIcon.astro";
+export { default as ShieldCheck } from "./icons/ShieldCheck.astro";
+export { default as Leaf } from "./icons/Leaf.astro";
+export { default as Truck } from "./icons/Truck.astro";
+export { default as Zap } from "./icons/Zap.astro";
+export { default as Reload } from "./icons/Reload.astro";
+export { default as ValorCard } from "./ValorCard.astro";
+export * from "./types";

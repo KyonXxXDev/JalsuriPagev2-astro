@@ -1,0 +1,129 @@
+---
+import type { ValorCardProps } from "@/components/types";
+import ShieldCheck from "../icons/ShieldCheck.astro";
+import Leaf from "../icons/Leaf.astro";
+import Truck from "../icons/Truck.astro";
+import Zap from "../icons/Zap.astro";
+import ValorCard from "../ValorCard.astro";
+
+export const valores: ValorCardProps[] = [
+    {
+        id: 1,
+        title: "Pureza Incomprometible",
+        description: "Sometemos cada lote a rigurosos procesos de microfiltración y ozonización garantizando la máxima nitidez y seguridad bacteriológica.",
+        badge: "Calidad Certificada",
+        icon: ShieldCheck, 
+        // Nuevos campos del reverso
+        backTitle: "El Proceso Jalsuri",
+        backDescription: "Nuestra planta cuenta con filtros de última generación para eliminar el 99.9% de impurezas, asegurando agua premium.",
+        features: [
+            "Microfiltración de 5 etapas",
+            "Ozonización continua",
+            "Análisis de laboratorio diario"
+        ],
+        ctaText: "Conocer el proceso",
+        ctaLink: "#proceso"
+    },
+    {
+        id: 2,
+        title: "Sostenibilidad Consciente",
+        description: "Promovemos el modelo circular con bidones retornables de larga vida útil, reduciendo significativamente la huella de plástico.",
+        badge: "Responsabilidad Ambiental",
+        icon: Leaf,
+        // Nuevos campos del reverso
+        backTitle: "Impacto Positivo",
+        backDescription: "Cada bidón retornable evita el uso de cientos de botellas de plástico desechables en los basureros y océanos.",
+        features: [
+            "Bidones BPA-Free",
+            "Lavado ecológico industrial",
+            "Rutas de entrega optimizadas"
+        ],
+        ctaText: "Nuestra huella",
+        ctaLink: "#sostenibilidad"
+    },
+    {
+        id: 3,
+        title: "Logística y Puntualidad",
+        description: "Respetamos el flujo de trabajo de tu equipo. Garantizamos entregas programadas sin demoras para que nunca falte hidratación.",
+        badge: "Atención Corporativa",
+        icon: Truck,
+        // Nuevos campos del reverso
+        backTitle: "Entregas sin estrés",
+        backDescription: "Tu empresa nunca se quedará sin agua gracias a nuestro sistema automatizado de rutas programadas exclusivas para B2B.",
+        features: [
+            "Programación semanal fija",
+            "Stock corporativo garantizado",
+            "Asesor de cuenta dedicado"
+        ],
+        ctaText: "Programar envíos",
+        ctaLink: "#contacto"
+    },
+    {
+        id: 4,
+        title: "Innovación Ozonizada",
+        description: "Implementamos tecnología de vanguardia en purificación por ozono, asegurando un sabor fresco, liviano y altamente saludable.",
+        badge: "Tecnología de Punta",
+        icon: Zap,
+        // Nuevos campos del reverso
+        backTitle: "El Poder del Ozono",
+        backDescription: "El ozono es un purificador 100% natural que no deja residuos químicos y enriquece el agua con oxígeno extra.",
+        features: [
+            "Sabor ultra ligero",
+            "Mayor oxigenación celular",
+            "Libre de cloro y sodio"
+        ],
+        ctaText: "Cotizar ahora",
+        ctaLink: "#contacto"
+    },
+];
+
+---
+
+<section id="valores" class="py-24 relative overflow-hidden">
+    <!-- Luces ambientales de fondo -->
+    <div
+        class="absolute top-1/3 -left-32 w-96 h-96 bg-accent1/10 rounded-full blur-3xl pointer-events-none"
+    >
+    </div>
+    <div
+        class="absolute bottom-1/3 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"
+    >
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+        <!-- Cabecera de la sección -->
+        <div
+            class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"
+        >
+            <span
+                class="px-4 py-1.5 rounded-full bg-accent1/10 text-primary border border-accent1/30 text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm"
+            >
+                Nuestros Pilares
+            </span>
+            <h2
+                class="text-3xl sm:text-5xl font-extrabold text-text tracking-tight font-display leading-tight"
+            >
+                Principios que garantizan cada <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent1"
+                    >gota de pureza</span
+                >
+            </h2>
+            <p
+                class="mt-4 text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
+            >
+                En Jalsuri combinamos innovación tecnológica, sostenibilidad
+                ambiental y servicio humano para elevar el estándar de
+                hidratación corporativa.
+            </p>
+        </div>
+
+        <!-- Rejilla de Tarjetas de Valores -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {
+                valores.map(valor =>(
+                    <ValorCard {...valor} />
+                ))
+            }
+        </div>
+    </div>
+</section>
