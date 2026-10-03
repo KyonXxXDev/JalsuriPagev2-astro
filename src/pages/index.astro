@@ -10,7 +10,7 @@ import SectionValores from "@/components/section-valores/SectionValores.astro";
 
 <Layout>
 	<Header />
-	 <!-- <picture id="global-waterfall" class="fixed top-0 left-0 w-screen h-screen -z-50 pointer-events-none">
+	<!-- <picture id="global-waterfall" class="fixed top-0 left-0 w-screen h-screen -z-50 pointer-events-none">
        Overlay oscuro clave: Garantiza que cualquier texto encima se lea perfecto 
         <div class="absolute inset-0 bg-slate-950/60 z-10"></div>
         <video
@@ -24,66 +24,68 @@ import SectionValores from "@/components/section-valores/SectionValores.astro";
 		id="hero-container"
 		class="relative w-full h-screen overflow-hidden"
 	>
-		
-		<!-- Máscara con el logo y el video de fondo -->
+		<!-- Máscara con el logo y el video de fondo 
 		<div
 			id="logo-mask"
 			class="w-full h-full absolute top-0 left-0 bg-black"
 			style={`--mask-url: url('${imgKey.src}');`}
+		></div>-->
+		<picture
+			id="hero-key"
+			class="h-screen w-screen block overflow-hidden fixed"
 		>
-			<picture
-				id="hero-key"
-				class="h-screen w-screen block overflow-hidden fixed"
+			<!-- SIN OVERLAY DE OSCURECIMIENTO - Video 100% nítido y libre de capas oscuras -->
+			<div
+				class="absolute inset-0 bg-linear-to-t from-black/40 via-black/20 to-black/30 z-[1] pointer-events-none"
 			>
-				<!-- SIN OVERLAY DE OSCURECIMIENTO - Video 100% nítido y libre de capas oscuras -->
-				<div
-					class="absolute inset-0 bg-linear-to-t from-black/40 via-black/20 to-black/30 z-[1] pointer-events-none"
+			</div>
+			<!-- Textos principales del Hero Corporativo -->
+			<div
+				id="hero-description"
+				class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+			>
+				<!-- Badge Superior Corporativo -->
+				<span
+					class="px-5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-sky-300 text-sky-700 text-xs md:text-sm font-bold tracking-[0.25em] uppercase mb-4 shadow-xl shadow-sky-900/10"
 				>
-				</div>
-				<!-- Textos principales del Hero Corporativo -->
-				<div
-					id="hero-description"
-					class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+					Pureza & Calidad Certificada
+				</span>
+
+				<!-- Título Principal Limpio -->
+				<h1
+					class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight drop-shadow-[0_4px_16px_rgba(2,132,199,0.7)] my-2 font-display"
 				>
-					<!-- Badge Superior Corporativo -->
-					<span
-						class="px-5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-sky-300 text-sky-700 text-xs md:text-sm font-bold tracking-[0.25em] uppercase mb-4 shadow-xl shadow-sky-900/10"
-					>
-						Pureza & Calidad Certificada
-					</span>
+					Agua Purificada Jalsuri
+				</h1>
 
-					<!-- Título Principal Limpio -->
-					<h1
-						class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight drop-shadow-[0_4px_16px_rgba(2,132,199,0.7)] my-2 font-display"
-					>
-						Agua Purificada Jalsuri
-					</h1>
-
-					<!-- Subtítulo Corporativo Nítido -->
-					<p
-						class="mt-3 text-sky-50 font-medium text-base sm:text-lg md:text-xl max-w-xl tracking-wide drop-shadow-[0_2px_10px_rgba(14,165,233,0.6)] leading-relaxed"
-					>
-						Tecnología de microfiltración y ozonización para una
-						hidratación pura, ligera y saludable.
-					</p>
-				</div>
-
-				<video
-					id="hero-video"
-					src={VideoKey}
-					class="w-full h-full object-cover"
-					muted
-					playsinline
-					preload="auto"
+				<!-- Subtítulo Corporativo Nítido -->
+				<p
+					class="mt-3 text-sky-50 font-medium text-base sm:text-lg md:text-xl max-w-xl tracking-wide drop-shadow-[0_2px_10px_rgba(14,165,233,0.6)] leading-relaxed"
 				>
-					Tu navegador no admite el elemento <code>video</code>.
-				</video>
-			</picture>
-		</div>
+					Tecnología de microfiltración y ozonización para una
+					hidratación pura, ligera y saludable.
+				</p>
+			</div>
+
+			<video
+				id="hero-video"
+				src={VideoKey}
+				class="w-full h-full object-cover"
+				muted
+				playsinline
+				preload="auto"
+			>
+				Tu navegador no admite el elemento <code>video</code>.
+			</video>
+		</picture>
+
 		<section
 			id="compromiso"
 			class="absolute bottom-20 w-full py-20 lg:py-32 overflow-hidden opacity-0"
 		>
+			<picture>
+				<img src={imgKey} alt="" />
+			</picture>
 			<div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
 				<div
 					class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
@@ -612,4 +614,9 @@ import SectionValores from "@/components/section-valores/SectionValores.astro";
 			});
 		});
 	}
+
+	// Animación del bidon footer
+	const bidon = document.getElementById(
+		"bidon",
+	) as HTMLImageElement | null;
 </script>
