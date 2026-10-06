@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-slate-950 text-slate-100">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,12 @@
     <!-- Google Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -35,15 +38,15 @@
             }
         }
     </script>
-    
+
     <style>
         /* Custom UI Enhancements */
         .checkerboard {
             background-color: #0d1527;
-            background-image: 
-                linear-gradient(45deg, #131f37 25%, transparent 25%), 
-                linear-gradient(-45deg, #131f37 25%, transparent 25%), 
-                linear-gradient(45deg, transparent 75%, #131f37 75%), 
+            background-image:
+                linear-gradient(45deg, #131f37 25%, transparent 25%),
+                linear-gradient(-45deg, #131f37 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #131f37 75%),
                 linear-gradient(-45deg, transparent 75%, #131f37 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
@@ -51,10 +54,10 @@
 
         .checkerboard-light {
             background-color: #f1f5f9;
-            background-image: 
-                linear-gradient(45deg, #e2e8f0 25%, transparent 25%), 
-                linear-gradient(-45deg, #e2e8f0 25%, transparent 25%), 
-                linear-gradient(45deg, transparent 75%, #e2e8f0 75%), 
+            background-image:
+                linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+                linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
                 linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
@@ -62,7 +65,7 @@
 
         .blueprint-grid {
             background-color: #041226;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(0, 194, 255, 0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 194, 255, 0.1) 1px, transparent 1px),
                 linear-gradient(rgba(0, 194, 255, 0.04) 5px, transparent 5px),
@@ -75,17 +78,20 @@
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #060e1e;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #1e3a8a;
             border-radius: 9999px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #0084FF;
         }
-        
+
         .tab-btn.active {
             border-color: #00C2FF;
             color: #00C2FF;
@@ -98,22 +104,27 @@
         }
     </style>
 </head>
+
 <body class="h-full flex flex-col font-sans antialiased bg-slate-950 text-slate-100 overflow-x-hidden">
 
     <!-- TOP NAVBAR -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 p-0.5 shadow-lg shadow-cyan-500/20 flex items-center justify-center">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 p-0.5 shadow-lg shadow-cyan-500/20 flex items-center justify-center">
                     <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
                         <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 100 100" fill="none">
-                            <path d="M50 15 C 35 40, 20 60, 20 75 A 30 30 0 0 0 80 75 C 80 60, 65 40, 50 15 Z" fill="currentColor"/>
+                            <path d="M50 15 C 35 40, 20 60, 20 75 A 30 30 0 0 0 80 75 C 80 60, 65 40, 50 15 Z"
+                                fill="currentColor" />
                         </svg>
                     </div>
                 </div>
                 <div>
                     <h1 class="text-lg font-bold font-display tracking-tight text-white flex items-center gap-2">
-                        JALSURI <span class="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-sans font-medium">SVG Studio</span>
+                        JALSURI <span
+                            class="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-sans font-medium">SVG
+                            Studio</span>
                     </h1>
                     <p class="text-xs text-slate-400">Vector Logo Customizer & Asset Exporter</p>
                 </div>
@@ -121,10 +132,12 @@
 
             <!-- Quick Action Links -->
             <div class="flex items-center gap-3">
-                <button onclick="resetDefaults()" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 rounded-lg border border-slate-700 transition">
+                <button onclick="resetDefaults()"
+                    class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 rounded-lg border border-slate-700 transition">
                     <i class="fa-solid font-xs fa-rotate"></i> Restablecer
                 </button>
-                <a href="#exporter" onclick="switchMainTab('export')" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 rounded-lg shadow-lg shadow-cyan-500/20 transition transform active:scale-95">
+                <a href="#exporter" onclick="switchMainTab('export')"
+                    class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 rounded-lg shadow-lg shadow-cyan-500/20 transition transform active:scale-95">
                     <i class="fa-solid fa-download"></i> Exportar Assets
                 </a>
             </div>
@@ -133,74 +146,97 @@
 
     <!-- MAIN WORKSPACE -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
+
         <!-- LEFT COLUMN: LIVE CANVAS PREVIEW (7 Cols) -->
         <section class="lg:col-span-7 flex flex-col gap-4">
-            
+
             <!-- Canvas Toolbar -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-xl">
+            <div
+                class="bg-slate-900 border border-slate-800 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-xl">
                 <!-- Background Switchers -->
                 <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
                     <span class="text-slate-400 px-2 font-medium">Fondo:</span>
-                    <button onclick="setBgStyle('dark')" id="bgBtn-dark" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5 bg-slate-800 text-cyan-400">
+                    <button onclick="setBgStyle('dark')" id="bgBtn-dark"
+                        class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5 bg-slate-800 text-cyan-400">
                         <span class="w-3 h-3 rounded-full bg-slate-900 border border-slate-700"></span> Dark
                     </button>
-                    <button onclick="setBgStyle('light')" id="bgBtn-light" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <button onclick="setBgStyle('light')" id="bgBtn-light"
+                        class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
                         <span class="w-3 h-3 rounded-full bg-white"></span> Light
                     </button>
-                    <button onclick="setBgStyle('water')" id="bgBtn-water" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <button onclick="setBgStyle('water')" id="bgBtn-water"
+                        class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
                         <i class="fa-solid fa-water text-cyan-400"></i> Agua
                     </button>
-                    <button onclick="setBgStyle('blueprint')" id="bgBtn-blueprint" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <button onclick="setBgStyle('blueprint')" id="bgBtn-blueprint"
+                        class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
                         <i class="fa-solid fa-ruler-combined text-blue-400"></i> Grid
                     </button>
-                    <button onclick="setBgStyle('checker')" id="bgBtn-checker" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <button onclick="setBgStyle('checker')" id="bgBtn-checker"
+                        class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
                         <i class="fa-solid fa-border-all text-slate-400"></i> Alpha
                     </button>
                 </div>
 
                 <!-- Canvas Toggles & Zoom -->
                 <div class="flex items-center gap-2">
-                    <button onclick="toggleGuidelines()" id="guidelinesBtn" class="p-2 text-xs font-medium text-slate-400 hover:text-white bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl transition flex items-center gap-1.5" title="Mostrar Guías de Espaciado">
+                    <button onclick="toggleGuidelines()" id="guidelinesBtn"
+                        class="p-2 text-xs font-medium text-slate-400 hover:text-white bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl transition flex items-center gap-1.5"
+                        title="Mostrar Guías de Espaciado">
                         <i class="fa-solid fa-vector-square"></i> <span class="hidden sm:inline">Guías</span>
                     </button>
-                    <button onclick="toggleGlow()" id="glowBtn" class="p-2 text-xs font-medium text-slate-400 hover:text-white bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl transition flex items-center gap-1.5" title="Efecto de Resplandor Neón">
-                        <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> <span class="hidden sm:inline">Glow</span>
+                    <button onclick="toggleGlow()" id="glowBtn"
+                        class="p-2 text-xs font-medium text-slate-400 hover:text-white bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl transition flex items-center gap-1.5"
+                        title="Efecto de Resplandor Neón">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> <span
+                            class="hidden sm:inline">Glow</span>
                     </button>
                     <div class="flex items-center bg-slate-950 rounded-xl border border-slate-800 p-1">
-                        <button onclick="adjustScale(-0.1)" class="w-7 h-7 text-slate-400 hover:text-white flex items-center justify-center rounded-lg hover:bg-slate-800 text-xs"><i class="fa-solid fa-minus"></i></button>
-                        <span id="zoomLabel" class="text-xs text-slate-300 font-mono px-2 min-w-[3rem] text-center">100%</span>
-                        <button onclick="adjustScale(0.1)" class="w-7 h-7 text-slate-400 hover:text-white flex items-center justify-center rounded-lg hover:bg-slate-800 text-xs"><i class="fa-solid fa-plus"></i></button>
+                        <button onclick="adjustScale(-0.1)"
+                            class="w-7 h-7 text-slate-400 hover:text-white flex items-center justify-center rounded-lg hover:bg-slate-800 text-xs"><i
+                                class="fa-solid fa-minus"></i></button>
+                        <span id="zoomLabel"
+                            class="text-xs text-slate-300 font-mono px-2 min-w-[3rem] text-center">100%</span>
+                        <button onclick="adjustScale(0.1)"
+                            class="w-7 h-7 text-slate-400 hover:text-white flex items-center justify-center rounded-lg hover:bg-slate-800 text-xs"><i
+                                class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
             </div>
 
             <!-- Main Canvas Display Window -->
-            <div id="previewCanvasContainer" class="relative min-h-[420px] sm:min-h-[500px] w-full rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden flex items-center justify-center transition-all duration-500 shadow-2xl">
-                
+            <div id="previewCanvasContainer"
+                class="relative min-h-[420px] sm:min-h-[500px] w-full rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden flex items-center justify-center transition-all duration-500 shadow-2xl">
+
                 <!-- Water Animation Canvas (Conditional Background) -->
-                <canvas id="waterCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-500"></canvas>
-                
+                <canvas id="waterCanvas"
+                    class="absolute inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-500"></canvas>
+
                 <!-- Grid Overlay Lines (Toggleable) -->
                 <div id="guidelinesOverlay" class="absolute inset-0 pointer-events-none hidden">
                     <div class="w-full h-full border border-cyan-500/20 relative flex items-center justify-center">
                         <div class="absolute inset-x-0 top-1/2 border-b border-dashed border-cyan-500/30"></div>
                         <div class="absolute inset-y-0 left-1/2 border-r border-dashed border-cyan-500/30"></div>
-                        <div class="absolute w-[80%] h-[80%] border border-amber-500/20 rounded-lg flex items-start justify-end p-2">
+                        <div
+                            class="absolute w-[80%] h-[80%] border border-amber-500/20 rounded-lg flex items-start justify-end p-2">
                             <span class="text-[9px] text-amber-500/60 font-mono">SAFE AREA (1x)</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- SVG RENDER TARGET CONTAINER -->
-                <div id="svgStage" class="relative z-10 transition-transform duration-300 transform p-8 flex items-center justify-center">
+                <div id="svgStage"
+                    class="relative z-10 transition-transform duration-300 transform p-8 flex items-center justify-center">
                     <!-- Dynamic SVG injected by JS -->
                 </div>
 
                 <!-- Canvas Footer Meta Stats -->
-                <div class="absolute bottom-3 inset-x-4 flex items-center justify-between text-[11px] text-slate-400 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-800/80">
+                <div
+                    class="absolute bottom-3 inset-x-4 flex items-center justify-between text-[11px] text-slate-400 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-800/80">
                     <div class="flex items-center gap-3">
-                        <span class="flex items-center gap-1 font-mono text-cyan-400"><i class="fa-solid fa-expand text-[10px]"></i> <span id="metaViewbox">0 0 520 160</span></span>
+                        <span class="flex items-center gap-1 font-mono text-cyan-400"><i
+                                class="fa-solid fa-expand text-[10px]"></i> <span id="metaViewbox">0 0 520
+                                160</span></span>
                         <span class="hidden sm:inline border-l border-slate-700 h-3"></span>
                         <span class="hidden sm:inline text-slate-400" id="metaLayoutName">Horizontal Standard</span>
                     </div>
@@ -212,29 +248,41 @@
 
             <!-- Quick Preset Layout Badges -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <button onclick="setLayout('horizontal')" id="layoutCard-horizontal" class="layout-card active p-3 rounded-xl border border-cyan-500/40 bg-slate-900/90 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
-                    <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm group-hover:scale-110 transition"><i class="fa-solid fa-[#00C2FF] fa-grip"></i></div>
+                <button onclick="setLayout('horizontal')" id="layoutCard-horizontal"
+                    class="layout-card active p-3 rounded-xl border border-cyan-500/40 bg-slate-900/90 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm group-hover:scale-110 transition">
+                        <i class="fa-solid fa-[#00C2FF] fa-grip"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">Horizontal</div>
                         <div class="text-[10px] text-slate-400">Isotipo + Logotipo</div>
                     </div>
                 </button>
-                <button onclick="setLayout('stacked')" id="layoutCard-stacked" class="layout-card p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
-                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm group-hover:scale-110 transition"><i class="fa-solid fa-cubes"></i></div>
+                <button onclick="setLayout('stacked')" id="layoutCard-stacked"
+                    class="layout-card p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm group-hover:scale-110 transition">
+                        <i class="fa-solid fa-cubes"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">Apilado (Stacked)</div>
                         <div class="text-[10px] text-slate-400">Centrado vertical</div>
                     </div>
                 </button>
-                <button onclick="setLayout('isotipo')" id="layoutCard-isotipo" class="layout-card p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
-                    <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-sm group-hover:scale-110 transition"><i class="fa-solid fa-droplet"></i></div>
+                <button onclick="setLayout('isotipo')" id="layoutCard-isotipo"
+                    class="layout-card p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-sm group-hover:scale-110 transition">
+                        <i class="fa-solid fa-droplet"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">Isotipo Solo</div>
                         <div class="text-[10px] text-slate-400">Icono / Favicon</div>
                     </div>
                 </button>
-                <button onclick="setLayout('logotipo')" id="layoutCard-logotipo" class="layout-card p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
-                    <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm group-hover:scale-110 transition"><i class="fa-solid fa-font"></i></div>
+                <button onclick="setLayout('logotipo')" id="layoutCard-logotipo"
+                    class="layout-card p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900 text-left transition flex items-center gap-3 group">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm group-hover:scale-110 transition">
+                        <i class="fa-solid fa-font"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">Logotipo Solo</div>
                         <div class="text-[10px] text-slate-400">Marca en texto</div>
@@ -244,20 +292,25 @@
         </section>
 
         <!-- RIGHT COLUMN: CONTROL PANEL & EXPORTER (5 Cols) -->
-        <section class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col gap-6">
-            
+        <section
+            class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col gap-6">
+
             <!-- Navigation Tabs -->
             <div class="flex border-b border-slate-800 pb-3 gap-2 overflow-x-auto">
-                <button onclick="switchTab('customize')" id="tabBtn-customize" class="tab-btn active px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
+                <button onclick="switchTab('customize')" id="tabBtn-customize"
+                    class="tab-btn active px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-sliders"></i> Personalizar
                 </button>
-                <button onclick="switchTab('palette')" id="tabBtn-palette" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
+                <button onclick="switchTab('palette')" id="tabBtn-palette"
+                    class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-palette"></i> Paleta & Color
                 </button>
-                <button onclick="switchTab('export')" id="tabBtn-export" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
+                <button onclick="switchTab('export')" id="tabBtn-export"
+                    class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-code"></i> Exportar Código
                 </button>
-                <button onclick="switchTab('specs')" id="tabBtn-specs" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
+                <button onclick="switchTab('specs')" id="tabBtn-specs"
+                    class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-circle-info"></i> Manual
                 </button>
             </div>
@@ -265,25 +318,33 @@
             <!-- TAB 1: CUSTOMIZE CONTROLS -->
             <div id="tab-customize" class="space-y-5">
                 <div>
-                    <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-3">Elementos de la Marca</label>
+                    <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-3">Elementos de la
+                        Marca</label>
                     <div class="space-y-2.5">
-                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+                        <label
+                            class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
                             <span class="text-xs text-slate-300 font-medium flex items-center gap-2">
-                                <i class="fa-solid fa-align-left text-cyan-400"></i> Mostrar Subtítulo ("AGUA PURIFICADA")
+                                <i class="fa-solid fa-align-left text-cyan-400"></i> Mostrar Subtítulo ("AGUA
+                                PURIFICADA")
                             </span>
-                            <input type="checkbox" id="chkSubtitle" checked onchange="updateSVG()" class="w-4 h-4 accent-cyan-500 rounded cursor-pointer">
+                            <input type="checkbox" id="chkSubtitle" checked onchange="updateSVG()"
+                                class="w-4 h-4 accent-cyan-500 rounded cursor-pointer">
                         </label>
-                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+                        <label
+                            class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
                             <span class="text-xs text-slate-300 font-medium flex items-center gap-2">
                                 <i class="fa-solid fa-certificate text-amber-400"></i> Badge "Pureza Certificada"
                             </span>
-                            <input type="checkbox" id="chkBadge" onchange="updateSVG()" class="w-4 h-4 accent-cyan-500 rounded cursor-pointer">
+                            <input type="checkbox" id="chkBadge" onchange="updateSVG()"
+                                class="w-4 h-4 accent-cyan-500 rounded cursor-pointer">
                         </label>
-                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+                        <label
+                            class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
                             <span class="text-xs text-slate-300 font-medium flex items-center gap-2">
                                 <i class="fa-solid fa-fill-drip text-blue-400"></i> Relleno con Degradados (Gradients)
                             </span>
-                            <input type="checkbox" id="chkGradients" checked onchange="updateSVG()" class="w-4 h-4 accent-cyan-500 rounded cursor-pointer">
+                            <input type="checkbox" id="chkGradients" checked onchange="updateSVG()"
+                                class="w-4 h-4 accent-cyan-500 rounded cursor-pointer">
                         </label>
                     </div>
                 </div>
@@ -295,7 +356,8 @@
                             <span class="text-slate-300 font-medium">Separación Isotipo / Texto</span>
                             <span id="gapVal" class="text-cyan-400 font-mono">24px</span>
                         </div>
-                        <input type="range" id="rngGap" min="10" max="60" value="24" oninput="updateSVG()" class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                        <input type="range" id="rngGap" min="10" max="60" value="24" oninput="updateSVG()"
+                            class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-400">
                     </div>
 
                     <div>
@@ -303,7 +365,9 @@
                             <span class="text-slate-300 font-medium">Tamaño del Isotipo (Icono)</span>
                             <span id="iconScaleVal" class="text-cyan-400 font-mono">1.0x</span>
                         </div>
-                        <input type="range" id="rngIconScale" min="0.6" max="1.5" step="0.1" value="1.0" oninput="updateSVG()" class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                        <input type="range" id="rngIconScale" min="0.6" max="1.5" step="0.1" value="1.0"
+                            oninput="updateSVG()"
+                            class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-400">
                     </div>
 
                     <div>
@@ -311,7 +375,8 @@
                             <span class="text-slate-300 font-medium">Padding / Margen Interno</span>
                             <span id="padVal" class="text-cyan-400 font-mono">20px</span>
                         </div>
-                        <input type="range" id="rngPadding" min="0" max="50" value="20" oninput="updateSVG()" class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                        <input type="range" id="rngPadding" min="0" max="50" value="20" oninput="updateSVG()"
+                            class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-400">
                     </div>
                 </div>
             </div>
@@ -319,9 +384,11 @@
             <!-- TAB 2: PALETTE & COLORS -->
             <div id="tab-palette" class="space-y-5 hidden">
                 <div>
-                    <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-3">Temas Predefinidos</label>
+                    <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-3">Temas
+                        Predefinidos</label>
                     <div class="grid grid-cols-2 gap-2.5">
-                        <button onclick="applyPresetTheme('brand')" class="p-2.5 rounded-xl border border-slate-700 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
+                        <button onclick="applyPresetTheme('brand')"
+                            class="p-2.5 rounded-xl border border-slate-700 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
                             <span class="text-xs font-semibold text-white">Oficial Jalsuri</span>
                             <div class="flex -space-x-1">
                                 <span class="w-4 h-4 rounded-full bg-[#0084FF] border border-slate-900"></span>
@@ -329,7 +396,8 @@
                                 <span class="w-4 h-4 rounded-full bg-[#0B3C73] border border-slate-900"></span>
                             </div>
                         </button>
-                        <button onclick="applyPresetTheme('dark')" class="p-2.5 rounded-xl border border-slate-800 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
+                        <button onclick="applyPresetTheme('dark')"
+                            class="p-2.5 rounded-xl border border-slate-800 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
                             <span class="text-xs font-semibold text-white">Modo Oscuro</span>
                             <div class="flex -space-x-1">
                                 <span class="w-4 h-4 rounded-full bg-[#00C2FF] border border-slate-900"></span>
@@ -337,7 +405,8 @@
                                 <span class="w-4 h-4 rounded-full bg-[#FFFFFF] border border-slate-900"></span>
                             </div>
                         </button>
-                        <button onclick="applyPresetTheme('mono')" class="p-2.5 rounded-xl border border-slate-800 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
+                        <button onclick="applyPresetTheme('mono')"
+                            class="p-2.5 rounded-xl border border-slate-800 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
                             <span class="text-xs font-semibold text-white">Monocromático</span>
                             <div class="flex -space-x-1">
                                 <span class="w-4 h-4 rounded-full bg-[#334155] border border-slate-900"></span>
@@ -345,7 +414,8 @@
                                 <span class="w-4 h-4 rounded-full bg-[#0F172A] border border-slate-900"></span>
                             </div>
                         </button>
-                        <button onclick="applyPresetTheme('white')" class="p-2.5 rounded-xl border border-slate-800 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
+                        <button onclick="applyPresetTheme('white')"
+                            class="p-2.5 rounded-xl border border-slate-800 bg-slate-950 hover:border-cyan-500 text-left transition flex items-center justify-between group">
                             <span class="text-xs font-semibold text-white">Negativo (Blanco)</span>
                             <div class="flex -space-x-1">
                                 <span class="w-4 h-4 rounded-full bg-[#FFFFFF] border border-slate-900"></span>
@@ -358,28 +428,35 @@
 
                 <!-- Custom Color Pickers -->
                 <div class="space-y-3 pt-3 border-t border-slate-800">
-                    <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block">Personalización Manual de Colores</label>
-                    
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                    <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block">Personalización
+                        Manual de Colores</label>
+
+                    <div
+                        class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800">
                         <span class="text-xs text-slate-300 font-medium">Color Primario (--color-primary)</span>
                         <div class="flex items-center gap-2">
-                            <input type="color" id="clrPrimary" value="#0084FF" onchange="updateSVG()" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
+                            <input type="color" id="clrPrimary" value="#0084FF" onchange="updateSVG()"
+                                class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
                             <span id="clrPrimaryHex" class="text-xs font-mono text-slate-400">#0084FF</span>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                        <span class="text-xs text-slate-300 font-medium">Color Secundario (--color-accent1)</span>
+                    <div
+                        class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                        <span class="text-xs text-slate-300 font-medium">Color Secundario (--color-secondary)</span>
                         <div class="flex items-center gap-2">
-                            <input type="color" id="clrAccent" value="#00C2FF" onchange="updateSVG()" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
+                            <input type="color" id="clrAccent" value="#00C2FF" onchange="updateSVG()"
+                                class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
                             <span id="clrAccentHex" class="text-xs font-mono text-slate-400">#00C2FF</span>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                    <div
+                        class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800">
                         <span class="text-xs text-slate-300 font-medium">Color Texto Principal (--color-text)</span>
                         <div class="flex items-center gap-2">
-                            <input type="color" id="clrText" value="#0B3C73" onchange="updateSVG()" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
+                            <input type="color" id="clrText" value="#0B3C73" onchange="updateSVG()"
+                                class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
                             <span id="clrTextHex" class="text-xs font-mono text-slate-400">#0B3C73</span>
                         </div>
                     </div>
@@ -391,26 +468,33 @@
                 <div class="flex items-center justify-between">
                     <label class="text-xs font-bold text-slate-300 uppercase tracking-wider">Formato de Salida</label>
                     <div class="flex gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-[11px]">
-                        <button onclick="setExportFormat('svg')" id="fmtBtn-svg" class="px-2.5 py-1 rounded-lg text-cyan-400 bg-slate-800 font-medium">SVG Inline</button>
-                        <button onclick="setExportFormat('astro')" id="fmtBtn-astro" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Astro Component</button>
-                        <button onclick="setExportFormat('react')" id="fmtBtn-react" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">React JSX</button>
+                        <button onclick="setExportFormat('svg')" id="fmtBtn-svg"
+                            class="px-2.5 py-1 rounded-lg text-cyan-400 bg-slate-800 font-medium">SVG Inline</button>
+                        <button onclick="setExportFormat('astro')" id="fmtBtn-astro"
+                            class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Astro Component</button>
+                        <button onclick="setExportFormat('react')" id="fmtBtn-react"
+                            class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">React JSX</button>
                     </div>
                 </div>
 
                 <!-- Code Viewport -->
                 <div class="relative">
-                    <textarea id="codeOutput" readonly class="w-full h-52 p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-cyan-300 focus:outline-none resize-none leading-relaxed select-all"></textarea>
-                    <button onclick="copyCodeToClipboard()" class="absolute top-3 right-3 px-3 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition flex items-center gap-1.5 shadow-lg">
+                    <textarea id="codeOutput" readonly
+                        class="w-full h-52 p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-cyan-300 focus:outline-none resize-none leading-relaxed select-all"></textarea>
+                    <button onclick="copyCodeToClipboard()"
+                        class="absolute top-3 right-3 px-3 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition flex items-center gap-1.5 shadow-lg">
                         <i class="fa-regular fa-copy"></i> Copiar
                     </button>
                 </div>
 
                 <!-- Download Buttons -->
                 <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button onclick="downloadSVGFile()" class="p-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2">
+                    <button onclick="downloadSVGFile()"
+                        class="p-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2">
                         <i class="fa-solid fa-file-arrow-down text-sm"></i> Descargar Vector SVG
                     </button>
-                    <button onclick="downloadPNGFile()" class="p-3 bg-slate-800 hover:bg-slate-750 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 transition flex items-center justify-center gap-2">
+                    <button onclick="downloadPNGFile()"
+                        class="p-3 bg-slate-800 hover:bg-slate-750 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 transition flex items-center justify-center gap-2">
                         <i class="fa-regular fa-file-image text-sm"></i> Descargar PNG HD
                     </button>
                 </div>
@@ -441,7 +525,9 @@
                         <i class="fa-solid fa-shield-halved"></i> Reglas de Área Clara (Clear Space)
                     </h4>
                     <p class="text-xs text-slate-300 leading-relaxed">
-                        El logotipo debe mantener siempre un margen de protección mínimo equivalente a la altura de la letra <strong class="text-white font-mono">"J"</strong> alrededor de todos sus bordes para garantizar legibilidad.
+                        El logotipo debe mantener siempre un margen de protección mínimo equivalente a la altura de la
+                        letra <strong class="text-white font-mono">"J"</strong> alrededor de todos sus bordes para
+                        garantizar legibilidad.
                     </p>
                 </div>
 
@@ -462,7 +548,8 @@
     </main>
 
     <!-- TOAST NOTIFICATION CONTAINER -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-300 shadow-2xl shadow-cyan-500/20 text-xs font-semibold">
+    <div id="toast"
+        class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-300 shadow-2xl shadow-cyan-500/20 text-xs font-semibold">
         <i class="fa-solid fa-circle-check text-base text-cyan-400"></i>
         <span id="toastMsg">Código copiado al portapapeles</span>
     </div>
@@ -505,7 +592,7 @@
         // GENERATE PURE VECTOR PATHS FOR JALSURI LOGO
         function generateSVGMarkup(forExport = false) {
             const { layout, primaryColor, accentColor, textColor, showSubtitle, showBadge, useGradients, gap, iconScale, padding } = state;
-            
+
             // Generate Unique ID prefix for gradients
             const gradIdPrimary = useGradients ? 'url(#jalsuri-grad-primary)' : primaryColor;
             const gradIdAccent = useGradients ? 'url(#jalsuri-grad-accent)' : accentColor;
@@ -667,7 +754,7 @@ ${contentBody}
             state.showSubtitle = document.getElementById('chkSubtitle').checked;
             state.showBadge = document.getElementById('chkBadge').checked;
             state.useGradients = document.getElementById('chkGradients').checked;
-            
+
             state.gap = parseInt(document.getElementById('rngGap').value);
             state.iconScale = parseFloat(document.getElementById('rngIconScale').value);
             state.padding = parseInt(document.getElementById('rngPadding').value);
@@ -704,7 +791,7 @@ ${contentBody}
         // RENDER CODE IN SELECTED FORMAT (SVG, ASTRO, REACT)
         function renderCodeOutput(rawSvg) {
             const textarea = document.getElementById('codeOutput');
-            
+
             if (state.exportFormat === 'svg') {
                 textarea.value = rawSvg;
             } else if (state.exportFormat === 'astro') {
@@ -723,16 +810,16 @@ ${rawSvg.replace('<svg ', '<svg class={className} ')}`;
 export default function JalsuriLogo(props) {
   return (
     ${rawSvg
-        .replace(/class=/g, 'className=')
-        .replace(/stop-color=/g, 'stopColor=')
-        .replace(/stop-opacity=/g, 'stopOpacity=')
-        .replace(/font-family=/g, 'fontFamily=')
-        .replace(/font-weight=/g, 'fontWeight=')
-        .replace(/font-size=/g, 'fontSize=')
-        .replace(/letter-spacing=/g, 'letterSpacing=')
-        .replace(/text-anchor=/g, 'textAnchor=')
-        .replace(/stroke-width=/g, 'strokeWidth=')
-        .replace(/fill-opacity=/g, 'fillOpacity=')}
+                        .replace(/class=/g, 'className=')
+                        .replace(/stop-color=/g, 'stopColor=')
+                        .replace(/stop-opacity=/g, 'stopOpacity=')
+                        .replace(/font-family=/g, 'fontFamily=')
+                        .replace(/font-weight=/g, 'fontWeight=')
+                        .replace(/font-size=/g, 'fontSize=')
+                        .replace(/letter-spacing=/g, 'letterSpacing=')
+                        .replace(/text-anchor=/g, 'textAnchor=')
+                        .replace(/stroke-width=/g, 'strokeWidth=')
+                        .replace(/fill-opacity=/g, 'fillOpacity=')}
   );
 }`;
             }
@@ -741,13 +828,13 @@ export default function JalsuriLogo(props) {
         // CONTROL HANDLERS
         function setLayout(layoutType) {
             state.layout = layoutType;
-            
+
             // Toggle active card CSS
             document.querySelectorAll('.layout-card').forEach(card => {
                 card.classList.remove('active', 'border-cyan-500/40', 'bg-slate-900/90');
                 card.classList.add('border-slate-800', 'bg-slate-900/60');
             });
-            
+
             const activeCard = document.getElementById(`layoutCard-${layoutType}`);
             if (activeCard) {
                 activeCard.classList.add('active', 'border-cyan-500/40', 'bg-slate-900/90');
@@ -823,7 +910,7 @@ export default function JalsuriLogo(props) {
             state.showGuidelines = !state.showGuidelines;
             const overlay = document.getElementById('guidelinesOverlay');
             const btn = document.getElementById('guidelinesBtn');
-            
+
             if (state.showGuidelines) {
                 overlay.classList.remove('hidden');
                 btn.classList.add('text-cyan-400', 'bg-slate-800');
@@ -884,7 +971,7 @@ export default function JalsuriLogo(props) {
             const textarea = document.getElementById('codeOutput');
             textarea.select();
             textarea.setSelectionRange(0, 99999); // Mobile
-            
+
             try {
                 document.execCommand('copy');
                 showToast("¡Código copiado al portapapeles!");
@@ -915,7 +1002,7 @@ export default function JalsuriLogo(props) {
             const url = URL.createObjectURL(svgBlob);
 
             const img = new Image();
-            img.onload = function() {
+            img.onload = function () {
                 const canvas = document.createElement('canvas');
                 // Render at 3x scale for crisp HD export
                 const scale = 3;
@@ -1006,4 +1093,5 @@ export default function JalsuriLogo(props) {
         }
     </script>
 </body>
+
 </html>

@@ -1,21 +1,33 @@
 ---
 import imgKey from "@/assets/logo.webp";
+
+interface Props {
+    /**
+     * Fondo sólido para páginas interiores (sin hero oscuro detrás).
+     * En la home se mantiene transparente.
+     */
+    solid?: boolean;
+}
+const { solid = false } = Astro.props;
 ---
 <!-- HEADER CORPORATIVO FIJO -->
 <header
     id="main-header"
-    class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-text/10"
+    class:list={[
+        "fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-text/10",
+        solid && "bg-background/92 border-b border-text/10",
+    ]}
 >
     <div
         class="max-w-7xl mx-auto flex justify-between items-center text-background"
     >
         <!-- Logo + Brand Name -->
         <a
-            href="#hero-container"
+            href="/#hero-container"
             class="flex items-center gap-3 group focus:outline-none"
         >
             <div
-                class="p-1 rounded-xl bg-primary/5 border border-accent1/30 transition-transform group-hover:scale-105"
+                class="p-1 rounded-xl bg-primary/5 border border-secondary/30 transition-transform group-hover:scale-105"
             >
                 <img
                     src={imgKey.src}
@@ -25,12 +37,18 @@ import imgKey from "@/assets/logo.webp";
             </div>
             <div class="flex flex-col">
                 <span
-                    class="text-background font-extrabold text-lg tracking-tight font-display leading-tight group-hover:text-primary transition-colors"
+                    class:list={[
+                        "font-extrabold text-lg tracking-tight font-display leading-tight group-hover:text-primary transition-colors",
+                        solid ? "text-text" : "text-background",
+                    ]}
                 >
                     JALSURI
                 </span>
                 <span
-                    class="text-[10px] tracking-widest uppercase font-semibold text-accent1"
+                    class:list={[
+                        "text-[10px] tracking-widest uppercase font-semibold",
+                        solid ? "text-primary" : "text-secondary",
+                    ]}
                 >
                     Agua Purificada
                 </span>
@@ -38,9 +56,9 @@ import imgKey from "@/assets/logo.webp";
         </a>
 
         <!-- Navigation Menu (Desktop) -->
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium">
             <a
-                href="#hero-container"
+                href="/#hero-container"
                 class="text-text hover:text-primary transition-colors py-1 relative group"
             >
                 Inicio
@@ -49,7 +67,7 @@ import imgKey from "@/assets/logo.webp";
                 ></span>
             </a>
             <a
-                href="#compromiso"
+                href="/#compromiso"
                 class="text-text hover:text-primary transition-colors py-1 relative group"
             >
                 Nosotros
@@ -58,7 +76,7 @@ import imgKey from "@/assets/logo.webp";
                 ></span>
             </a>
             <a
-                href="#productos"
+                href="/#productos"
                 class="text-text hover:text-primary transition-colors py-1 relative group"
             >
                 Productos
@@ -67,16 +85,25 @@ import imgKey from "@/assets/logo.webp";
                 ></span>
             </a>
             <a
-                href="#maquila"
+                href="/#calidad"
                 class="text-text hover:text-primary transition-colors py-1 relative group"
             >
-                Maquila & Empresas
+                Calidad
                 <span
                     class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
                 ></span>
             </a>
             <a
-                href="#contacto"
+                href="/#trayectoria"
+                class="text-text hover:text-primary transition-colors py-1 relative group"
+            >
+                Línea de Tiempo
+                <span
+                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
+                ></span>
+            </a>
+            <a
+                href="/#contacto"
                 class="text-text hover:text-primary transition-colors py-1 relative group"
             >
                 Contacto
@@ -92,7 +119,7 @@ import imgKey from "@/assets/logo.webp";
                 href="https://wa.me/51997673300"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent1 to-primary hover:from-primary hover:to-text text-background font-semibold text-xs tracking-wider uppercase shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+                class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-text text-background font-semibold text-xs tracking-wider uppercase shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
             >
                 <svg
                     class="w-4 h-4"
@@ -115,7 +142,7 @@ import imgKey from "@/assets/logo.webp";
             <button
                 id="mobile-menu-btn"
                 aria-label="Toggle Navigation Menu"
-                class="md:hidden p-2 rounded-xl text-text hover:text-primary hover:bg-primary/10 focus:outline-none transition-colors"
+                class="lg:hidden p-2 rounded-xl text-text hover:text-primary hover:bg-primary/10 focus:outline-none transition-colors"
             >
                 <svg
                     id="menu-icon-open"
@@ -152,30 +179,35 @@ import imgKey from "@/assets/logo.webp";
     <!-- Mobile Navigation Drawer -->
     <div
         id="mobile-menu"
-        class="hidden md:hidden mt-3 pt-4 border-t border-accent1/20 flex flex-col gap-3 pb-2 text-text font-medium text-sm animate-fadeIn bg-background"
+        class="hidden lg:hidden mt-3 pt-4 border-t border-secondary/20 flex flex-col gap-3 pb-2 text-text font-medium text-sm animate-fadeIn bg-background"
     >
         <a
-            href="#hero-container"
+            href="/#hero-container"
             class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
             >Inicio</a
         >
         <a
-            href="#compromiso"
+            href="/#compromiso"
             class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
             >Nosotros</a
         >
         <a
-            href="#productos"
+            href="/#productos"
             class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
             >Productos</a
         >
         <a
-            href="#maquila"
+            href="/#calidad"
             class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            >Maquila & Empresas</a
+            >Calidad</a
         >
         <a
-            href="#contacto"
+            href="/#trayectoria"
+            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
+            >Línea de Tiempo</a
+        >
+        <a
+            href="/#contacto"
             class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
             >Contacto</a
         >
@@ -183,9 +215,42 @@ import imgKey from "@/assets/logo.webp";
             href="https://wa.me/51997673300"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-2 text-center py-2.5 rounded-full bg-gradient-to-r from-accent1 to-primary text-background font-semibold text-xs uppercase tracking-wider shadow-md"
+            class="mt-2 text-center py-2.5 rounded-full bg-gradient-to-r from-secondary to-primary text-background font-semibold text-xs uppercase tracking-wider shadow-md"
         >
             Cotizar Vía WhatsApp
         </a>
     </div>
 </header>
+
+<script>
+    // Menú móvil del Header. Vive aquí (y no en la página) para que
+    // funcione en todas las rutas que incluyen el componente.
+    const mobileBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const iconOpen = document.getElementById("menu-icon-open");
+    const iconClose = document.getElementById("menu-icon-close");
+
+    if (mobileBtn && mobileMenu && iconOpen && iconClose) {
+        mobileBtn.addEventListener("click", () => {
+            const isHidden = mobileMenu.classList.contains("hidden");
+            if (isHidden) {
+                mobileMenu.classList.remove("hidden");
+                iconOpen.classList.add("hidden");
+                iconClose.classList.remove("hidden");
+            } else {
+                mobileMenu.classList.add("hidden");
+                iconOpen.classList.remove("hidden");
+                iconClose.classList.add("hidden");
+            }
+        });
+
+        // Cerrar el menú al navegar a un enlace del índice.
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+                iconOpen.classList.remove("hidden");
+                iconClose.classList.add("hidden");
+            });
+        });
+    }
+</script>

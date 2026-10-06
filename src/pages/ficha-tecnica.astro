@@ -1,0 +1,498 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Viewer3D from "@/components/section-ficha-3d/Viewer3D.astro";
+import FilaFlotante from "@/components/section-ficha-3d/FilaFlotante.astro";
+import fichas from "@/data/fichas.json";
+
+import imgBidon85 from "@/assets/img/PORTADA-WEB-JALSURI-BIDON-8.5-LITROS_2.webp";
+import imgCaja20 from "@/assets/img/20LT-OKAS.webp";
+import imgBidon20 from "@/assets/img/bidon.webp";
+
+// Visual de cada formato. Los modelos 3D están en preparación:
+// por ahora se muestra el material gráfico del producto.
+const visuales: Record<string, ImageMetadata> = {
+	"bidon-8-10": imgBidon85,
+	"caja-20": imgCaja20,
+	"bidon-20": imgBidon20,
+};
+
+const PDF = "/fichas-tecnicas/ficha-tecnica-jalsuri.pdf";
+
+// Ambiente de fondo por ficha: cada formato cambia sutilmente el color de la
+// sección (como en la referencia, que cambia de fondo entre productos).
+const fondos = [
+	"bg-linear-to-b from-white via-slate-50/70 to-primary/[0.06]",
+	"bg-linear-to-b from-primary/[0.06] via-slate-50/70 to-secondary/[0.08]",
+	"bg-linear-to-b from-secondary/[0.08] via-slate-50/70 to-primary/[0.06]",
+];
+
+const solicitar = (nombre: string) =>
+	`https://wa.me/51997673300?text=${encodeURIComponent(
+		`Hola, deseo información sobre ${nombre}`,
+	)}`;
+---
+
+<Layout
+	title="Ficha Técnica | Bidón 8.5L, Caja 20L y Bidón 20L – Jalsuri"
+	description="Especificaciones técnicas de los formatos Jalsuri: bidón de 8.5L y 10L, caja de 20L y bidón de 20L. Descarga la ficha técnica en PDF."
+>
+	<Header solid />
+	<main class="pt-24 sm:pt-28 bg-slate-50">
+		<!-- ============================ INTRO ============================ -->
+		<section class="relative overflow-hidden">
+			<div
+				aria-hidden="true"
+				class="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[360px] rounded-full bg-primary/10 blur-3xl"
+			>
+			</div>
+			<div
+				aria-hidden="true"
+				class="pointer-events-none absolute top-40 -left-24 w-[380px] h-[380px] rounded-full bg-secondary/10 blur-3xl"
+			>
+			</div>
+
+			<div
+				class="relative max-w-4xl mx-auto px-4 sm:px-8 lg:px-12 py-14 sm:py-20 text-center"
+			>
+				<span
+					class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-text text-xs font-bold tracking-[0.22em] uppercase"
+				>
+					Ficha técnica interactiva 3D
+				</span>
+
+				<h1
+					class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text font-display leading-[1.08] tracking-tight"
+					data-reveal
+				>
+					<span
+						class="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary"
+						>Ficha Técnica</span
+					>
+					Interactiva 3D
+				</h1>
+
+				<p
+					class="mt-5 text-text/70 text-base sm:text-lg leading-relaxed mx-auto max-w-2xl"
+				>
+					{fichas.subtitulo}
+				</p>
+
+				<!-- Atajos a cada ficha -->
+				<nav
+					class="mt-8 flex flex-wrap justify-center gap-3"
+					aria-label="Formatos"
+				>
+					{
+						fichas.productos.map((p) => (
+							<a
+								href={`#${p.id}`}
+								class="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 hover:border-primary hover:text-primary text-text text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
+							>
+								<span class="text-[11px] font-extrabold text-primary group-hover:text-secondary">
+									{p.orden}
+								</span>
+								{p.nombre}
+							</a>
+						))
+					}
+				</nav>
+
+				<p
+					class="mt-8 mx-auto max-w-2xl text-sm text-text/70 bg-white/70 border border-primary/15 rounded-2xl px-5 py-4 leading-relaxed"
+				>
+					<span class="font-bold text-text">Nota:</span>
+					{fichas.notaModelos}
+				</p>
+			</div>
+		</section>
+
+		<!-- ======================= FICHAS (200vh CADA UNA) ======================= -->
+		{
+			fichas.productos.map((p, i) => {
+				const visual = visuales[p.id];
+				const fondo = fondos[i % fondos.length];
+				// Dos grupos de características: flotan a izquierda y derecha del
+				// modelo en escritorio; en dos olas centradas abajo en móvil/tablet.
+				const grupoIzq = p.datos.slice(0, 4);
+				const grupoDer = p.datos.slice(4);
+
+				return (
+					<section
+						id={p.id}
+						data-ficha
+						class="relative h-[200vh] border-t border-slate-200/70"
+					>
+						<!-- Ambiente de la ficha -->
+						<div aria-hidden="true" class:list={["absolute inset-0", fondo]}></div>
+
+						<!-- ESCENARIO: queda anclado en pantalla durante los 200vh -->
+						<div class="sticky top-0 h-screen overflow-hidden">
+							<!-- INICIO: marcador + atributos + titular gigante (por detrás del modelo) -->
+							<div
+								class="absolute inset-x-0 top-24 sm:top-28 z-10 px-4 text-center"
+								data-titulo
+							>
+								<div class="mx-auto w-full max-w-[42rem]">
+									<div class="flex items-center justify-center gap-3">
+										<span
+											class="w-9 h-9 shrink-0 rounded-full bg-linear-to-tr from-primary to-secondary text-white font-extrabold text-xs grid place-items-center shadow-md shadow-primary/30"
+										>
+											{p.orden}
+										</span>
+										<span
+											class="text-[11px] font-bold uppercase tracking-[0.2em] text-text/70"
+										>
+											{p.categoria}
+										</span>
+									</div>
+
+									<div class="mt-4 hidden sm:flex flex-wrap justify-center gap-2">
+										{p.chips.map((c) => (
+											<span
+												class="px-3 py-1 rounded-full bg-white/80 backdrop-blur border border-primary/20 text-text text-xs font-bold"
+											>
+												{c}
+											</span>
+										))}
+									</div>
+
+									<h2
+										class="mt-3 mx-auto max-w-[16ch] text-balance font-display font-black text-text tracking-[-0.035em] leading-[0.9] text-[clamp(3rem,13vw,5.5rem)]"
+									>
+										{p.nombre}
+									</h2>
+								</div>
+							</div>
+
+							<!-- Resumen: fuera del centro para que el modelo no lo tape -->
+							<p
+								class="hidden lg:block absolute left-5 xl:left-12 top-40 z-30 w-[17rem] text-[13px] leading-relaxed text-text/75"
+							>
+								{p.resumen}
+							</p>
+
+							<!-- MODELO 3D: centrado en el escenario y por delante del titular -->
+							<div class="absolute inset-0 pt-24 sm:pt-28 z-20">
+								<Viewer3D
+									modelos={p.modelos}
+									poster={visual.src}
+									posterAlt={`Producto: ${p.nombre}`}
+									nombre={p.nombre}
+								/>
+							</div>
+
+							<!-- CARACTERÍSTICAS FLOTANDO A LOS COSTADOS (escritorio) -->
+							<dl
+								class="hidden lg:flex flex-col gap-3 absolute left-5 xl:left-12 top-[62%] -translate-y-1/2 w-[17rem] xl:w-[19rem] z-30"
+								data-lado="izq"
+							>
+								{grupoIzq.map((d) => (
+									<FilaFlotante label={d.label} value={d.value} />
+								))}
+							</dl>
+							<dl
+								class="hidden lg:flex flex-col gap-3 absolute right-5 xl:right-12 top-[62%] -translate-y-1/2 w-[17rem] xl:w-[19rem] z-30"
+								data-lado="der"
+							>
+								{grupoDer.map((d) => (
+									<FilaFlotante label={d.label} value={d.value} />
+								))}
+							</dl>
+
+							<!-- Móvil/tablet: las mismas características en dos olas -->
+							<dl
+								class="lg:hidden absolute inset-x-4 bottom-20 z-30 flex flex-col gap-2"
+								data-ola="0"
+							>
+								{grupoIzq.map((d) => (
+									<FilaFlotante label={d.label} value={d.value} />
+								))}
+							</dl>
+							<dl
+								class="lg:hidden absolute inset-x-4 bottom-20 z-30 flex flex-col gap-2"
+								data-ola="1"
+							>
+								{grupoDer.map((d) => (
+									<FilaFlotante label={d.label} value={d.value} />
+								))}
+							</dl>
+
+							<!-- Capacidad del formato -->
+							<span
+								class="absolute top-28 sm:top-32 right-4 sm:right-8 lg:right-12 z-40 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur border border-primary/25 text-text text-xs font-extrabold shadow-sm"
+							>
+								{p.capacidad}
+							</span>
+
+							<!-- Acción siempre disponible -->
+							<div class="absolute inset-x-0 bottom-5 z-40 flex justify-center px-4">
+								<a
+									href={solicitar(p.nombre)}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider shadow-lg shadow-primary/30 hover:bg-text hover:-translate-y-0.5 transition-all duration-300"
+								>
+									Cotizar este formato
+									<svg
+										class="w-4 h-4"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M14 5l7 7m0 0l-7 7m7-7H3"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</section>
+				);
+			})
+		}
+
+		<!-- ======================= DESCARGA PDF ========================== -->
+		<section class="py-16 sm:py-20">
+			<div class="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12">
+				<div
+					class="relative overflow-hidden rounded-3xl bg-text text-white p-8 sm:p-12 text-center shadow-2xl shadow-primary/25"
+				>
+					<div
+						aria-hidden="true"
+						class="pointer-events-none absolute -top-24 -right-16 w-72 h-72 rounded-full bg-primary/40 blur-3xl"
+					>
+					</div>
+					<div
+						aria-hidden="true"
+						class="pointer-events-none absolute -bottom-28 -left-16 w-72 h-72 rounded-full bg-secondary/30 blur-3xl"
+					>
+					</div>
+
+					<div class="relative">
+						<span
+							class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold tracking-[0.2em] uppercase"
+						>
+							Descarga libre
+						</span>
+						<h2
+							class="mt-5 text-3xl sm:text-4xl font-extrabold font-display tracking-tight"
+							data-reveal
+						>
+							Llévate la ficha técnica completa
+						</h2>
+						<p
+							class="mt-4 text-white/80 max-w-2xl mx-auto leading-relaxed"
+						>
+							Todos los formatos, especificaciones y condiciones
+							de servicio en un solo documento. Ideal para
+							compartir con tu equipo de compras o logística.
+						</p>
+
+						<div
+							class="mt-8 flex flex-col sm:flex-row justify-center gap-4"
+						>
+							<a
+								href={PDF}
+								download="ficha-tecnica-jalsuri.pdf"
+								class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white text-text font-extrabold text-sm uppercase tracking-wider shadow-xl shadow-black/20 hover:bg-secondary hover:text-white hover:-translate-y-1 transition-all duration-300"
+							>
+								<svg
+									class="w-5 h-5"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0 0l-4-4m4 4l4-4"
+									/>
+								</svg>
+								Descargar ficha técnica (PDF)
+							</a>
+							<a
+								href={solicitar("la ficha técnica y una cotización")}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-white/40 text-white font-bold text-sm uppercase tracking-wider hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
+							>
+								Consultar a un asesor
+							</a>
+						</div>
+
+						<p class="mt-6 text-xs text-white/70 tracking-wide">
+							Actualizado: {fichas.actualizado} · Formato A4 ·
+							PDF descargable
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	const reduceMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
+
+	if (!reduceMotion) {
+		gsap.registerPlugin(ScrollTrigger);
+
+		// 1. Escenario de cada ficha (200vh con el modelo anclado en el centro):
+		//    el titular del inicio se desvanece y las características flotan
+		//    a los costados del modelo 3D (o en dos olas en móvil).
+		const escenarios = gsap.matchMedia();
+
+		// Escritorio (≥1024): dos columnas flotantes, izquierda y derecha.
+		escenarios.add("(min-width: 1024px)", () => {
+			gsap.utils.toArray<HTMLElement>("[data-ficha]").forEach((seccion) => {
+				const titulo = seccion.querySelector("[data-titulo]");
+				const izq = seccion.querySelectorAll('[data-lado="izq"] [data-fila]');
+				const der = seccion.querySelectorAll('[data-lado="der"] [data-fila]');
+
+				// Estado inicial explícito: las filas entran con el scroll.
+				gsap.set(izq, { opacity: 0, x: -40, y: 16 });
+				gsap.set(der, { opacity: 0, x: 40, y: 16 });
+
+				gsap
+					.timeline({
+						scrollTrigger: {
+							trigger: seccion,
+							start: "top top",
+							end: "bottom bottom",
+							scrub: 0.6,
+							invalidateOnRefresh: true,
+						},
+					})
+					.fromTo(
+						titulo,
+						{ opacity: 1, y: 0 },
+						{ opacity: 0, y: -70, duration: 0.24, ease: "none" },
+						0,
+					)
+					.to(
+						izq,
+						{
+							opacity: 1,
+							x: 0,
+							y: 0,
+							duration: 0.2,
+							stagger: 0.06,
+							ease: "power1.out",
+						},
+						0.08,
+					)
+					.to(
+						der,
+						{
+							opacity: 1,
+							x: 0,
+							y: 0,
+							duration: 0.2,
+							stagger: 0.06,
+							ease: "power1.out",
+						},
+						0.36,
+					)
+					// Reserva de recorrido: la última fila termina antes del final
+					// de la sección y no a la mitad del todo el scroll.
+					.to(titulo, { opacity: 0, duration: 0.26 }, 0.74);
+			});
+		});
+
+		// Móvil/tablet: las mismas características en dos olas centradas abajo.
+		escenarios.add("(max-width: 1023px)", () => {
+			gsap.utils.toArray<HTMLElement>("[data-ficha]").forEach((seccion) => {
+				const titulo = seccion.querySelector("[data-titulo]");
+				const ola0 = seccion.querySelectorAll('[data-ola="0"] [data-fila]');
+				const ola1 = seccion.querySelectorAll('[data-ola="1"] [data-fila]');
+
+				// Estado inicial explícito: fuera de cuadro hasta su ola.
+				gsap.set(ola0, { opacity: 0, y: 26 });
+				gsap.set(ola1, { opacity: 0, y: 26 });
+
+				gsap
+					.timeline({
+						scrollTrigger: {
+							trigger: seccion,
+							start: "top top",
+							end: "bottom bottom",
+							scrub: 0.6,
+							invalidateOnRefresh: true,
+						},
+					})
+					.fromTo(
+						titulo,
+						{ opacity: 1, y: 0 },
+						{ opacity: 0, y: -50, duration: 0.22, ease: "none" },
+						0,
+					)
+					.to(
+						ola0,
+						{
+							opacity: 1,
+							y: 0,
+							duration: 0.16,
+							stagger: 0.05,
+							ease: "power1.out",
+						},
+						0.1,
+					)
+					.to(
+						ola0,
+						{
+							opacity: 0,
+							y: -18,
+							duration: 0.12,
+							stagger: 0.03,
+							ease: "power1.in",
+						},
+						0.48,
+					)
+					.to(
+						ola1,
+						{
+							opacity: 1,
+							y: 0,
+							duration: 0.16,
+							stagger: 0.05,
+							ease: "power1.out",
+						},
+						0.54,
+					)
+					// Reserva de recorrido: la segunda ola termina antes del final.
+					.to(titulo, { opacity: 0, duration: 0.15 }, 0.85);
+			});
+		});
+
+		// 2. Encabezados y párrafos de cabecera.
+		gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
+			gsap.from(el, {
+				opacity: 0,
+				y: 20,
+				duration: 0.6,
+				ease: "power2.out",
+				scrollTrigger: {
+					trigger: el,
+					start: "top 92%",
+					toggleActions: "play none none reverse",
+				},
+			});
+		});
+
+		// 3. El movimiento del visual (descenso + giro 3D, o la imagen de
+		//    respaldo) vive dentro de Viewer3D.astro, que lo sincroniza con el
+		//    scroll de cada sección.
+	}
+</script>

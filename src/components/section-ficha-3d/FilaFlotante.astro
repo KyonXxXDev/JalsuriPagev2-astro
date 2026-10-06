@@ -1,0 +1,29 @@
+---
+/**
+ * Característica "flotando": tarjeta de cristal que se sitúa a los costados
+ * del modelo 3D (escritorio) u en dos olas centradas abajo (móvil).
+ * En pantallas pequeñas etiqueta y valor van en la misma línea para que la
+ * fila pese menos y quepa toda la tanda en pantalla.
+ */
+interface Props {
+	label: string;
+	value: string;
+}
+const { label, value } = Astro.props;
+---
+
+<div
+	data-fila
+	class="rounded-xl sm:rounded-2xl bg-white/85 backdrop-blur-md border border-slate-200/70 px-3.5 py-1.5 sm:px-4 sm:py-3 shadow-lg shadow-text/10"
+>
+	<dt
+		class="inline sm:block mr-1.5 sm:mr-0 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500"
+	>
+		{label}
+	</dt>
+	<dd
+		class="inline sm:block text-[11.5px] sm:text-[13px] font-semibold leading-snug text-text"
+	>
+		{value}
+	</dd>
+</div>

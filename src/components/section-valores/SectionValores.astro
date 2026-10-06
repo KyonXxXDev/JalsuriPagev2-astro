@@ -10,79 +10,86 @@ export const valores: ValorCardProps[] = [
     {
         id: 1,
         title: "Pureza Incomprometible",
-        description: "Sometemos cada lote a rigurosos procesos de microfiltración y ozonización garantizando la máxima nitidez y seguridad bacteriológica.",
+        description:
+            "Sometemos cada lote a rigurosos procesos de microfiltración y ozonización garantizando la máxima nitidez y seguridad bacteriológica.",
         badge: "Calidad Certificada",
-        icon: ShieldCheck, 
+        icon: ShieldCheck,
         // Nuevos campos del reverso
         backTitle: "El Proceso Jalsuri",
-        backDescription: "Nuestra planta cuenta con filtros de última generación para eliminar el 99.9% de impurezas, asegurando agua premium.",
+        backDescription:
+            "Nuestra planta cuenta con filtros de última generación para eliminar el 99.9% de impurezas, asegurando agua premium.",
         features: [
             "Microfiltración de 5 etapas",
             "Ozonización continua",
-            "Análisis de laboratorio diario"
+            "Análisis de laboratorio diario",
         ],
         ctaText: "Conocer el proceso",
-        ctaLink: "#proceso"
+        ctaLink: "#proceso",
     },
     {
         id: 2,
         title: "Sostenibilidad Consciente",
-        description: "Promovemos el modelo circular con bidones retornables de larga vida útil, reduciendo significativamente la huella de plástico.",
+        description:
+            "Promovemos el modelo circular con bidones retornables de larga vida útil, reduciendo significativamente la huella de plástico.",
         badge: "Responsabilidad Ambiental",
         icon: Leaf,
         // Nuevos campos del reverso
         backTitle: "Impacto Positivo",
-        backDescription: "Cada bidón retornable evita el uso de cientos de botellas de plástico desechables en los basureros y océanos.",
+        backDescription:
+            "Cada bidón retornable evita el uso de cientos de botellas de plástico desechables en los basureros y océanos.",
         features: [
             "Bidones BPA-Free",
             "Lavado ecológico industrial",
-            "Rutas de entrega optimizadas"
+            "Rutas de entrega optimizadas",
         ],
         ctaText: "Nuestra huella",
-        ctaLink: "#sostenibilidad"
+        ctaLink: "#sostenibilidad",
     },
     {
         id: 3,
         title: "Logística y Puntualidad",
-        description: "Respetamos el flujo de trabajo de tu equipo. Garantizamos entregas programadas sin demoras para que nunca falte hidratación.",
+        description:
+            "Respetamos el flujo de trabajo de tu equipo. Garantizamos entregas programadas sin demoras para que nunca falte hidratación.",
         badge: "Atención Corporativa",
         icon: Truck,
         // Nuevos campos del reverso
         backTitle: "Entregas sin estrés",
-        backDescription: "Tu empresa nunca se quedará sin agua gracias a nuestro sistema automatizado de rutas programadas exclusivas para B2B.",
+        backDescription:
+            "Tu empresa nunca se quedará sin agua gracias a nuestro sistema automatizado de rutas programadas exclusivas para B2B.",
         features: [
             "Programación semanal fija",
             "Stock corporativo garantizado",
-            "Asesor de cuenta dedicado"
+            "Asesor de cuenta dedicado",
         ],
         ctaText: "Programar envíos",
-        ctaLink: "#contacto"
+        ctaLink: "#contacto",
     },
     {
         id: 4,
         title: "Innovación Ozonizada",
-        description: "Implementamos tecnología de vanguardia en purificación por ozono, asegurando un sabor fresco, liviano y altamente saludable.",
+        description:
+            "Implementamos tecnología de vanguardia en purificación por ozono, asegurando un sabor fresco, liviano y altamente saludable.",
         badge: "Tecnología de Punta",
         icon: Zap,
         // Nuevos campos del reverso
         backTitle: "El Poder del Ozono",
-        backDescription: "El ozono es un purificador 100% natural que no deja residuos químicos y enriquece el agua con oxígeno extra.",
+        backDescription:
+            "El ozono es un purificador 100% natural que no deja residuos químicos y enriquece el agua con oxígeno extra.",
         features: [
             "Sabor ultra ligero",
             "Mayor oxigenación celular",
-            "Libre de cloro y sodio"
+            "Libre de cloro y sodio",
         ],
         ctaText: "Cotizar ahora",
-        ctaLink: "#contacto"
+        ctaLink: "#contacto",
     },
 ];
-
 ---
 
 <section id="valores" class="py-24 relative overflow-hidden">
     <!-- Luces ambientales de fondo -->
     <div
-        class="absolute top-1/3 -left-32 w-96 h-96 bg-accent1/10 rounded-full blur-3xl pointer-events-none"
+        class="absolute top-1/3 -left-32 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none"
     >
     </div>
     <div
@@ -96,7 +103,7 @@ export const valores: ValorCardProps[] = [
             class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"
         >
             <span
-                class="px-4 py-1.5 rounded-full bg-accent1/10 text-primary border border-accent1/30 text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm"
+                class="px-4 py-1.5 rounded-full bg-secondary/10 text-primary border border-secondary/30 text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm"
             >
                 Nuestros Pilares
             </span>
@@ -104,7 +111,7 @@ export const valores: ValorCardProps[] = [
                 class="text-3xl sm:text-5xl font-extrabold text-text tracking-tight font-display leading-tight"
             >
                 Principios que garantizan cada <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent1"
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
                     >gota de pureza</span
                 >
             </h2>
@@ -119,11 +126,7 @@ export const valores: ValorCardProps[] = [
 
         <!-- Rejilla de Tarjetas de Valores -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {
-                valores.map(valor =>(
-                    <ValorCard {...valor} />
-                ))
-            }
+            {valores.map((valor) => <ValorCard {...valor} />)}
         </div>
     </div>
 </section>

@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agua de Mesa Jalsuri | Hidratación Corporativa e Industrial</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        jalsuri: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#0ea5e9', // Primary Cyan/Blue
+                            600: '#0284c7', // Brand Deep Blue
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                        eco: {
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .water-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #0284c7 40%, #0d9488 100%);
+        }
+
+        .water-wave {
+            background-image: radial-gradient(circle at 50% 100%, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+        }
+
+        /* Custom range slider styling */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #0284c7;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-jalsuri-500 selection:text-white">
+
+    <!-- Top Contact Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-6">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-jalsuri-400"></i> Ventas:
+                    <strong>960 695 747</strong></span>
+                <span class="hidden sm:inline flex items-center gap-2"><i
+                        class="fa-solid fa-envelope text-jalsuri-400"></i> ventas@aguademesajalsuri.com</span>
+                <span class="hidden md:inline flex items-center gap-2"><i
+                        class="fa-solid fa-clock text-jalsuri-400"></i> L-V: 8:00 - 18:00 | S: 8:00 - 13:00</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs">
+                <span class="text-slate-400"><i class="fa-solid fa-building text-jalsuri-400 mr-1"></i> Ingeniería
+                    Aplicada al Agua S.A.C.</span>
+                <a href="#contacto" class="text-jalsuri-300 hover:underline font-medium">Atención a Empresas</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header
+        class="sticky top-0 z-40 bg-slate/90 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div
+                        class="w-11 h-11 rounded-2xl water-gradient flex items-center justify-center text-white shadow-md shadow-jalsuri-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-droplet text-xl"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="text-2xl font-black tracking-tight text-slate-900 block leading-none">JALSURI</span>
+                        <span
+                            class="text-[10px] uppercase tracking-widest font-semibold text-jalsuri-600 block mt-1">Agua
+                            Ozonizada Corporativa</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-8 font-medium text-slate-600 text-sm">
+                    <a href="#inicio" class="hover:text-jalsuri-600 transition-colors">Inicio</a>
+                    <a href="#nosotros" class="hover:text-jalsuri-600 transition-colors">Nosotros</a>
+                    <a href="#calculadora"
+                        class="hover:text-jalsuri-600 transition-colors flex items-center gap-1.5 text-jalsuri-700 font-semibold bg-jalsuri-50 px-3 py-1.5 rounded-lg border border-jalsuri-200">
+                        <i class="fa-solid fa-calculator text-jalsuri-500"></i> Calculadora B2B
+                    </a>
+                    <a href="#productos" class="hover:text-jalsuri-600 transition-colors">Productos</a>
+                    <a href="#servicios" class="hover:text-jalsuri-600 transition-colors">Servicio Integral</a>
+                    <a href="#maquila" class="hover:text-jalsuri-600 transition-colors">Maquila (Marca Propia)</a>
+                    <a href="#faq" class="hover:text-jalsuri-600 transition-colors">Preguntas</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <button onclick="openQuoteModal()"
+                        class="bg-jalsuri-600 hover:bg-jalsuri-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-jalsuri-600/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice"></i> Cotización Rápida
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center gap-2">
+                    <button onclick="toggleMobileMenu()"
+                        class="p-2.5 text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-100 transition-colors">
+                        <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden border-b border-slate-200 bg-slate px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-700 font-medium hover:text-jalsuri-600">Inicio</a>
+            <a href="#nosotros" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-700 font-medium hover:text-jalsuri-600">Nosotros</a>
+            <a href="#calculadora" onclick="toggleMobileMenu()"
+                class="block py-2 text-jalsuri-600 font-semibold">Calculadora de Consumo B2B</a>
+            <a href="#productos" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-700 font-medium hover:text-jalsuri-600">Productos y Equipos</a>
+            <a href="#servicios" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-700 font-medium hover:text-jalsuri-600">Servicios Logísticos</a>
+            <a href="#maquila" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-700 font-medium hover:text-jalsuri-600">Maquila de Agua</a>
+            <a href="#faq" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-700 font-medium hover:text-jalsuri-600">Preguntas Frecuentes</a>
+            <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+                <button onclick="openQuoteModal(); toggleMobileMenu()"
+                    class="w-full bg-jalsuri-600 text-white font-semibold py-3 rounded-xl text-center shadow-md">
+                    Solicitar Cotización Empresarial
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative overflow-hidden bg-slate-900 text-white pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <!-- Background Decorative Elements -->
+        <div class="absolute inset-0 opacity-20 water-wave pointer-events-none"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-jalsuri-500/30 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div
+                        class="inline-flex items-center gap-2 bg-slate-800/80 border border-jalsuri-500/30 text-jalsuri-300 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full">
+                        <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+                        Proveedor Estratégico Corporativo para Empresas
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white">
+                        Hidratación Responsable y <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-jalsuri-300 via-teal-200 to-jalsuri-400">Agua
+                            Ozonizada Pureza 100%</span>
+                    </h1>
+
+                    <p
+                        class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        Aseguramos el bienestar y eficiencia de tu equipo corporativo e industrial con suministro
+                        programado, préstamo de dispensadores sin costo inicial y agua ozonizada sin agregados químicos.
+                    </p>
+
+                    <!-- Key Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-left">
+                        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50 flex items-center gap-3">
+                            <div
+                                class="w-9 h-9 rounded-lg bg-jalsuri-500/20 flex items-center justify-center text-jalsuri-400">
+                                <i class="fa-solid fa-box-archive text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-200">Préstamo Gratis</h4>
+                                <p class="text-[11px] text-slate-400">Dispensadores</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50 flex items-center gap-3">
+                            <div
+                                class="w-9 h-9 rounded-lg bg-teal-500/20 flex items-center justify-center text-teal-400">
+                                <i class="fa-solid fa-truck-fast text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-200">Entrega Interna</h4>
+                                <p class="text-[11px] text-slate-400">A tus oficinas/planta</p>
+                            </div>
+                        </div>
+                        <div
+                            class="col-span-2 sm:col-span-1 bg-slate-800/60 p-3 rounded-xl border border-slate-700/50 flex items-center gap-3">
+                            <div
+                                class="w-9 h-9 rounded-lg bg-slate-500/20 flex items-center justify-center text-blue-400">
+                                <i class="fa-solid fa-shield-virus text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-200">Purificación Ozono</h4>
+                                <p class="text-[11px] text-slate-400">Sin químicos nocivos</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Call to Actions -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                        <button onclick="scrollToSection('calculadora')"
+                            class="bg-jalsuri-500 hover:bg-jalsuri-600 text-white font-bold px-7 py-4 rounded-xl shadow-xl shadow-jalsuri-500/30 transition-all flex items-center justify-center gap-3 group">
+                            <i class="fa-solid fa-calculator group-hover:rotate-12 transition-transform"></i>
+                            Calcular Consumo para mi Empresa
+                        </button>
+                        <button onclick="openQuoteModal()"
+                            class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-7 py-4 rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane text-jalsuri-400"></i>
+                            Solicitar Propuesta
+                        </button>
+                    </div>
+
+                    <p class="text-xs text-slate-400 pt-2 flex items-center justify-center lg:justify-start gap-2">
+                        <i class="fa-solid fa-check-circle text-teal-400"></i> Atención a Oficinas, Plantas
+                        Industriales, Clínicas y Colegios
+                    </p>
+                </div>
+
+                <!-- Hero Graphic / Interactive Card Showcase -->
+                <div class="lg:col-span-5">
+                    <div class="relative max-w-md mx-auto">
+                        <!-- Main Card -->
+                        <div
+                            class="bg-gradient-to-b from-slate-800 to-slate-900 rounded-3xl p-6 border border-slate-700/80 shadow-2xl relative z-10 space-y-6">
+
+                            <div class="flex justify-between items-center border-b border-slate-700 pb-4">
+                                <div>
+                                    <span
+                                        class="text-xs font-semibold uppercase tracking-wider text-jalsuri-400">Servicio
+                                        Destacado</span>
+                                    <h3 class="text-lg font-bold text-white">Plan Suministro Corporativo</h3>
+                                </div>
+                                <span
+                                    class="bg-teal-500/20 text-teal-300 text-xs font-bold px-3 py-1 rounded-full border border-teal-500/30">Sin
+                                    Inversión Inicial</span>
+                            </div>
+
+                            <!-- Feature Points -->
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-check text-xs"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-300"><strong class="text-white">Bidones de 20
+                                            Litros:</strong> Envases ergonómicos de alta resistencia con válvula
+                                        higiénica.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-check text-xs"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-300"><strong class="text-white">Dispensadores
+                                            Frío/Caliente:</strong> Mantenimiento preventivo periódico e higienización
+                                        programada.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-check text-xs"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-300"><strong class="text-white">Logística
+                                            Interna:</strong> Llevamos los bidones directamente a las áreas de consumo
+                                        de tu local.</p>
+                                </div>
+                            </div>
+
+                            <!-- Live Quick Stats -->
+                            <div
+                                class="grid grid-cols-2 gap-3 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 text-center">
+                                <div>
+                                    <span class="text-2xl font-black text-jalsuri-400 block">+12 Años</span>
+                                    <span class="text-[10px] uppercase font-semibold text-slate-400">Experiencia en
+                                        Mercado</span>
+                                </div>
+                                <div>
+                                    <span class="text-2xl font-black text-teal-400 block">100%</span>
+                                    <span class="text-[10px] uppercase font-semibold text-slate-400">Garantía
+                                        Sanitaria</span>
+                                </div>
+                            </div>
+
+                            <button onclick="openQuoteModalWithPlan('Plan Corporativo Pyme')"
+                                class="w-full bg-gradient-to-r from-jalsuri-500 to-teal-500 hover:opacity-95 text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm">
+                                Solicitar Evaluación en Planta u Oficina
+                            </button>
+                        </div>
+
+                        <!-- Floating Badges -->
+                        <div
+                            class="absolute -top-6 -left-6 bg-slate text-slate-900 p-3 rounded-2xl shadow-xl z-20 hidden sm:flex items-center gap-3 border border-slate-100">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold">Planta Certificada</p>
+                                <p class="text-[10px] text-slate-500">Controles en laboratorio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="py-20 bg-slate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span
+                    class="text-xs font-bold text-jalsuri-600 uppercase tracking-widest bg-jalsuri-50 px-3 py-1 rounded-full border border-jalsuri-200">
+                    Ingeniería Aplicada al Agua S.A.C.
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">
+                    Sobre JALSURI: Pureza, Origen y Sostenibilidad
+                </h2>
+                <p class="text-slate-600 text-base">
+                    Desde el 2013 nos propusimos transformar la manera en que las empresas garantizan la hidratación de
+                    sus equipos. "Jalsuri" (del aymara: <em>manantial o vertiente de agua pura</em>) representa nuestro
+                    compromiso con la frescura natural y la tecnología de vanguardia.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:border-jalsuri-200 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-jalsuri-500 text-white flex items-center justify-center text-2xl mb-6 shadow-md shadow-jalsuri-500/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-filter flex"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Tratamiento con Ozono</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Nuestra planta aplica tecnología de ozonización de alta precisión que elimina virus, bacterias y
+                        microorganismos sin alterar el sabor ni requerir insumos químicos residuales.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:border-jalsuri-200 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-teal-500 text-white flex items-center justify-center text-2xl mb-6 shadow-md shadow-teal-500/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Enfoque Sostenible</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Fomentamos la reducción de plásticos de un solo uso mediante bidones retornables de alta
+                        resistencia y dispensadores ergonómicos de eficiente consumo energético.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:border-jalsuri-200 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-slate-600 text-white flex items-center justify-center text-2xl mb-6 shadow-md shadow-blue-600/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Servicio Sin Interrupciones</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Entendemos la dinámica empresarial. Programamos entregas periódicas según el volumen de consumo
+                        de tu personal, garantizando reposición antes de que se agote.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculadora"
+        class="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-jalsuri-950 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+                <span
+                    class="text-xs font-bold text-teal-400 uppercase tracking-widest bg-teal-500/10 px-3 py-1 rounded-full border border-teal-500/20">
+                    Herramienta Exclusiva B2B
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black">Calculadora de Hidratación Corporativa</h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Estima de forma instantánea los bidones mensuales, dispensadores necesarios y el ahorro ecológico
+                    según la cantidad de colaboradores en tu empresa.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+
+                <!-- Controls Side -->
+                <div
+                    class="lg:col-span-7 bg-slate-800/80 p-6 sm:p-8 rounded-3xl border border-slate-700/80 shadow-xl space-y-8 flex flex-col justify-between">
+
+                    <div>
+                        <!-- Employee Count Slider -->
+                        <div class="space-y-4 mb-8">
+                            <div class="flex justify-between items-center">
+                                <label
+                                    class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fa-solid fa-users text-jalsuri-400"></i> Cantidad de Colaboradores /
+                                    Trabajadores
+                                </label>
+                                <span
+                                    class="bg-jalsuri-500 text-white font-extrabold text-lg px-4 py-1.5 rounded-xl shadow-md"
+                                    id="employeeVal">
+                                    25
+                                </span>
+                            </div>
+                            <input type="range" id="employeeInput" min="5" max="300" step="5" value="25"
+                                class="w-full h-3 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-jalsuri-500">
+                            <div class="flex justify-between text-xs text-slate-400">
+                                <span>5 personas</span>
+                                <span>50 personas</span>
+                                <span>150 personas</span>
+                                <span>300+ personas</span>
+                            </div>
+                        </div>
+
+                        <!-- Industry Type Selection -->
+                        <div class="space-y-3 mb-8">
+                            <label class="text-sm font-bold text-slate-200 uppercase tracking-wider block">Tipo de
+                                Entorno de Trabajo</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="industrySelector">
+                                <button onclick="setIndustry('office', this)"
+                                    class="industry-btn active p-3 rounded-xl border border-jalsuri-500 bg-jalsuri-500/20 text-left text-xs font-semibold hover:border-jalsuri-400 transition-all flex flex-col gap-1">
+                                    <i class="fa-solid fa-building-user text-jalsuri-400 text-base"></i>
+                                    <span>Oficina / Administrativo</span>
+                                </button>
+                                <button onclick="setIndustry('industrial', this)"
+                                    class="industry-btn p-3 rounded-xl border border-slate-700 bg-slate-900/60 text-left text-xs font-semibold hover:border-jalsuri-400 transition-all flex flex-col gap-1">
+                                    <i class="fa-solid fa-industry text-teal-400 text-base"></i>
+                                    <span>Planta / Almacén / Obra</span>
+                                </button>
+                                <button onclick="setIndustry('medical', this)"
+                                    class="industry-btn p-3 rounded-xl border border-slate-700 bg-slate-900/60 text-left text-xs font-semibold hover:border-jalsuri-400 transition-all flex flex-col gap-1 col-span-2 sm:col-span-1">
+                                    <i class="fa-solid fa-hospital text-blue-400 text-base"></i>
+                                    <span>Salud / Educación</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Extra Services Checklist -->
+                        <div class="space-y-3">
+                            <label class="text-sm font-bold text-slate-200 uppercase tracking-wider block">Servicios
+                                Adicionales Requeridos</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <label
+                                    class="flex items-center gap-3 bg-slate-900/50 p-3 rounded-xl border border-slate-700 cursor-pointer hover:bg-slate-900">
+                                    <input type="checkbox" id="chkDispenser" checked
+                                        class="rounded accent-jalsuri-500 w-4 h-4">
+                                    <span>Préstamo de Dispensadores Frío/Caliente</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 bg-slate-900/50 p-3 rounded-xl border border-slate-700 cursor-pointer hover:bg-slate-900">
+                                    <input type="checkbox" id="chkInternalDelivery" checked
+                                        class="rounded accent-jalsuri-500 w-4 h-4">
+                                    <span>Distribución a Puntos Internos</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-slate-400 pt-4 border-t border-slate-700/60 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-jalsuri-400"></i> Cálculos basados en estándar promedio
+                        de hidratación recomendada en jornada laboral.
+                    </div>
+
+                </div>
+
+                <!-- Results Output Card Side -->
+                <div
+                    class="lg:col-span-5 bg-gradient-to-b from-slate-800 to-jalsuri-900 p-6 sm:p-8 rounded-3xl border border-jalsuri-500/30 shadow-2xl flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-jalsuri-500/20 rounded-full blur-2xl"></div>
+
+                    <div>
+                        <div class="flex justify-between items-center border-b border-slate-700 pb-4 mb-6">
+                            <h3 class="font-extrabold text-lg text-white">Propuesta de Consumo Estimada</h3>
+                            <span
+                                class="text-xs bg-jalsuri-500/20 text-jalsuri-300 px-3 py-1 rounded-full border border-jalsuri-400/30">Plan
+                                B2B Personalizado</span>
+                        </div>
+
+                        <!-- Big Numbers Display -->
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-700 text-center">
+                                <span class="text-3xl sm:text-4xl font-black text-jalsuri-400 block"
+                                    id="outBidones">15</span>
+                                <span
+                                    class="text-xs text-slate-300 font-semibold uppercase tracking-wider block mt-1">Bidones
+                                    (20L) / Mes</span>
+                            </div>
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-700 text-center">
+                                <span class="text-3xl sm:text-4xl font-black text-teal-400 block"
+                                    id="outDispensers">2</span>
+                                <span
+                                    class="text-xs text-slate-300 font-semibold uppercase tracking-wider block mt-1">Dispensadores
+                                    Sugeridos</span>
+                            </div>
+                        </div>
+
+                        <!-- Ecological Metrics -->
+                        <div class="bg-slate-900/40 p-4 rounded-2xl border border-slate-800 space-y-3 mb-6">
+                            <h4
+                                class="text-xs font-bold text-teal-300 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-seedling"></i> Impacto Ecológico Estimado
+                            </h4>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-300">Botellas de 500ml evadidas:</span>
+                                <span class="font-bold text-white" id="outBottlesSaved">600 un. / mes</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-300">Ahorro estimado en plástico:</span>
+                                <span class="font-bold text-teal-400" id="outPlasticSaved">15.0 kg / mes</span>
+                            </div>
+                        </div>
+
+                        <!-- Recommendations list -->
+                        <div class="text-xs text-slate-300 space-y-2 mb-6">
+                            <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-teal-400"></i>
+                                Frecuencia de entrega sugerida: <strong class="text-white" id="outFrequency">Quincenal
+                                    (2 rutas/mes)</strong></p>
+                            <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-teal-400"></i>
+                                Mantenimiento preventivo incluido sin costo adicional.</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button onclick="applyCalculatorQuote()"
+                        class="w-full bg-jalsuri-500 hover:bg-jalsuri-600 text-white font-extrabold py-4 rounded-xl shadow-lg shadow-jalsuri-500/30 transition-all text-sm flex items-center justify-center gap-2 group">
+                        <span>Solicitar Cotización con este Cálculo</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="productos" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+                <span
+                    class="text-xs font-bold text-jalsuri-600 uppercase tracking-widest bg-jalsuri-100 px-3 py-1 rounded-full border border-jalsuri-200">
+                    Catálogo Corporativo
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900">Nuestros Productos y Equipos</h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Equipamiento y agua tratada bajo estrictos estándares de sanidad y ergonomía para todo tipo de
+                    instalaciones corporativas.
+                </p>
+            </div>
+
+            <!-- Product Categories Tabs -->
+            <div class="flex justify-center gap-2 mb-10 overflow-x-auto pb-2">
+                <button onclick="filterProducts('all', this)"
+                    class="prod-tab active bg-jalsuri-600 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-sm transition-all whitespace-nowrap">
+                    Todos los Productos
+                </button>
+                <button onclick="filterProducts('bidones', this)"
+                    class="prod-tab bg-slate text-slate-700 hover:bg-slate-100 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl border border-slate-200 transition-all whitespace-nowrap">
+                    Bidones de Agua
+                </button>
+                <button onclick="filterProducts('dispensadores', this)"
+                    class="prod-tab bg-slate text-slate-700 hover:bg-slate-100 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl border border-slate-200 transition-all whitespace-nowrap">
+                    Dispensadores de Agua
+                </button>
+                <button onclick="filterProducts('accesorios', this)"
+                    class="prod-tab bg-slate text-slate-700 hover:bg-slate-100 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl border border-slate-200 transition-all whitespace-nowrap">
+                    Accesorios y Soporte
+                </button>
+            </div>
+
+            <!-- Grid of Products -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productGrid">
+
+                <!-- Product 1: Bidón 20L -->
+                <div
+                    class="product-card prod-bidones bg-slate rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div
+                            class="relative bg-gradient-to-br from-jalsuri-50 to-teal-50 rounded-2xl p-8 mb-6 text-center overflow-hidden">
+                            <span
+                                class="absolute top-3 right-3 bg-jalsuri-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg">Mas
+                                Solicitado</span>
+                            <div
+                                class="w-24 h-24 mx-auto text-jalsuri-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-bottle-water text-6xl"></i>
+                            </div>
+                        </div>
+                        <span class="text-xs font-semibold text-jalsuri-600 uppercase tracking-wider block mb-1">Recarga
+                            & Envase</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Bidón de Agua Ozonizada 20 Litros</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Agua ozonizada libre de químicos, procesada en planta certificada. Envase pet ergonómico
+                            retornable con caño o tapa hermética para dispensador.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i> Pureza
+                                libre de sodio y cloro residual</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i>
+                                Trazabilidad y sello de seguridad higiénico</li>
+                        </ul>
+                    </div>
+                    <button onclick="openQuoteModalWithProduct('Bidón de Agua Ozonizada 20L')"
+                        class="w-full bg-slate-900 hover:bg-jalsuri-600 text-white font-bold py-3 rounded-xl transition-colors text-xs flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Cotizar este producto
+                    </button>
+                </div>
+
+                <!-- Product 2: Dispensador Pedestal -->
+                <div
+                    class="product-card prod-dispensadores bg-slate rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div
+                            class="relative bg-gradient-to-br from-slate-100 to-slate-200/60 rounded-2xl p-8 mb-6 text-center">
+                            <span
+                                class="absolute top-3 right-3 bg-teal-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg">En
+                                Préstamo Gratuito</span>
+                            <div
+                                class="w-24 h-24 mx-auto text-slate-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-temperature-arrow-up text-6xl text-jalsuri-600"></i>
+                            </div>
+                        </div>
+                        <span
+                            class="text-xs font-semibold text-jalsuri-600 uppercase tracking-wider block mb-1">Equipamiento
+                            B2B</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Dispensador Eléctrico Frío / Caliente</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Equipo de compresión de alta velocidad. Proporciona agua helada (5°C) y caliente (90°C)
+                            ideal para café e infusiones corporativas.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i> Sistema
+                                de ahorro de energía eficiente</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i>
+                                Mantenimiento e higienización periódica</li>
+                        </ul>
+                    </div>
+                    <button onclick="openQuoteModalWithProduct('Dispensador Eléctrico Frío/Caliente')"
+                        class="w-full bg-slate-900 hover:bg-jalsuri-600 text-white font-bold py-3 rounded-xl transition-colors text-xs flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Solicitud con Préstamo
+                    </button>
+                </div>
+
+                <!-- Product 3: Dispensador Sobremesa / Válvula -->
+                <div
+                    class="product-card prod-dispensadores bg-slate rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div
+                            class="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 mb-6 text-center">
+                            <div
+                                class="w-24 h-24 mx-auto text-jalsuri-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-faucet-drip text-6xl"></i>
+                            </div>
+                        </div>
+                        <span
+                            class="text-xs font-semibold text-jalsuri-600 uppercase tracking-wider block mb-1">Compacto
+                            & Práctico</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Dispensador de Mesa y Soportes</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Ideal para salas de reuniones pequeñas, estaciones de trabajo o mostradores con espacio
+                            limitado. Sin consumo eléctrico.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i> Material
+                                atóxico apto para consumo humano</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i> Fácil
+                                limpieza y reubicación</li>
+                        </ul>
+                    </div>
+                    <button onclick="openQuoteModalWithProduct('Dispensador Compacto de Mesa')"
+                        class="w-full bg-slate-900 hover:bg-jalsuri-600 text-white font-bold py-3 rounded-xl transition-colors text-xs flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Cotizar este producto
+                    </button>
+                </div>
+
+                <!-- Product 4: Accesorios Ergonomicos -->
+                <div
+                    class="product-card prod-accesorios bg-slate rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div
+                            class="relative bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-8 mb-6 text-center">
+                            <div
+                                class="w-24 h-24 mx-auto text-teal-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-hand-holding-droplet text-6xl"></i>
+                            </div>
+                        </div>
+                        <span
+                            class="text-xs font-semibold text-jalsuri-600 uppercase tracking-wider block mb-1">Accesorios</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Soportes & Bombas Recargables</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Bombas automáticas USB recargables y bastidores metálicos porta-bidones para optimizar
+                            espacio en almacén.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i>
+                                Optimización de espacio físico</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i> Baterías
+                                de larga duración</li>
+                        </ul>
+                    </div>
+                    <button onclick="openQuoteModalWithProduct('Bombas Recargables y Soportes')"
+                        class="w-full bg-slate-900 hover:bg-jalsuri-600 text-white font-bold py-3 rounded-xl transition-colors text-xs flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Cotizar este producto
+                    </button>
+                </div>
+
+                <!-- Product 5: Pack Eventos -->
+                <div
+                    class="product-card prod-bidones bg-slate rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div
+                            class="relative bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 mb-6 text-center">
+                            <div
+                                class="w-24 h-24 mx-auto text-jalsuri-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-glass-water text-6xl"></i>
+                            </div>
+                        </div>
+                        <span class="text-xs font-semibold text-jalsuri-600 uppercase tracking-wider block mb-1">Eventos
+                            & Capacitaciones</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Botellas Individuales Personalizadas</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Presentaciones en botellas de 500ml y 1 Litro para conferencias, talleres y kits de
+                            bienvenida corporativos.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i>
+                                Presentaciones de 500ml, 600ml y 1L</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i>
+                                Etiquetado corporativo a medida</li>
+                        </ul>
+                    </div>
+                    <button onclick="openQuoteModalWithProduct('Botellas Personales para Eventos')"
+                        class="w-full bg-slate-900 hover:bg-jalsuri-600 text-white font-bold py-3 rounded-xl transition-colors text-xs flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Cotizar para Eventos
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-20 bg-slate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span
+                    class="text-xs font-bold text-teal-600 uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+                    Logística & Gestión Operativa
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900">¿Cómo Funciona Nuestro Servicio Integral?
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Gestión fluida de principio a fin para que tu empresa nunca sufra interrupciones ni problemas de
+                    abastecimiento.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+
+                <!-- Step 1 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative">
+                    <span
+                        class="w-10 h-10 rounded-xl bg-jalsuri-600 text-white font-black flex items-center justify-center text-base mb-4 shadow-md">01</span>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Producción Certificada</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Purificación con tecnología de microfiltración y ozono con estrictos controles periódicos en
+                        planta aprobados por sanidad.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative">
+                    <span
+                        class="w-10 h-10 rounded-xl bg-jalsuri-600 text-white font-black flex items-center justify-center text-base mb-4 shadow-md">02</span>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Distribución Programada</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Flota vehicular propia con rutas optimizadas para garantizar entregas puntuales según la
+                        frecuencia pactada.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative">
+                    <span
+                        class="w-10 h-10 rounded-xl bg-jalsuri-600 text-white font-black flex items-center justify-center text-base mb-4 shadow-md">03</span>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Entrega Interna en Local</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Nuestro personal transporta los bidones hasta cada piso, cocina o punto de consumo dentro de tus
+                        instalaciones.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative">
+                    <span
+                        class="w-10 h-10 rounded-xl bg-jalsuri-600 text-white font-black flex items-center justify-center text-base mb-4 shadow-md">04</span>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Mantenimiento Preventivo</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Supervisión continua, limpieza técnica e higienización periódica de todos los dispensadores
+                        prestados.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="maquila"
+        class="py-20 bg-gradient-to-r from-slate-900 via-jalsuri-950 to-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                <div class="lg:col-span-6 space-y-6">
+                    <span
+                        class="text-xs font-bold text-jalsuri-300 uppercase tracking-widest bg-jalsuri-500/20 px-3.5 py-1.5 rounded-full border border-jalsuri-400/30 inline-block">
+                        Servicio de Maquila y Envasado
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-black leading-tight">
+                        Agua de Mesa Ozonizada con <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-jalsuri-300 to-teal-300">Tu
+                            Propia Marca</span>
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        En JALSURI contamos con planta certificada para procesar, envasar y etiquetar agua de alta
+                        pureza con la identidad visual de tu empresa. Ideal para potenciar la imagen corporativa,
+                        promociones o eventos institucionales.
+                    </p>
+
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-3 bg-slate-800/50 p-3 rounded-xl border border-slate-700/60">
+                            <i class="fa-solid fa-bullhorn text-jalsuri-400 text-lg"></i>
+                            <span class="text-xs text-slate-200">Refuerza la identidad e imagen institucional de tu
+                                organización.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-800/50 p-3 rounded-xl border border-slate-700/60">
+                            <i class="fa-solid fa-stamp text-teal-400 text-lg"></i>
+                            <span class="text-xs text-slate-200">Cumplimiento total de registros sanitarios y controles
+                                microbiológicos.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-800/50 p-3 rounded-xl border border-slate-700/60">
+                            <i class="fa-solid fa-boxes-packing text-blue-400 text-lg"></i>
+                            <span class="text-xs text-slate-200">Lotes flexibles desde pequeñas cantidades hasta
+                                volúmenes industriales.</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button onclick="openQuoteModalWithService('Servicio de Maquila con Marca Propia')"
+                            class="bg-teal-500 hover:bg-teal-600 text-slate-950 font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-teal-500/25 transition-all text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-award"></i> Cotizar Servicio de Maquila
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Brand Preview Card -->
+                <div class="lg:col-span-6">
+                    <div class="bg-slate-800/90 rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-2xl space-y-6">
+                        <div class="text-center border-b border-slate-700 pb-4">
+                            <h3 class="font-bold text-lg text-white">Simulador de Etiqueta Corporativa</h3>
+                            <p class="text-xs text-slate-400">Prueba cómo se vería la botella de tu empresa</p>
+                        </div>
+
+                        <!-- Bottle Preview Mockup -->
+                        <div class="bg-slate-950/80 rounded-2xl p-6 text-center border border-slate-800 relative">
+                            <div
+                                class="w-32 h-56 mx-auto bg-gradient-to-b from-slate-800/40 via-jalsuri-500/20 to-slate-800/40 rounded-full border-2 border-jalsuri-400/40 flex flex-col justify-center items-center p-4 shadow-inner relative">
+                                <div class="w-full bg-slate/90 text-slate-900 py-3 px-2 rounded-lg shadow-lg border border-slate-200"
+                                    id="previewLabelBox">
+                                    <span class="text-[10px] font-bold tracking-widest uppercase block text-jalsuri-600"
+                                        id="previewCompany">TU EMPRESA S.A.C.</span>
+                                    <span class="text-[8px] text-slate-500 block">Agua Ozonizada de Mesa</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Name Input -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-300 block">Escribe el Nombre de tu
+                                Empresa:</label>
+                            <input type="text" id="simCompanyInput" oninput="updateBottlePreview()"
+                                placeholder="Ej. Minera Los Andes / Grupo Romero"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-jalsuri-400">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+                <span
+                    class="text-xs font-bold text-jalsuri-600 uppercase tracking-widest bg-jalsuri-100 px-3 py-1 rounded-full border border-jalsuri-200">
+                    Resuelve tus Dudas
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900">Preguntas Frecuentes de Empresas</h2>
+                <p class="text-slate-600 text-sm">
+                    Respuestas directas para la toma de decisiones en el área de Compras, Recursos Humanos y
+                    Operaciones.
+                </p>
+            </div>
+
+            <div class="space-y-4" id="faqAccordion">
+
+                <!-- FAQ Item 1 -->
+                <div class="bg-slate rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(this)"
+                        class="w-full px-6 py-5 text-left font-bold text-slate-900 flex justify-between items-center text-sm sm:text-base hover:text-jalsuri-600 transition-colors">
+                        <span>¿Cómo funciona el préstamo gratuito de dispensadores de agua?</span>
+                        <i class="fa-solid fa-chevron-down text-jalsuri-500 transition-transform duration-300"></i>
+                    </button>
+                    <div
+                        class="faq-answer hidden px-6 pb-5 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        Facilitamos la implementación del servicio cediendo dispensadores de agua frío/caliente sin
+                        necesidad de inversión inicial por parte de tu empresa, sujeto al consumo mensual estimado en la
+                        propuesta corporativa.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-slate rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(this)"
+                        class="w-full px-6 py-5 text-left font-bold text-slate-900 flex justify-between items-center text-sm sm:text-base hover:text-jalsuri-600 transition-colors">
+                        <span>¿Cuál es el beneficio de la purificación con Ozono frente al cloro?</span>
+                        <i class="fa-solid fa-chevron-down text-jalsuri-500 transition-transform duration-300"></i>
+                    </button>
+                    <div
+                        class="faq-answer hidden px-6 pb-5 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        El ozono es un desinfectante sumamente potente que destruye microorganismos sin dejar sabor
+                        desagradable ni residuos químicos nocivos en el agua, asegurando frescura ligera y saludable en
+                        cada vaso.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-slate rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(this)"
+                        class="w-full px-6 py-5 text-left font-bold text-slate-900 flex justify-between items-center text-sm sm:text-base hover:text-jalsuri-600 transition-colors">
+                        <span>¿Se encargan del traslado interno dentro de las instalaciones?</span>
+                        <i class="fa-solid fa-chevron-down text-jalsuri-500 transition-transform duration-300"></i>
+                    </button>
+                    <div
+                        class="faq-answer hidden px-6 pb-5 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        Sí, nuestro personal logístico ubica los bidones exactamente en los puntos de consumo señalados
+                        dentro de tus oficinas, laboratorios o almacenes para que tu personal no realice esfuerzos
+                        físicos innecesarios.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-slate rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(this)"
+                        class="w-full px-6 py-5 text-left font-bold text-slate-900 flex justify-between items-center text-sm sm:text-base hover:text-jalsuri-600 transition-colors">
+                        <span>¿Emite la empresa factura electrónica corporativa?</span>
+                        <i class="fa-solid fa-chevron-down text-jalsuri-500 transition-transform duration-300"></i>
+                    </button>
+                    <div
+                        class="faq-answer hidden px-6 pb-5 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        Por supuesto. Ingeniería Aplicada al Agua S.A.C. emite comprobantes de pago electrónicos
+                        (Factura / Boleta) con crédito fiscal ordenado y condiciones de crédito de acuerdo con los
+                        contratos corporativos.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-20 bg-slate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12">
+
+                <!-- Contact Direct Info -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span
+                            class="text-xs font-bold text-jalsuri-600 uppercase tracking-widest bg-jalsuri-50 px-3 py-1 rounded-full border border-jalsuri-200">
+                            Atención Inmediata
+                        </span>
+                        <h2 class="text-3xl font-black text-slate-900 mt-3">Conversemos sobre las necesidades de tu
+                            Empresa</h2>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-2">
+                            Nuestro equipo comercial y técnico está listo para ofrecerte una propuesta ajustada a tus
+                            requerimientos y presupuesto.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-jalsuri-50 text-jalsuri-600 flex items-center justify-center text-xl shrink-0 shadow-sm border border-jalsuri-100">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">Ventas Corporativas</h4>
+                                <p class="text-xs text-slate-600 mt-0.5">Celular / WhatsApp: <strong>960 695
+                                        747</strong></p>
+                                <p class="text-xs text-slate-500">Correo: ventas@aguademesajalsuri.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl shrink-0 shadow-sm border border-teal-100">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">Marketing & Alianzas</h4>
+                                <p class="text-xs text-slate-600 mt-0.5">Contacto Directo: <strong>957 886 947</strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center text-xl shrink-0 shadow-sm border border-slate-200">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">Horario de Atención Operativa</h4>
+                                <p class="text-xs text-slate-600 mt-0.5">Lunes a Viernes: 8:00 hrs – 18:00 hrs</p>
+                                <p class="text-xs text-slate-600">Sábados: 8:00 hrs – 13:00 hrs</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-600 space-y-2">
+                        <span class="font-bold text-slate-900 block flex items-center gap-2">
+                            <i class="fa-solid fa-certificate text-teal-600"></i> Razón Social Oficial
+                        </span>
+                        <p>Ingeniería Aplicada al Agua S.A.C.</p>
+                        <p>Planta procesadora certificada con tecnología de purificación de ozono y laboratorio de
+                            control de calidad.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Quote Form -->
+                <div class="lg:col-span-7 bg-slate-50 p-6 sm:p-10 rounded-3xl border border-slate-200/80 shadow-md">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Solicitar Propuesta Formal B2B</h3>
+                    <p class="text-xs text-slate-500 mb-6">Completa el formulario y te contactaremos en menos de 2 horas
+                        hábiles.</p>
+
+                    <form id="mainContactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre y Apellido
+                                    *</label>
+                                <input type="text" required placeholder="Ej. Carlos Mendoza"
+                                    class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Empresa / RUC *</label>
+                                <input type="text" required placeholder="Ej. Innova Tech S.A.C."
+                                    class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Correo Corporativo
+                                    *</label>
+                                <input type="email" required placeholder="carlos@tuempresa.com"
+                                    class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Teléfono / WhatsApp
+                                    *</label>
+                                <input type="tel" required placeholder="987 654 321"
+                                    class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">N° Estimado de
+                                    Trabajadores</label>
+                                <select
+                                    class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                                    <option>1 a 15 personas</option>
+                                    <option>16 a 50 personas</option>
+                                    <option>51 a 150 personas</option>
+                                    <option>Más de 150 personas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Servicio de
+                                    Interés</label>
+                                <select id="formServiceSelect"
+                                    class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                                    <option>Suministro de Bidones + Dispensadores</option>
+                                    <option>Solo Recarga de Bidones 20L</option>
+                                    <option>Maquila con Marca Propia</option>
+                                    <option>Agua para Eventos Institucionales</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Dirección o Distrito de
+                                Entrega</label>
+                            <input type="text" placeholder="Ej. Av. Javier Prado Este, San Isidro / Lince / SJL / Ate"
+                                class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Detalle o Consulta
+                                Adicional</label>
+                            <textarea rows="3"
+                                placeholder="Comentarios sobre requerimientos específicos, pisos o logística..."
+                                class="w-full bg-slate border border-slate-300 rounded-xl px-4 py-3 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-jalsuri-600 hover:bg-jalsuri-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud de Cotización
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+
+                <div class="col-span-2 md:col-span-1 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-xl water-gradient flex items-center justify-center text-white">
+                            <i class="fa-solid fa-droplet text-sm"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white tracking-wide">JALSURI</span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed">
+                        Soluciones integrales de hidratación corporativa con agua ozonizada. Ingeniería Aplicada al Agua
+                        S.A.C.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-200 font-bold uppercase tracking-wider mb-3 text-xs">Navegación</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="hover:text-jalsuri-400 transition-colors">Inicio</a></li>
+                        <li><a href="#nosotros" class="hover:text-jalsuri-400 transition-colors">Nosotros</a></li>
+                        <li><a href="#productos" class="hover:text-jalsuri-400 transition-colors">Productos y
+                                Bidones</a></li>
+                        <li><a href="#servicios" class="hover:text-jalsuri-400 transition-colors">Servicio Integral</a>
+                        </li>
+                        <li><a href="#maquila" class="hover:text-jalsuri-400 transition-colors">Servicio de Maquila</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-200 font-bold uppercase tracking-wider mb-3 text-xs">Contacto B2B</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><strong class="text-slate-300">Ventas:</strong> 960 695 747</li>
+                        <li><strong class="text-slate-300">Marketing:</strong> 957 886 947</li>
+                        <li>ventas@aguademesajalsuri.com</li>
+                        <li>L-V 8:00-18:00 | S 8:00-13:00</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-200 font-bold uppercase tracking-wider mb-3 text-xs">Garantía Sanitaria</h4>
+                    <p class="text-slate-400 leading-relaxed mb-3">
+                        Agua tratada con tecnología ozono para oficinas, industrias, centros de salud e instituciones
+                        educativas.
+                    </p>
+                    <div class="flex gap-3 text-lg text-slate-300">
+                        <a href="https://www.facebook.com/aguajalsuri" target="_blank" class="hover:text-jalsuri-400"><i
+                                class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/aguajalsuri" target="_blank"
+                            class="hover:text-jalsuri-400"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/51960695747" target="_blank" class="hover:text-teal-400"><i
+                                class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div
+                class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500 text-[11px]">
+                <p>© 2026 Agua de Mesa Jalsuri - Ingeniería Aplicada al Agua S.A.C. Todos los derechos reservados.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">Políticas de Privacidad</a>
+                    <a href="#" class="hover:underline">Términos del Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/51960695747?text=Hola%20Jalsuri,%20deseo%20informaci%C3%B3n%20para%20cotizar%20agua%20de%20mesa%20para%20mi%20empresa"
+        target="_blank"
+        class="fixed bottom-6 right-6 z-50 bg-teal-500 hover:bg-teal-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl shadow-teal-500/40 hover:scale-110 transition-all duration-300 group">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span
+            class="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            Chat Directo Ventas
+        </span>
+    </a>
+
+    <div id="quoteModal"
+        class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuoteModal()"
+                class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 rounded-full">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="mb-6">
+                <span
+                    class="text-xs font-bold text-jalsuri-600 uppercase tracking-widest bg-jalsuri-50 px-3 py-1 rounded-full">Atención
+                    Directa</span>
+                <h3 class="text-xl font-bold text-slate-900 mt-2" id="modalTitle">Solicitar Cotización Empresarial</h3>
+                <p class="text-xs text-slate-500 mt-1" id="modalSubtitle">Ingresa tus datos para enviarte una propuesta
+                    formal en PDF y WhatsApp.</p>
+            </div>
+
+            <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre Completo *</label>
+                    <input type="text" id="modalName" required
+                        class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Empresa / RUC *</label>
+                    <input type="text" id="modalCompany" required
+                        class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Celular / WhatsApp *</label>
+                        <input type="tel" id="modalPhone" required
+                            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Distrito de Entrega</label>
+                        <input type="text" id="modalLocation" placeholder="Ej. San Isidro"
+                            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Detalle del Requerimiento</label>
+                    <textarea id="modalMessage" rows="3"
+                        class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-jalsuri-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="submit"
+                        class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Enviar por WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast"
+        class="fixed top-24 right-4 z-50 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 transform translate-x-full transition-transform duration-300 pointer-events-none text-xs">
+        <i class="fa-solid fa-circle-check text-teal-400 text-lg" id="toastIcon"></i>
+        <span id="toastMsg">Mensaje procesado correctamente.</span>
+    </div>
+
+    <script>
+        let currentIndustryRate = 1.2; // Liters per employee per day average
+
+        const employeeInput = document.getElementById('employeeInput');
+        const employeeVal = document.getElementById('employeeVal');
+        const outBidones = document.getElementById('outBidones');
+        const outDispensers = document.getElementById('outDispensers');
+        const outBottlesSaved = document.getElementById('outBottlesSaved');
+        const outPlasticSaved = document.getElementById('outPlasticSaved');
+        const outFrequency = document.getElementById('outFrequency');
+
+        function calculateHydration() {
+            const count = parseInt(employeeInput.value) || 25;
+            employeeVal.innerText = count;
+
+            // Average work days per month = 22
+            const litersPerMonth = count * currentIndustryRate * 22;
+            const bidonesNeeded = Math.ceil(litersPerMonth / 20);
+
+            // Recommended dispensers (approx 1 dispenser per 15-20 employees)
+            const dispensersNeeded = Math.max(1, Math.ceil(count / 18));
+
+            // Eco Impact: 1 Bidon = 40 bottles of 500ml
+            const bottlesSaved = bidonesNeeded * 40;
+            const kgPlastic = (bottlesSaved * 0.025).toFixed(1);
+
+            outBidones.innerText = bidonesNeeded;
+            outDispensers.innerText = dispensersNeeded;
+            outBottlesSaved.innerText = bottlesSaved.toLocaleString() + ' un. / mes';
+            outPlasticSaved.innerText = kgPlastic + ' kg / mes';
+
+            if (bidonesNeeded <= 10) {
+                outFrequency.innerText = 'Mensual (1 entrega)';
+            } else if (bidonesNeeded <= 30) {
+                outFrequency.innerText = 'Quincenal (2 entregas/mes)';
+            } else {
+                outFrequency.innerText = 'Semanal (4 entregas/mes)';
+            }
+        }
+
+        function setIndustry(type, btn) {
+            document.querySelectorAll('.industry-btn').forEach(b => {
+                b.classList.remove('active', 'border-jalsuri-500', 'bg-jalsuri-500/20');
+                b.classList.add('border-slate-700', 'bg-slate-900/60');
+            });
+            btn.classList.add('active', 'border-jalsuri-500', 'bg-jalsuri-500/20');
+            btn.classList.remove('border-slate-700', 'bg-slate-900/60');
+
+            if (type === 'office') currentIndustryRate = 1.0;
+            if (type === 'industrial') currentIndustryRate = 1.8;
+            if (type === 'medical') currentIndustryRate = 1.4;
+
+            calculateHydration();
+        }
+
+        if (employeeInput) {
+            employeeInput.addEventListener('input', calculateHydration);
+        }
+
+        function filterProducts(cat, btn) {
+            document.querySelectorAll('.prod-tab').forEach(b => {
+                b.classList.remove('bg-jalsuri-600', 'text-white');
+                b.classList.add('bg-slate', 'text-slate-700');
+            });
+            btn.classList.add('bg-jalsuri-600', 'text-white');
+            btn.classList.remove('bg-slate', 'text-slate-700');
+
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (cat === 'all' || card.classList.contains('prod-' + cat)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function updateBottlePreview() {
+            const input = document.getElementById('simCompanyInput').value.trim();
+            const companyDisplay = document.getElementById('previewCompany');
+            if (input.length > 0) {
+                companyDisplay.innerText = input.toUpperCase();
+            } else {
+                companyDisplay.innerText = "TU EMPRESA S.A.C.";
+            }
+        }
+
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            const isOpen = !answer.classList.contains('hidden');
+
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('#faqAccordion i').forEach(i => i.style.transform = 'rotate(0deg)');
+
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function openQuoteModal() {
+            document.getElementById('modalTitle').innerText = "Solicitar Cotización Empresarial";
+            document.getElementById('modalSubtitle').innerText = "Cotización directa para suministro de agua ozonizada JALSURI.";
+            document.getElementById('modalMessage').value = "";
+            document.getElementById('quoteModal').classList.remove('hidden');
+        }
+
+        function openQuoteModalWithPlan(planName) {
+            openQuoteModal();
+            document.getElementById('modalTitle').innerText = `Solicitar ${planName}`;
+            document.getElementById('modalMessage').value = `Hola, estoy interesado en recibir información y propuesta para el ${planName}.`;
+        }
+
+        function openQuoteModalWithProduct(prodName) {
+            openQuoteModal();
+            document.getElementById('modalTitle').innerText = `Cotizar: ${prodName}`;
+            document.getElementById('modalMessage').value = `Deseo solicitar información y precios sobre el producto: ${prodName}.`;
+        }
+
+        function openQuoteModalWithService(servName) {
+            openQuoteModal();
+            document.getElementById('modalTitle').innerText = `Cotizar ${servName}`;
+            document.getElementById('modalMessage').value = `Me interesa recibir una cotización detallada para: ${servName}.`;
+        }
+
+        function applyCalculatorQuote() {
+            const count = employeeInput.value;
+            const bidones = outBidones.innerText;
+            const dispensers = outDispensers.innerText;
+
+            openQuoteModal();
+            document.getElementById('modalTitle').innerText = "Cotización basada en Calculadora B2B";
+            document.getElementById('modalMessage').value = `Requerimiento aproximado:\n- Colaboradores: ${count}\n- Bidones 20L/mes estimados: ${bidones}\n- Dispensadores necesarios: ${dispensers}`;
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').classList.add('hidden');
+        }
+
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('modalName').value;
+            const company = document.getElementById('modalCompany').value;
+            const phone = document.getElementById('modalPhone').value;
+            const location = document.getElementById('modalLocation').value;
+            const msg = document.getElementById('modalMessage').value;
+
+            const fullText = `Hola JALSURI! Deseo solicitar una cotización empresarial:%0A%0A- *Nombre:* ${encodeURIComponent(name)}%0A- *Empresa:* ${encodeURIComponent(company)}%0A- *Teléfono:* ${encodeURIComponent(phone)}%0A- *Distrito:* ${encodeURIComponent(location)}%0A- *Detalle:* ${encodeURIComponent(msg)}`;
+
+            closeQuoteModal();
+            showToast("Redirigiendo a WhatsApp de Ventas Jalsuri...");
+            setTimeout(() => {
+                window.open(`https://wa.me/51960695747?text=${fullText}`, '_blank');
+            }, 1000);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast("¡Solicitud recibida! Te contactaremos en breve.");
+            e.target.reset();
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = text;
+            toast.classList.remove('translate-x-full');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 4000);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            const target = document.getElementById(id);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Initialize Calculator Default State
+        window.onload = function () {
+            calculateHydration();
+        };
+    </script>
+</body>
+
+</html>

@@ -1,134 +1,307 @@
 ---
 import imgKey from "@/assets/logo.webp";
 import bidonFooter from "@/assets/img/bidon-footer.webp";
+import SectionWaves from "@/components/section-waves/SectionWaves.astro";
 ---
 
 <!-- 
   El footer principal tiene un z-index relativo para quedar por 
   encima de la imagen de fondo fijo que vendrá después.
 -->
-<footer class="bg-text text-background pt-16 relative overflow-hidden z-10 border-t border-accent1/20 shadow-[0_-10px_30px_rgba(0,0,0,0.1)]">
-    
+<footer
+    class="bg-text text-background relative overflow-hidden z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.1)]"
+>
+    <!-- CIERRE CON "SIMPLE CSS WAVES" (waves.html):
+         banda con gradiente de marca y doble tira de olas animadas:
+         la superior en el color de la sección anterior (enlaza con el
+         contenido) y la inferior en el color del footer (enlaza con el
+         cuerpo del footer). El gradiente se transparenta entre ambas. -->
+    <div
+        class="relative z-20 w-full bg-linear-to-tr from-primary to-secondary pointer-events-none"
+        aria-hidden="true"
+    >
+        <SectionWaves flip color="#f8fafc" />
+        <SectionWaves color="#0B3C73" />
+    </div>
     <!-- CAPA SUPERIOR: Contenido y Enlaces (z-30) -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-30">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 pb-12">
+    <div
+        class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-30 pt-10 sm:pt-14"
+    >
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 pb-12 text-white"
+        >
             <!-- Columna 1: Branding -->
             <div class="flex flex-col gap-6 lg:col-span-1">
                 <div>
-                    <a href="#hero-container" class="flex items-center gap-3 group w-fit mb-4">
-                        <div class="p-1.5 rounded-xl bg-background/10 border border-accent1/30 backdrop-blur-sm transition-transform group-hover:scale-105 shadow-inner">
-                            <img src={imgKey.src} alt="Jalsuri Logo" class="h-9 w-auto object-contain brightness-0 invert" />
+                    <a
+                        href="/#hero-container"
+                        class="flex items-center gap-3 group w-fit mb-4"
+                    >
+                        <div
+                            class="p-1.5 rounded-xl bg-background/10 border border-secondary/30 backdrop-blur-sm transition-transform group-hover:scale-105 shadow-inner"
+                        >
+                            <img
+                                src={imgKey.src}
+                                alt="Jalsuri Logo"
+                                class="h-9 w-auto object-contain brightness-0 invert"
+                            />
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-background font-extrabold text-xl tracking-tight font-display leading-tight group-hover:text-accent1 transition-colors">
+                            <span
+                                class="text-background font-extrabold text-xl tracking-tight font-display leading-tight group-hover:text-secondary transition-colors"
+                            >
                                 JALSURI
                             </span>
-                            <span class="text-[10px] tracking-widest uppercase font-semibold text-accent1/80">
+                            <span
+                                class="text-[10px] tracking-widest uppercase font-semibold text-secondary/80"
+                            >
                                 Agua Purificada
                             </span>
                         </div>
                     </a>
                     <p class="text-background/70 text-sm leading-relaxed pr-4">
-                        Comprometidos con la pureza y el bienestar. Llevamos agua de alta calidad procesada con tecnología de vanguardia.
+                        Comprometidos con la pureza y el bienestar. Llevamos
+                        agua de alta calidad procesada con tecnología de
+                        vanguardia.
                     </p>
                 </div>
             </div>
 
             <!-- Columna 2: Navegación -->
             <div class="flex flex-col gap-4">
-                <h3 class="text-accent1 font-bold text-xs tracking-widest uppercase border-b border-accent1/20 pb-2 inline-block w-max">
+                <h3
+                    class="text-secondary font-bold text-xs tracking-widest uppercase border-b border-secondary/20 pb-2 inline-block w-max"
+                >
                     Navegación
                 </h3>
                 <ul class="space-y-3 text-sm text-background/80">
-                    <li><a href="#hero-container" class="hover:text-accent1 hover:pl-2 transition-all duration-300 flex items-center gap-2">Inicio</a></li>
-                    <li><a href="#compromiso" class="hover:text-accent1 hover:pl-2 transition-all duration-300 flex items-center gap-2">Nosotros</a></li>
-                    <li><a href="#productos" class="hover:text-accent1 hover:pl-2 transition-all duration-300 flex items-center gap-2">Productos</a></li>
-                    <li><a href="#maquila" class="hover:text-accent1 hover:pl-2 transition-all duration-300 flex items-center gap-2">Maquila & Empresas</a></li>
-                    <li><a href="#contacto" class="hover:text-accent1 hover:pl-2 transition-all duration-300 flex items-center gap-2">Contacto</a></li>
+                    <li>
+                        <a
+                            href="/#hero-container"
+                            class="hover:text-secondary hover:pl-2 transition-all duration-300 flex items-center gap-2"
+                            >Inicio</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#compromiso"
+                            class="hover:text-secondary hover:pl-2 transition-all duration-300 flex items-center gap-2"
+                            >Nosotros</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#productos"
+                            class="hover:text-secondary hover:pl-2 transition-all duration-300 flex items-center gap-2"
+                            >Productos</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#calidad"
+                            class="hover:text-secondary hover:pl-2 transition-all duration-300 flex items-center gap-2"
+                            >Calidad</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/ficha-tecnica"
+                            class="hover:text-secondary hover:pl-2 transition-all duration-300 flex items-center gap-2"
+                            ><span
+                                class="w-1.5 h-1.5 rounded-full bg-secondary/50"
+                            ></span>
+                            Ficha Técnica</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/#contacto"
+                            class="hover:text-secondary hover:pl-2 transition-all duration-300 flex items-center gap-2"
+                            >Contacto</a>
+                    </li>
                 </ul>
             </div>
 
             <!-- Columna 3: Soluciones -->
             <div class="flex flex-col gap-4">
-                <h3 class="text-accent1 font-bold text-xs tracking-widest uppercase border-b border-accent1/20 pb-2 inline-block w-max">
+                <h3
+                    class="text-secondary font-bold text-xs tracking-widest uppercase border-b border-secondary/20 pb-2 inline-block w-max"
+                >
                     Soluciones
                 </h3>
                 <ul class="space-y-3 text-sm text-background/80">
-                    <li><span class="hover:text-accent1 transition-colors cursor-pointer flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent1/50"></span> Bidones de 20 Litros</span></li>
-                    <li><span class="hover:text-accent1 transition-colors cursor-pointer flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent1/50"></span> Botellas Personales</span></li>
-                    <li><span class="hover:text-accent1 transition-colors cursor-pointer flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent1/50"></span> Maquila de Agua</span></li>
-                    <li><span class="hover:text-accent1 transition-colors cursor-pointer flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent1/50"></span> Atención Corporativa</span></li>
+                    <li>
+                        <span
+                            class="hover:text-secondary transition-colors cursor-pointer flex items-center gap-2"
+                            ><span
+                                class="w-1.5 h-1.5 rounded-full bg-secondary/50"
+                            ></span> Bidones de 20 Litros</span>
+                    </li>
+                    <li>
+                        <span
+                            class="hover:text-secondary transition-colors cursor-pointer flex items-center gap-2"
+                            ><span
+                                class="w-1.5 h-1.5 rounded-full bg-secondary/50"
+                            ></span> Botellas Personales</span>
+                    </li>
+                    <li>
+                        <span
+                            class="hover:text-secondary transition-colors cursor-pointer flex items-center gap-2"
+                            ><span
+                                class="w-1.5 h-1.5 rounded-full bg-secondary/50"
+                            ></span> Maquila de Agua</span>
+                    </li>
+                    <li>
+                        <span
+                            class="hover:text-secondary transition-colors cursor-pointer flex items-center gap-2"
+                            ><span
+                                class="w-1.5 h-1.5 rounded-full bg-secondary/50"
+                            ></span> Atención Corporativa</span>
+                    </li>
                 </ul>
             </div>
 
             <!-- Columna 4: Contacto y Mapa -->
             <div class="flex flex-col gap-6">
                 <div>
-                    <h3 class="text-accent1 font-bold text-xs tracking-widest uppercase border-b border-accent1/20 pb-2 mb-4 inline-block w-max">
+                    <h3
+                        class="text-secondary font-bold text-xs tracking-widest uppercase border-b border-secondary/20 pb-2 mb-4 inline-block w-max"
+                    >
                         Atención Directa
                     </h3>
                     <div class="flex flex-col gap-3 text-sm text-background/80">
-                        <a href="https://wa.me/51997673300" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-accent1 transition-colors p-2 -ml-2 rounded-lg hover:bg-background/5">
-                            <span class="p-2 rounded-full bg-accent1/10 text-accent1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <a
+                            href="https://wa.me/51997673300"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-3 hover:text-secondary transition-colors p-2 -ml-2 rounded-lg hover:bg-background/5"
+                        >
+                            <span
+                                class="p-2 rounded-full bg-secondary/10 text-secondary"
+                            >
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    ><path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                    ></path></svg
+                                >
                             </span>
                             +51 997 673 300
                         </a>
                         <span class="flex items-center gap-3 p-2 -ml-2">
-                            <span class="p-2 rounded-full bg-accent1/10 text-accent1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span
+                                class="p-2 rounded-full bg-secondary/10 text-secondary"
+                            >
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    ><path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                    ></path><path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                    ></path></svg
+                                >
                             </span>
                             Lima, Perú
                         </span>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Mapa -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-4 relative overflow-hidden rounded-xl border border-background/10 bg-background/5 p-1 shadow-lg group">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.274981293814!2d-76.9252699!3d-12.0246847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c346572ebd63%3A0x9be48c071c6aca4!2sAgua%20de%20Mesa%20Jalsuri!5e0!3m2!1ses-419!2spe!4v1710000000000!5m2!1ses-419!2spe" height="140" class="rounded-lg w-full grayscale-[20%] contrast-125 hover:grayscale-0 transition-all duration-500" allow="fullscreen" loading="lazy" title="Ubicación Jalsuri"></iframe>
+            <div
+                class="col-span-1 md:col-span-2 lg:col-span-4 relative overflow-hidden rounded-xl border border-background/10 bg-background/5 p-1 shadow-lg group"
+            >
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.274981293814!2d-76.9252699!3d-12.0246847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c346572ebd63%3A0x9be48c071c6aca4!2sAgua%20de%20Mesa%20Jalsuri!5e0!3m2!1ses-419!2spe!4v1710000000000!5m2!1ses-419!2spe"
+                    height="140"
+                    class="rounded-lg w-full grayscale-[20%] contrast-125 hover:grayscale-0 transition-all duration-500"
+                    allow="fullscreen"
+                    loading="lazy"
+                    title="Ubicación Jalsuri"></iframe>
             </div>
         </div>
     </div>
 
     <!-- ZONA INFERIOR: Composición de Tipografía y Bidón -->
-    <div class="relative w-full flex flex-col items-center justify-end mt-12 pointer-events-none">
-        
+    <div
+        class="relative w-full flex flex-col items-center justify-end group pointer-events-auto pb-10"
+    >
         <!-- CAPA DE FONDO: Tipografía JALSURI (z-10) -->
-        <div class="relative z-10 w-full px-4 transform translate-y-8 sm:translate-y-12">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" class="w-full h-auto drop-shadow-2xl">
+        <div class="relative z-10 w-full px-4 pointer-events-none">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 800 280"
+                class="w-full h-auto drop-shadow-2xl"
+            >
                 <defs>
-                    <linearGradient id="jalsuriGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#FFFFFF" />
-                        <stop offset="45%" stop-color="#FFFFFF" />
-                        <stop offset="100%" stop-color="#00AEEF" />
+                    <linearGradient
+                        id="jalsuriGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="0%"
+                        y2="100%"
+                    >
+                        <stop offset="0%" stop-color="#FFFFFF"></stop>
+                        <stop offset="45%" stop-color="#FFFFFF"></stop>
+                        <stop offset="100%" stop-color="#00C2FF"></stop>
                     </linearGradient>
                 </defs>
-                <text x="50%" y="55%" dominant-baseline="central" text-anchor="middle" fill="url(#jalsuriGradient)" font-family="'Impact', 'Anton', 'Bebas Neue', sans-serif" font-size="260px" font-weight="900" textLength="750" lengthAdjust="spacingAndGlyphs">
+                <text
+                    x="50%"
+                    y="55%"
+                    dominant-baseline="central"
+                    text-anchor="middle"
+                    fill="url(#jalsuriGradient)"
+                    font-family="'Impact', 'Anton', 'Bebas Neue', sans-serif"
+                    font-size="260px"
+                    font-weight="900"
+                    textLength="750"
+                    lengthAdjust="spacingAndGlyphs"
+                >
                     JALSURI
                 </text>
             </svg>
         </div>
 
         <!-- CAPA INTERMEDIA: El Bidón frontal superpuesto (z-20) -->
-        <!-- NOTA: He centrado la imagen y eliminado los inline-styles sucios. Ajusta el ancho (max-w) según necesites -->
+        <!-- Se corrigió la sintaxis de Tailwind: [valores] para datos arbitrarios y pointer-events-none -->
         <img
+
             id="bidon"
             src={bidonFooter.src}
-            alt="Bidón Jalsuri" 
-            loading="lazy" 
-            class="absolute z-40 -bottom-4 left-1/2 transform -translate-x-1/2 w-auto h-[200%] max-h-300 object-contain drop-shadow-[0_-20px_30px_rgba(0,0,0,0.3)] translate-y-32  transition-all duration-1000 ease-out"
+            alt="Bidón Jalsuri"
+            loading="lazy"
+            class="absolute z-50 -bottom-4 left-1/2 transform -translate-x-1/2 w-auto h-[200%] max-h-300 object-contain drop-shadow-[0_-20px_30px_rgba(0,0,0,0.3)] translate-y-100 opacity-0 transition-all duration-1000 ease-out group-hover:translate-y-15 md:group-hover:translate-y-60 -rotate-60 group-hover:opacity-80"
         />
+
     </div>
 
-    <!-- CAPA SUPERIOR FINAL: Copyright (z-30) -->
-    <div class="relative z-30 max-w-full mx-auto px-4 sm:px-8 lg:px-12 py-6 border-t border-background/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-background/50 tracking-wide uppercase bg-text/80 backdrop-blur-md">
+    <!-- CAPA SUPERIOR FINAL: Copyright (z-40) -->
+    <!-- Se subió el z-index principal a z-40 para que quede nativamente por encima de todo -->
+    <div
+        class="relative z-40 max-w-full mx-auto px-4 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-white tracking-wide uppercase bg-text/80 backdrop-blur-md"
+    >
         <p>
             © {new Date().getFullYear()} JALSURI. Todos los derechos reservados.
         </p>
         <div class="flex gap-6 pointer-events-auto">
-            <a href="#" class="hover:text-accent1 transition-colors">Términos</a>
-            <a href="#" class="hover:text-accent1 transition-colors">Privacidad</a>
+            <a href="#" class="hover:text-secondary transition-colors"
+                >Términos</a
+            >
+            <a href="#" class="hover:text-secondary transition-colors"
+                >Privacidad</a
+            >
         </div>
     </div>
 </footer>

@@ -1,24 +1,27 @@
 ---
 import "../styles/global.css";
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+const {
+    title = "Jalsuri | Agua Purificada & Soluciones Corporativas",
+    description = "Agua purificada de máxima calidad, procesamiento ozonizado y servicios de maquila corporativa para empresas.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-smooth">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Jalsuri | Agua Purificada & Soluciones Corporativas</title>
-		<meta name="description" content="Agua purificada de máxima calidad, procesamiento ozonizado y servicios de maquila corporativa para empresas." />
-		<!-- Google Fonts: Plus Jakarta Sans & Outfit -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-	</head>
-	<body class="bg-background text-text font-sans antialiased selection:bg-primary selection:text-background overflow-x-hidden">
-		<slot />
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+    </head>
+    <body class="bg-background text-text antialiased selection:bg-primary selection:text-background overflow-x-hidden">
+        <slot />
+    </body>
 </html>
-
-

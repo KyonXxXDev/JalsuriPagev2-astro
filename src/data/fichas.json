@@ -1,0 +1,68 @@
+{
+  "titulo": "Ficha Técnica Interactiva 3D",
+  "subtitulo": "Especificaciones de nuestros formatos de embotellado. Recorre cada ficha mientras haces scroll: la información aparece de forma alternada para que puedas revisarla con calma.",
+  "notaModelos": "El visor 3D ya está integrado en esta página: en cuanto cada modelo .glb (Bidón 8.5L, Caja 20L y Bidón 20L) esté disponible en /models/, se mostrará automáticamente con su animación de scroll. Mientras tanto verás la imagen de referencia de cada producto.",
+  "actualizado": "Octubre 2026",
+  "productos": [
+    {
+      "id": "bidon-8-10",
+      "orden": "01",
+      "nombre": "Bidón 8.5L – 10L",
+      "categoria": "Formato mediano",
+      "capacidad": "8.5 L / 10 L",
+      "modelos": ["/models/bidon-8.5l.glb"],
+      "resumen": "El formato ideal para bodegas, negocios y oficinas: abastece sin ocupar tanto espacio y sin sacrificar pureza.",
+      "chips": ["Retornable", "DIGESA", "Ruta programada"],
+      "datos": [
+        { "label": "Capacidad", "value": "8.5 L y 10 L" },
+        { "label": "Contenido", "value": "Agua de mesa ozonizada (O₃)" },
+        { "label": "Proceso", "value": "Microfiltración + ósmosis inversa + ozonización + rayos UV" },
+        { "label": "Material del envase", "value": "PET alimenticio, retornable y reutilizable" },
+        { "label": "Cierre", "value": "Boca estándar con asa de transporte" },
+        { "label": "Uso recomendado", "value": "Bodegas, tiendas, oficinas y hogar" },
+        { "label": "Certificación", "value": "Registro Sanitario DIGESA · Protocolos HACCP" },
+        { "label": "Entrega", "value": "Ruta programada (semanal o quincenal)" }
+      ]
+    },
+    {
+      "id": "caja-20",
+      "orden": "02",
+      "nombre": "Caja de 20L",
+      "categoria": "Formato corporativo",
+      "capacidad": "20 L",
+      "modelos": ["/models/caja-20l.glb"],
+      "resumen": "Agua en caja 20 LT: comodidad en gran formato. Fácil de transportar y almacenar, con un empaque práctico y ecológico.",
+      "chips": ["Gran formato", "Ecológico", "Entornos exigentes"],
+      "datos": [
+        { "label": "Capacidad", "value": "20 L por caja" },
+        { "label": "Contenido", "value": "Agua de mesa ozonizada (O₃)" },
+        { "label": "Empaque", "value": "Caja individual, fácil de transportar y almacenar" },
+        { "label": "Sostenibilidad", "value": "Empaque práctico y ecológico, envase retornable" },
+        { "label": "Indicado para", "value": "Industria, minería, eventos, retail y oficinas" },
+        { "label": "Proceso", "value": "Ósmosis inversa + ozonización continua (O₃)" },
+        { "label": "Certificación", "value": "Registro Sanitario DIGESA · Protocolos HACCP" },
+        { "label": "Entrega", "value": "Despacho corporativo con rutas programadas" }
+      ]
+    },
+    {
+      "id": "bidon-20",
+      "orden": "03",
+      "nombre": "Bidón 20L",
+      "categoria": "Formato estándar",
+      "capacidad": "20 L",
+      "modelos": ["/models/bidon-20l.glb", "/models/bidon.glb"],
+      "resumen": "El clásico botellón de 20 litros, compatible con dispensadores eléctricos y de mesa. Incluye programa de comodato y reposición.",
+      "chips": ["Comodato", "Dispensador incluido", "Retornable"],
+      "datos": [
+        { "label": "Capacidad", "value": "20 L" },
+        { "label": "Contenido", "value": "Agua de mesa ozonizada (O₃)" },
+        { "label": "Material", "value": "PET retornable de alta resistencia" },
+        { "label": "Compatibilidad", "value": "Dispensadores eléctricos (frío/caliente) y de mesa" },
+        { "label": "Servicio", "value": "Comodato de dispensadores sin costo de alquiler" },
+        { "label": "Higiene", "value": "Lavado y desinfección industrial por lote" },
+        { "label": "Certificación", "value": "Registro Sanitario DIGESA · Protocolos HACCP" },
+        { "label": "Entrega", "value": "Reposición programada según consumo" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+---
+
+---
+
+<!--
+  Bidón 3D FIPT: fijo en pantalla y acompaña todo el scroll de la
+  página, rotando y desplazándose igual que el video del hero.
+-->
+<div
+    id="fixed-bidon"
+    class="fixed bottom-6 right-2 sm:right-6 z-40 pointer-events-none opacity-0 will-change-transform"
+>
+    <model-viewer
+        id="fixed-bidon-viewer"
+        src="/models/bidon.glb"
+        alt="Botellón Jalsuri 20 Litros - Modelo 3D interactivo"
+        shadow-intensity="1"
+        shadow-softness="1"
+        exposure="1"
+        interaction-prompt="none"
+        disable-tap
+        style="width:min(32vw,200px);height:min(42vh,340px);--poster-color:transparent;"
+    ></model-viewer>
+</div>
+
+<script>
+    import "@google/model-viewer";
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const mv = document.getElementById("fixed-bidon-viewer") as any;
+    const wrap = document.getElementById("fixed-bidon");
+
+    let ready = false;
+    const init = () => {
+        if (ready || !mv || !wrap) return;
+        ready = true;
+
+        const orbit = { azimut: -30, pitch: 75, radius: 105 };
+        const applyOrbit = () => {
+            mv.setAttribute(
+                "camera-orbit",
+                `${orbit.azimut}deg ${orbit.pitch}deg ${orbit.radius}%`,
+            );
+        };
+        applyOrbit();
+
+        // Rotación suave a lo largo de toda la página
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: document.body,
+                start: "top top",
+                end: "max",
+                scrub: 1.2,
+            },
+        });
+
+        tl.to(
+            orbit,
+            {
+                azimut: 690,
+                pitch: 78,
+                radius: 85,
+                ease: "none",
+                duration: 1,
+                onUpdate: applyOrbit,
+            },
+            0,
+        );
+
+        // Recorrido suave (sin cambios bruscos) a lo largo del scroll
+        gsap.to(wrap, {
+            y: "-22vh",
+            x: "-10vw",
+            duration: 1,
+            ease: "power1.inOut",
+            scrollTrigger: {
+                trigger: document.body,
+                start: "top top",
+                end: "max",
+                scrub: 1.2,
+            },
+        });
+
+        // Aparece cuando termina el hero (inicio de #valores)
+        gsap.fromTo(
+            wrap,
+            { autoAlpha: 0 },
+            {
+                autoAlpha: 1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#valores",
+                    start: "top 90%",
+                    end: "top 40%",
+                    scrub: true,
+                },
+            },
+        );
+
+        // Desaparece antes del footer
+        gsap.to(wrap, {
+            autoAlpha: 0,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "footer",
+                start: "top 90%",
+                end: "top 30%",
+                scrub: true,
+            },
+        });
+    };
+
+    if (mv) {
+        mv.addEventListener("load", init);
+        setTimeout(init, 2500);
+    }
+</script>

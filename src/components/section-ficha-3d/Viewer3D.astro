@@ -1,0 +1,596 @@
+---
+/**
+ * Visor 3D de producto: three.js + GLTFLoader + GSAP ScrollTrigger.
+ *
+ * - Carga los .glb en orden de prioridad (si uno falla prueba el siguiente;
+ *   si fallan todos se queda la imagen de respaldo, sin romper la página).
+ * - Cada ficha mide 200vh con el escenario anclado en pantalla: el modelo
+ *   parte de su vista de presentación, **desciende** por el eje Y y **gira**
+ *   sobre su propio eje hasta estabilizarse, mientras las características
+ *   flotan a los costados del visor.
+ * - Rendimiento: import diferido de three, render bajo demanda (sólo pinta si
+ *   el visor es visible y algo cambió), ResizeObserver, IntersectionObserver y
+ *   liberación de recursos al salir de la página.
+ */
+interface Props {
+	/** Rutas .glb en orden de prioridad. */
+	modelos: string[];
+	/** Imagen de respaldo (carga o ausencia de WebGL/modelo). */
+	poster: string;
+	posterAlt: string;
+	/** Nombre del producto (badge y pie del visor). */
+	nombre: string;
+}
+
+const { modelos, poster, posterAlt, nombre } = Astro.props;
+---
+
+<div
+	class="viewer-3d relative w-full h-full overflow-hidden"
+	data-viewer-3d
+	data-modelos={JSON.stringify(modelos)}
+	style="touch-action: pan-y;"
+>
+	<!-- Halo de estudio: el modelo flota sobre él (sin tarjeta que lo encierre) -->
+	<div
+		aria-hidden="true"
+		class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-[14%] w-[78%] aspect-square rounded-full bg-linear-to-br from-primary/30 via-secondary/20 to-transparent blur-xl"
+	>
+	</div>
+
+	<!-- Suelo de estudio (profundidad sin coste de render) -->
+	<div
+		aria-hidden="true"
+		class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-[13%] w-[56%] h-10 rounded-[50%] bg-linear-to-b from-text/30 via-text/10 to-transparent blur-[7px]"
+	>
+	</div>
+
+	<!-- Imagen de respaldo: se muestra como tarjeta y desaparece al cargar
+	     el modelo 3D (los .glb siguen en preparación). La leyenda vive dentro
+	     de la tarjeta para que no compita con el botón de acción. -->
+	<div
+		class="poster absolute inset-0 grid place-items-center p-5 sm:p-6 transition-opacity duration-700"
+	>
+		<figure
+			class="w-full max-w-[24rem] sm:max-w-[30rem] rounded-2xl overflow-hidden bg-white ring-1 ring-slate-900/10 shadow-2xl shadow-text/20"
+		>
+			<img
+				src={poster}
+				alt={posterAlt}
+				loading="lazy"
+				class="block w-full aspect-video object-cover"
+			/>
+			<figcaption
+				class="px-4 py-2 text-[10px] uppercase tracking-wider font-semibold text-slate-500 border-t border-slate-100"
+			>
+				Visual de referencia · {nombre}
+			</figcaption>
+		</figure>
+	</div>
+
+	<canvas
+		class="absolute inset-0 w-full h-full block pointer-events-none"
+		aria-hidden="true"></canvas>
+
+	<!-- Estado de carga -->
+	<div
+		data-carga
+		class="absolute top-14 left-4 flex justify-start transition-opacity duration-300"
+	>
+		<span
+			class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/85 text-white text-[10px] font-bold uppercase tracking-wider shadow-md"
+		>
+			<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"
+			></span>
+			Cargando modelo 3D
+		</span>
+	</div>
+
+	<!-- Badge de estado (se intercambia cuando el modelo está listo) -->
+	<span
+		data-badge-ref
+		class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/90 text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm"
+	>
+		<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
+			/>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12.01"></path>
+		</svg>
+		Modelo 3D en preparación
+	</span>
+
+	<span
+		data-badge-3d
+		class="hidden absolute top-4 left-4 items-center gap-2 px-3 py-1.5 rounded-full bg-primary/95 text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm shadow-md"
+	>
+		<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.687 6m11.316 0A8.001 8.001 0 0019.318 6M9 21l3-3m0 0l3 3m-3-3V9"
+			></path>
+		</svg>
+		Vista 3D interactiva
+	</span>
+
+	<slot />
+</div>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	// Sólo tipos (se eliminan en el build: three.js se importa de forma diferida)
+	import type { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+	import type { KTX2Loader } from "three/addons/loaders/KTX2Loader.js";
+	import type {
+		Group,
+		Material,
+		Mesh,
+		Object3D,
+		PerspectiveCamera,
+		Scene,
+		WebGLRenderer,
+	} from "three";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	// -------------------------------------------------------------------------
+	// Parámetros de la escena (unidades normalizadas: el modelo mide 1 de alto)
+	// -------------------------------------------------------------------------
+	const FOV = 32;
+	// Encuadre: en escritorio el modelo ocupa ~45% del alto del escenario y en
+	// móvil se aleja para dejar hueco al titular y a las olas de características.
+	const CAM_Z_ESC = 3.4;
+	const CAM_Z_MOVIL = 6.2;
+	const ALTURA_OBJETIVO = 1;
+	// Anclaje vertical del modelo dentro del escenario (0 = centro exacto).
+	const BASE_ESC = 0;
+	const BASE_MOVIL = 0.42;
+	// Recorrido con el scroll: aparece por detrás del titular, desciende y se
+	// estabiliza junto a las características flotantes.
+	const INICIO_ESC = 0.26;
+	const FIN_ESC = -0.08;
+	const INICIO_MOVIL = 0.62;
+	const FIN_MOVIL = -0.15;
+	const ROT_INICIO = -0.45; // vista de presentación (3/4)
+	const LEAN = -0.18; // inclinación de "héroe" (≈10°), fija en pantalla
+	const REDUCIDO = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const ES_GRANDE = () => window.matchMedia("(min-width: 1024px)").matches;
+	// Cada ficha mide 200vh con el escenario anclado: el modelo vive entre el
+	// momento en que la sección llega al top y el momento en que sale.
+	const INICIO_SCROLL = "top top";
+	const FIN_SCROLL = "bottom bottom";
+
+	const camaraZ = () => (ES_GRANDE() ? CAM_Z_ESC : CAM_Z_MOVIL);
+	const baseY = () => (ES_GRANDE() ? BASE_ESC : BASE_MOVIL);
+	const inicioY = () => (ES_GRANDE() ? INICIO_ESC : INICIO_MOVIL);
+	const finY = () => (ES_GRANDE() ? FIN_ESC : FIN_MOVIL);
+
+	type Cargadores = {
+		THREE: typeof import("three");
+		GLTFLoader: typeof import("three/addons/loaders/GLTFLoader.js")["GLTFLoader"];
+		DRACOLoader: typeof import("three/addons/loaders/DRACOLoader.js")["DRACOLoader"];
+		KTX2Loader: typeof import("three/addons/loaders/KTX2Loader.js")["KTX2Loader"];
+		RoomEnvironment: (typeof import(
+			"three/addons/environments/RoomEnvironment.js"
+		))["RoomEnvironment"];
+	};
+
+	// three.js sólo se descarga cuando un visor está a punto de entrar en
+	// pantalla (no penaliza la carga inicial de la página).
+	let promesaCargadores: Promise<Cargadores> | null = null;
+	const obtenerCargadores = () => {
+		if (!promesaCargadores) {
+			promesaCargadores = Promise.all([
+				import("three"),
+				import("three/addons/loaders/GLTFLoader.js"),
+				import("three/addons/loaders/DRACOLoader.js"),
+				import("three/addons/loaders/KTX2Loader.js"),
+				import("three/addons/environments/RoomEnvironment.js"),
+			]).then(([t, g, d, k, e]) => ({
+				THREE: t,
+				GLTFLoader: g.GLTFLoader,
+				DRACOLoader: d.DRACOLoader,
+				KTX2Loader: k.KTX2Loader,
+				RoomEnvironment: e.RoomEnvironment,
+			}));
+		}
+		return promesaCargadores;
+	};
+
+	// -------------------------------------------------------------------------
+	// Bucle de render compartido: sólo pinta visores visibles con cambios
+	// -------------------------------------------------------------------------
+	type Instancia = {
+		visible: boolean;
+		sucio: boolean;
+		render: () => void;
+		liberar: () => void;
+	};
+
+	const instancias: Instancia[] = [];
+	let rafId = 0;
+
+	const bucle = () => {
+		for (const inst of instancias) {
+			if (inst.visible && inst.sucio) {
+				inst.sucio = false;
+				try {
+					inst.render();
+				} catch (error) {
+					console.warn("[visor-3d] error de render:", error);
+				}
+			}
+		}
+		rafId = requestAnimationFrame(bucle);
+	};
+
+	window.addEventListener("pagehide", () => {
+		cancelAnimationFrame(rafId);
+		rafId = 0;
+		for (const inst of instancias) inst.liberar();
+		instancias.length = 0;
+	});
+
+	// -------------------------------------------------------------------------
+	// Carga perezosa de un .glb con cadena de respaldo (primer modelo que funcione)
+	// -------------------------------------------------------------------------
+	const cargarModelo = (cargador: GLTFLoader, rutas: string[]) =>
+		new Promise<Object3D>((resolver, rechazar) => {
+			let indice = 0;
+			const intentar = () => {
+				if (indice >= rutas.length) {
+					rechazar(new Error("Ningún modelo disponible"));
+					return;
+				}
+				const ruta = rutas[indice++];
+				cargador.load(
+					ruta,
+					(gltf) => resolver(gltf.scene),
+					undefined,
+					() => intentar(),
+				);
+			};
+			intentar();
+		});
+
+	// -------------------------------------------------------------------------
+	// Inicialización de cada visor
+	// -------------------------------------------------------------------------
+	const preparar = (contenedor: HTMLElement) => {
+		const canvas = contenedor.querySelector("canvas");
+		const poster = contenedor.querySelector<HTMLImageElement>(".poster");
+		const seccion = contenedor.closest<HTMLElement>("section");
+		if (!canvas) return;
+
+		const estado = { y: inicioY(), rot: 0 };
+		const disposables: Array<() => void> = [];
+		let sucio = true;
+		let visible = false;
+		let render: () => void = () => {};
+		let tweenPoster: gsap.core.Tween | null = null;
+
+		// Mata el tween de respaldo y su ScrollTrigger (si lo hay) sin dejar
+		// triggers huérfanos en la página.
+		const matarTweenPoster = () => {
+			tweenPoster?.scrollTrigger?.kill();
+			tweenPoster?.kill();
+			tweenPoster = null;
+		};
+
+		const instancia: Instancia = {
+			get visible() {
+				return visible;
+			},
+			set visible(valor: boolean) {
+				visible = valor;
+				if (valor) sucio = true;
+			},
+			get sucio() {
+				return sucio;
+			},
+			set sucio(valor: boolean) {
+				sucio = valor;
+			},
+			render: () => render(),
+			liberar: () => {
+				for (const liberar of disposables) liberar();
+				disposables.length = 0;
+				matarTweenPoster();
+				render = () => {};
+			},
+		};
+		instancias.push(instancia);
+		if (!rafId) rafId = requestAnimationFrame(bucle);
+
+		const ocultarCarga = () => {
+			const carga = contenedor.querySelector<HTMLElement>("[data-carga]");
+			if (carga) carga.style.opacity = "0";
+		};
+
+		// Los badges compiten por display ("hidden" vs "inline-flex"), así que se
+		// alternan las dos clases en lugar de sólo una.
+		const verBadge = (selector: string, activo: boolean) => {
+			const badge = contenedor.querySelector<HTMLElement>(selector);
+			if (!badge) return;
+			badge.classList.toggle("hidden", !activo);
+			badge.classList.toggle("inline-flex", activo);
+		};
+
+		const marcarModeloListo = () => {
+			if (poster) poster.style.opacity = "0";
+			verBadge("[data-badge-3d]", true);
+			verBadge("[data-badge-ref]", false);
+		};
+
+		// Si el navegador suelta el contexto WebGL (poco memoria en móvil)
+		// volvemos a la imagen de respaldo en lugar de dejar un rectángulo negro.
+		const volverAImagen = () => {
+			if (poster) poster.style.opacity = "1";
+			verBadge("[data-badge-3d]", false);
+			verBadge("[data-badge-ref]", true);
+			ocultarCarga();
+		};
+
+		// Movimiento de respaldo: mientras sólo haya imagen, ésta también
+		// desciende con el scroll. Se descarta en cuanto carga el modelo.
+		if (poster && seccion && !REDUCIDO) {
+			tweenPoster = gsap.fromTo(
+				poster,
+				{ y: -12 },
+				{
+					y: 20,
+					ease: "none",
+					scrollTrigger: {
+						trigger: seccion,
+						start: INICIO_SCROLL,
+						end: FIN_SCROLL,
+						scrub: 0.7,
+						invalidateOnRefresh: true,
+					},
+				},
+			);
+		}
+
+		// El 3D (y su import diferido) sólo arranca cuando el visor se aproxima.
+		const acercarse = new IntersectionObserver(
+			(entradas) => {
+				if (entradas.some((entrada) => entrada.isIntersecting)) {
+					acercarse.disconnect();
+					void arrancar();
+				}
+			},
+			{ rootMargin: "500px 0px" },
+		);
+		acercarse.observe(contenedor);
+
+		// Visibilidad real → controla si se pinta
+		const visibilidad = new IntersectionObserver(
+			(entradas) => {
+				for (const entrada of entradas) {
+					instancia.visible = entrada.isIntersecting;
+				}
+			},
+			{ threshold: 0 },
+		);
+		visibilidad.observe(contenedor);
+
+		async function arrancar() {
+			const rutas: string[] = JSON.parse(contenedor.dataset.modelos || "[]");
+			if (!rutas.length) {
+				ocultarCarga();
+				return;
+			}
+
+			let THREE: Cargadores["THREE"];
+			let escena: Scene;
+			let camara: PerspectiveCamera;
+			let renderer: WebGLRenderer;
+			let pivote: Group;
+
+			try {
+				const cargadores = await obtenerCargadores();
+				THREE = cargadores.THREE;
+
+				// Sin WebGL nos quedamos con la imagen de respaldo.
+				try {
+					renderer = new THREE.WebGLRenderer({
+						canvas,
+						antialias: true,
+						alpha: true,
+						powerPreference: "high-performance",
+					});
+				} catch {
+					ocultarCarga();
+					return;
+				}
+				disposables.push(() => renderer.dispose());
+
+				// Pérdida de contexto WebGL → degradamos a la imagen de respaldo
+				const alPerderContexto = (evento: Event) => {
+					evento.preventDefault();
+					render = () => {};
+					volverAImagen();
+				};
+				canvas.addEventListener("webglcontextlost", alPerderContexto);
+				disposables.push(() =>
+					canvas.removeEventListener("webglcontextlost", alPerderContexto),
+				);
+
+				renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+				renderer.outputColorSpace = THREE.SRGBColorSpace;
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 1;
+
+				escena = new THREE.Scene();
+				camara = new THREE.PerspectiveCamera(FOV, 1, 0.05, 50);
+				camara.position.set(0, 0, camaraZ());
+				camara.lookAt(0, 0, 0);
+
+				// ---- Encuadre (antes de cargar: el canvas ya se dimensiona) ----
+				const ajustar = () => {
+					const rect = contenedor.getBoundingClientRect();
+					const ancho = Math.max(1, Math.round(rect.width));
+					const alto = Math.max(1, Math.round(rect.height));
+					renderer.setSize(ancho, alto, false);
+					// Encuadre según formato (escritorio más cerca, móvil más lejos)
+					camara.position.z = camaraZ();
+					camara.aspect = ancho / alto;
+					camara.updateProjectionMatrix();
+					sucio = true;
+				};
+				ajustar();
+				const resize = new ResizeObserver(ajustar);
+				resize.observe(contenedor);
+				disposables.push(() => resize.disconnect());
+
+				// Estudio de luz: entorno (reflexiones suaves) + clave/relleno/contra
+				const pmrem = new THREE.PMREMGenerator(renderer);
+				const entorno = new cargadores.RoomEnvironment();
+				const texturaEntorno = pmrem.fromScene(entorno, 0.04).texture;
+				escena.environment = texturaEntorno;
+				(
+					escena as unknown as { environmentIntensity: number }
+				).environmentIntensity = 0.75;
+				disposables.push(() => {
+					texturaEntorno.dispose();
+					pmrem.dispose();
+				});
+
+				const clave = new THREE.DirectionalLight(0xffffff, 2);
+				clave.position.set(2.6, 4, 3.4);
+				const relleno = new THREE.DirectionalLight(0xdcf3ff, 0.9);
+				relleno.position.set(-3.4, 1.4, 2.6);
+				const contra = new THREE.DirectionalLight(0xffffff, 1.3);
+				contra.position.set(0, 3, -4);
+				const ambiente = new THREE.AmbientLight(0xffffff, 0.35);
+				escena.add(clave, relleno, contra, ambiente);
+
+				// Cargador .glb.
+				// Draco: three trae por defecto el decoder de .drc sueltos, así que
+				// apuntamos a la variante glTF (copiada en /public/draco/).
+				const draco = new cargadores.DRACOLoader();
+				draco.setDecoderPath("/draco/");
+				disposables.push(() => draco.dispose());
+
+				// Texturas KTX2: sin setTranscoderPath() three usa su transcoder
+				// empaquetado (assets con hash en /_astro/), sin duplicar archivos.
+				const ktx2 = new cargadores.KTX2Loader().detectSupport(renderer);
+				disposables.push(() => ktx2.dispose());
+
+				const gltfLoader = new cargadores.GLTFLoader();
+				gltfLoader.setDRACOLoader(draco);
+				gltfLoader.setKTX2Loader(ktx2);
+
+				// El modelo se normaliza a 1 unidad de alto y se centra en el origen
+				// sobre el grupo "interior" (no tocamos los transforms del glTF).
+				const modelo = await cargarModelo(gltfLoader, rutas);
+				const caja = new THREE.Box3().setFromObject(modelo);
+				const tam = caja.getSize(new THREE.Vector3());
+				const centro = caja.getCenter(new THREE.Vector3());
+				const escala = ALTURA_OBJETIVO / Math.max(tam.y, 0.0001);
+
+				// inclinado = inclinación fija en pantalla + descenso (position.y)
+				//   └ pivote = gira sobre su propio eje Y (rotación con el scroll)
+				//       └ interior = escala y centra el modelo (sin tocar el glTF)
+				const inclinado = new THREE.Group();
+				inclinado.rotation.z = LEAN;
+
+				pivote = new THREE.Group();
+				const interior = new THREE.Group();
+				interior.add(modelo);
+				interior.scale.setScalar(escala);
+				interior.position.set(
+					-centro.x * escala,
+					-centro.y * escala,
+					-centro.z * escala,
+				);
+				pivote.add(interior);
+				inclinado.add(pivote);
+				inclinado.position.y = baseY() + estado.y;
+				pivote.rotation.y = ROT_INICIO;
+				escena.add(inclinado);
+
+				disposables.push(() => {
+					escena.traverse((objeto) => {
+						const malla = objeto as Mesh;
+						if (malla.geometry) malla.geometry.dispose();
+						const material = malla.material as
+							| Material
+							| Material[]
+							| undefined;
+						if (Array.isArray(material)) material.forEach((m) => m.dispose());
+						else material?.dispose();
+					});
+				});
+
+				// ---- Render bajo demanda ----
+				render = () => {
+					inclinado.position.y = baseY() + estado.y;
+					pivote.rotation.y = ROT_INICIO + estado.rot;
+					renderer.render(escena, camara);
+				};
+
+				// ---- Scroll: desciende y gira sincronizado con el progreso ----
+				if (seccion && !REDUCIDO) {
+					gsap
+						.timeline({
+							scrollTrigger: {
+								trigger: seccion,
+								// La sección mide 200vh y el escenario queda anclado:
+								// el modelo se anima durante todo ese tramo.
+								start: INICIO_SCROLL,
+								end: FIN_SCROLL,
+								scrub: 0.7,
+								invalidateOnRefresh: true,
+								onRefresh: () => {
+									sucio = true;
+								},
+							},
+						})
+						.fromTo(
+							estado,
+							{ y: inicioY, rot: 0 },
+							{
+								y: finY,
+								rot: () => (ES_GRANDE() ? Math.PI * 2 : Math.PI),
+								ease: "none",
+								onUpdate: () => {
+									sucio = true;
+								},
+							},
+						);
+				} else {
+					// Sin movimiento (prefers-reduced-motion): vista de llegada fija
+					estado.y = finY();
+					estado.rot = ES_GRANDE() ? Math.PI * 2 : Math.PI;
+				}
+
+				matarTweenPoster();
+				marcarModeloListo();
+				ocultarCarga();
+				sucio = true;
+				ScrollTrigger.refresh();
+			} catch (error) {
+				// Sin modelo: la imagen de respaldo y su animación siguen activas.
+				console.warn("[visor-3d] modelo no disponible:", error);
+				ocultarCarga();
+			}
+		}
+	};
+
+	document
+		.querySelectorAll<HTMLElement>("[data-viewer-3d]")
+		.forEach((contenedor) => preparar(contenedor));
+
+	window.addEventListener("load", () => ScrollTrigger.refresh());
+</script>
