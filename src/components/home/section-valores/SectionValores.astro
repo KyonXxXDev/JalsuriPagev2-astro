@@ -1,10 +1,11 @@
 ---
 import type { ValorCardProps } from "@/components/types";
-import ShieldCheck from "../icons/ShieldCheck.astro";
-import Leaf from "../icons/Leaf.astro";
-import Truck from "../icons/Truck.astro";
-import Zap from "../icons/Zap.astro";
-import ValorCard from "../ValorCard.astro";
+
+import ShieldCheck from "@/components/icons/ShieldCheck.astro";
+import { Leaf } from "lucide-react";
+import Truck from "@/components/icons/Truck.astro";
+import Zap from "@/components/icons/Zap.astro";
+import ValorCard from "@/components/ValorCard.astro";
 
 export const valores: ValorCardProps[] = [
     {
@@ -97,7 +98,7 @@ export const valores: ValorCardProps[] = [
     >
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 relative z-10">
         <!-- Cabecera de la sección -->
         <div
             class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"

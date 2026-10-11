@@ -2,22 +2,15 @@
 import imgKey from "@/assets/logo.webp";
 
 interface Props {
-    /**
-     * Fondo sólido para páginas interiores (sin hero oscuro detrás).
-     * En la home se mantiene transparente.
-     */
     solid?: boolean;
 }
 const { solid = false } = Astro.props;
+
 ---
 <!-- HEADER CORPORATIVO FIJO -->
 <header
     id="main-header"
-    class:list={[
-        "fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-text/10",
-        solid && "bg-background/92 border-b border-text/10",
-    ]}
->
+    class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-text/10 bg-background/50">
     <div
         class="max-w-7xl mx-auto flex justify-between items-center text-background"
     >
@@ -27,31 +20,13 @@ const { solid = false } = Astro.props;
             class="flex items-center gap-3 group focus:outline-none"
         >
             <div
-                class="p-1 rounded-xl bg-primary/5 border border-secondary/30 transition-transform group-hover:scale-105"
+                class="p-1 rounded-xl border border-secondary/30 transition-transform group-hover:scale-105"
             >
                 <img
                     src={imgKey.src}
                     alt="Jalsuri Logo"
                     class="h-9 w-auto object-contain"
                 />
-            </div>
-            <div class="flex flex-col">
-                <span
-                    class:list={[
-                        "font-extrabold text-lg tracking-tight font-display leading-tight group-hover:text-primary transition-colors",
-                        solid ? "text-text" : "text-background",
-                    ]}
-                >
-                    JALSURI
-                </span>
-                <span
-                    class:list={[
-                        "text-[10px] tracking-widest uppercase font-semibold",
-                        solid ? "text-primary" : "text-secondary",
-                    ]}
-                >
-                    Agua Purificada
-                </span>
             </div>
         </a>
 
@@ -179,7 +154,7 @@ const { solid = false } = Astro.props;
     <!-- Mobile Navigation Drawer -->
     <div
         id="mobile-menu"
-        class="hidden lg:hidden mt-3 pt-4 border-t border-secondary/20 flex flex-col gap-3 pb-2 text-text font-medium text-sm animate-fadeIn bg-background"
+        class="hidden lg:hidden mt-3 pt-4 border-t border-secondary/20 flex flex-col gap-3 pb-2 text-text font-medium text-sm animate-fadeIn"
     >
         <a
             href="/#hero-container"

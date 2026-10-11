@@ -1,48 +1,30 @@
 ---
+import SectionCompromiso from "@/components/home/section-compromiso/SectionCompromiso.astro";
 import Layout from "../layouts/Layout.astro";
 import VideoKey from "@/assets/video/video-optimizado.mp4";
-import ChevronDown from "@/components/icons/ChevronDown.astro";
-import imgKey from "@/assets/logo.webp";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import SectionValores from "@/components/section-valores/SectionValores.astro";
-import SectionBidon3D from "@/components/section-bidon3d/SectionBidon3D.astro";
-import SectionProductos from "@/components/section-productos/SectionProductos.astro";
-import ClientsSlider from "@/components/ClientsSlider";
-import SectionCalidad from "@/components/section-calidad/SectionCalidad.astro";
-import SectionTrayectoria from "@/components/section-trayectoria/SectionTrayectoria.astro";
-import SectionDelivery from "@/components/section-delivery/SectionDelivery.astro";
+import ScrollIndicator from "@/components/general/ScrollIndicator.astro";
+import SectionValores from "@/components/home/section-valores/SectionValores.astro";
+import SectionProductos from "@/components/home/section-productos/SectionProductos.astro";
+import SectionCalidad from "@/components/home/section-calidad/SectionCalidad.astro";
+import SectionTrayectoria from "@/components/home/section-trayectoria/SectionTrayectoria.astro";
+import SectionDelivery from "@/components/home/section-delivery/SectionDelivery.astro";
+import ClientsSlider from "@/components/ClientsSlider.jsx"
+
 ---
 
 <Layout>
-	<Header />
-	<!-- <picture id="global-waterfall" class="fixed top-0 left-0 w-screen h-screen -z-50 pointer-events-none">
-       Overlay oscuro clave: Garantiza que cualquier texto encima se lea perfecto 
-        <div class="absolute inset-0 bg-slate-950/60 z-10"></div>
-        <video
-            src={VideoWaterFall}
-            class="w-full h-full object-cover scale-105" 
-            muted autoplay loop playsinline preload="auto"
-        ></video>
-    </picture>-->
 	<!-- 1. HERO SECTION CON MÁSCARA Y VIDEO (SIN OVERLAY) -->
 	<section
 		id="hero-container"
 		class="relative w-full h-screen overflow-hidden"
 	>
-		<!-- Máscara con el logo y el video de fondo 
-		<div
-			id="logo-mask"
-			class="w-full h-full absolute top-0 left-0 bg-black"
-			style={`--mask-url: url('${imgKey.src}');`}
-		></div>-->
 		<picture
 			id="hero-key"
 			class="h-screen w-full block overflow-hidden fixed"
 		>
 			<!-- SIN OVERLAY DE OSCURECIMIENTO - Video 100% nítido y libre de capas oscuras -->
 			<div
-				class="absolute inset-0 bg-linear-to-t from-black/40 via-black/20 to-black/30 z-[1] pointer-events-none"
+				class="absolute inset-0 bg-linear-to-t from-black/40 via-black/20 to-black/30 z-1 pointer-events-none"
 			>
 			</div>
 			<!-- Textos principales del Hero Corporativo -->
@@ -63,16 +45,6 @@ import SectionDelivery from "@/components/section-delivery/SectionDelivery.astro
 				>
 					Agua Purificada Jalsuri
 				</h1>
-
-				<!-- Subtítulo Corporativo Nítido -->
-				<p
-					class="mt-3 text-sky-50 font-medium text-base sm:text-lg md:text-xl max-w-xl tracking-wide drop-shadow-[0_2px_10px_rgba(14,165,233,0.6)] leading-relaxed"
-				>
-					Agua 100% pura y purificada directo a tu hogar u
-					oficina. Tecnología de filtración, ozonización y UV
-					para una hidratación ligera y saludable.
-				</p>
-
 				<!-- CTAs del Hero -->
 				<div
 					class="mt-8 flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
@@ -105,372 +77,20 @@ import SectionDelivery from "@/components/section-delivery/SectionDelivery.astro
 				Tu navegador no admite el elemento <code>video</code>.
 			</video>
 		</picture>
+		<SectionCompromiso />
 
-		<section
-			id="compromiso"
-			class="absolute bottom-20 w-full py-20 lg:py-32 overflow-hidden opacity-0"
-		>
-			<div class="relative max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 z-10">
-				<picture class="block text-center">
-					<img
-						src={imgKey.src}
-						alt="LOGO EMPRESA"
-						class="mx-auto w-60 h-auto mb-10"
-					/>
-				</picture>
-				<div
-					class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
-				>
-					<!-- Columna Izquierda: Título Principal y Subtítulo -->
-					<div class="lg:col-span-5 flex flex-col gap-6">
-						<!-- Etiqueta superior -->
-						<div class="inline-flex items-center gap-3">
-							<span class="w-8 h-[2px] bg-secondary"></span>
-							<span
-								class="text-secondary font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
-							>
-								Para tu equipo
-							</span>
-						</div>
-
-						<!-- Título impactante con palabra resaltada en gradiente -->
-						<h2
-							class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text font-display leading-[1.1] tracking-tight"
-						>
-							Soluciones que <span
-								class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
-								>fluyen</span
-							> con tu ritmo laboral.
-						</h2>
-
-						<!-- Intro -->
-						<p
-							class="text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
-						>
-							Agua pura, práctica y pensada para el día a día de
-							tu equipo.
-						</p>
-					</div>
-
-					<!-- Columna Derecha: Contenido profundo y CTA -->
-					<div
-						class="lg:col-span-6 lg:col-start-7 flex flex-col gap-6 text-text/80 leading-relaxed"
-					>
-						<!-- Frase Destacada con borde lateral -->
-						<p
-							class="text-xl md:text-2xl text-text font-semibold border-l-4 border-secondary pl-6 py-1"
-						>
-							En Jalsuri no solo entregamos agua: <br
-								class="hidden sm:block"
-							/>
-							<span class="text-primary"
-								>brindamos tranquilidad.</span
-							>
-						</p>
-
-						<!-- Párrafos descriptivos -->
-						<div
-							class="flex flex-col gap-4 pl-0 sm:pl-7 text-[15px] sm:text-base"
-						>
-							<p>
-								Nos especializamos en abastecer espacios
-								corporativos con <strong
-									>agua ozonizada segura y de alta calidad</strong
-								>, diseñada para acompañar cada jornada en
-								oficinas, hospitales, clínicas y más.
-							</p>
-							<p>
-								Nuestros bidones y dispensadores ergonómicos
-								están pensados para ofrecer comodidad,
-								eficiencia y un <strong
-									>menor impacto ambiental</strong
-								>.
-							</p>
-						</div>
-
-						<!-- Llamada a la Acción (Botón) -->
-						<div class="pt-6 pl-0 sm:pl-7">
-							<a
-								href="#contacto"
-								class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-background font-bold rounded-full hover:bg-secondary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
-							>
-								Solicita tu propuesta
-								<svg
-									class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-								</svg>
-							</a>
-							<p class="mt-4 text-xs text-text/50 font-medium">
-								Descubre cómo hidratar tu entorno de forma más
-								consciente y responsable.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
 		<!-- Indicador Inferior de Scroll -->
-		<div
-			id="scroll-indicator"
-			class="fixed bottom-6 left-0 right-0 z-20 flex flex-col items-center justify-end pointer-events-none text-sky-50"
-		>
-			<div class="flex flex-col items-center gap-1.5 px-4 py-2">
-				<span
-					class="text-[10px] tracking-[0.3em] uppercase font-bold drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]"
-				>
-					Desliza para explorar
-				</span>
-				<ChevronDown
-					class="h-auto w-10 animate-bounce drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]"
-				/>
-			</div>
-		</div>
+		<ScrollIndicator />
 	</section>
 	<SectionValores />
-	<SectionBidon3D />
-	<section id="clientes" class="bg-white">
+	<section id="clientes">
 		<ClientsSlider client:load />
 	</section>
 	<SectionProductos />
 	<SectionCalidad />
 	<SectionTrayectoria />
 	<SectionDelivery />
-	<!-- 3. CATÁLOGO CORPORATIVO DE PRODUCTOS 
-	<section
-		id="productos"
-		class="relative z-30 bg-slate-50 text-slate-900 py-28 px-6 md:px-16"
-	>
-		<div class="max-w-7xl mx-auto space-y-16">
-			<div class="text-center space-y-3">
-				<span
-					class="text-sky-600 text-xs font-bold tracking-[0.3em] uppercase bg-sky-100 px-4 py-1.5 rounded-full inline-block"
-				>
-					Línea Completa
-				</span>
-				<h3
-					class="text-3xl sm:text-5xl font-extrabold text-slate-900 font-display"
-				>
-					Productos & Soluciones Jalsuri
-				</h3>
-				<p class="text-slate-600 max-w-2xl mx-auto text-base">
-					Disponemos de formatos adaptados a las necesidades de
-					hogares, oficinas, instituciones y eventos corporativos.
-				</p>
-			</div>
-
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<article
-					class="group bg-white p-6 rounded-3xl border border-slate-200/80 shadow-lg shadow-sky-950/5 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/15 transition-all duration-500 flex flex-col justify-between"
-				>
-					<div>
-						<div
-							class="relative overflow-hidden aspect-square bg-sky-50 rounded-2xl p-4 flex items-center justify-center"
-						>
-							<img
-								src={imgBidon20L.src}
-								alt="Bidón Jalsuri 20 Litros"
-								class="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
-							/>
-							<span
-								class="absolute top-3 right-3 bg-sky-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider"
-							>
-								Popular
-							</span>
-						</div>
-						<div class="pt-6 space-y-2">
-							<h4
-								class="text-xl font-bold text-slate-900 font-display group-hover:text-sky-600 transition-colors"
-							>
-								Bidones de 20 Litros
-							</h4>
-							<p class="text-xs text-slate-600 leading-relaxed">
-								Bidones ergonómicos con caño o para dispensador.
-								Agua 100% purificada y tratada con ozono.
-							</p>
-						</div>
-					</div>
-
-					<div
-						class="pt-6 border-t border-slate-100 mt-6 flex items-center justify-between"
-					>
-						<span class="text-xs font-semibold text-slate-500"
-							>Hogar & Oficina</span
-						>
-						<a
-							href="https://wa.me/51997673300?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20los%20bidones%20de%2020L"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="px-4 py-2 rounded-full bg-sky-50 group-hover:bg-sky-500 text-sky-600 group-hover:text-white font-semibold text-xs transition-colors"
-						>
-							Pedir Ahora →
-						</a>
-					</div>
-				</article>
-				<article
-					class="group bg-white p-6 rounded-3xl border border-slate-200/80 shadow-lg shadow-sky-950/5 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/15 transition-all duration-500 flex flex-col justify-between"
-				>
-					<div>
-						<div
-							class="relative overflow-hidden aspect-square bg-sky-50 rounded-2xl p-4 flex items-center justify-center"
-						>
-							<img
-								src={imgMaquila.src}
-								alt="Servicio de Maquila de Agua Personalizada"
-								class="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
-							/>
-							<span
-								class="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider"
-							>
-								Empresas
-							</span>
-						</div>
-						<div class="pt-6 space-y-2">
-							<h4
-								class="text-xl font-bold text-slate-900 font-display group-hover:text-sky-600 transition-colors"
-							>
-								Maquila Corporativa
-							</h4>
-							<p class="text-xs text-slate-600 leading-relaxed">
-								Embotellamos agua con la marca y diseño
-								exclusivo de tu empresa, hotel, restaurante o
-								evento.
-							</p>
-						</div>
-					</div>
-
-					<div
-						class="pt-6 border-t border-slate-100 mt-6 flex items-center justify-between"
-					>
-						<span class="text-xs font-semibold text-slate-500"
-							>Marca Propia</span
-						>
-						<a
-							href="https://wa.me/51997673300?text=Hola,%20deseo%20cotizar%20el%20servicio%20de%20maquila"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="px-4 py-2 rounded-full bg-sky-50 group-hover:bg-sky-500 text-sky-600 group-hover:text-white font-semibold text-xs transition-colors"
-						>
-							Cotizar Maquila →
-						</a>
-					</div>
-				</article>
-
-				<article
-					class="group bg-white p-6 rounded-3xl border border-slate-200/80 shadow-lg shadow-sky-950/5 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/15 transition-all duration-500 flex flex-col justify-between"
-				>
-					<div>
-						<div
-							class="relative overflow-hidden aspect-square bg-sky-50 rounded-2xl p-4 flex items-center justify-center"
-						>
-							<img
-								src={imgDispensador.src}
-								alt="Dispensadores de Agua Jalsuri"
-								class="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
-							/>
-						</div>
-						<div class="pt-6 space-y-2">
-							<h4
-								class="text-xl font-bold text-slate-900 font-display group-hover:text-sky-600 transition-colors"
-							>
-								Dispensadores & Racks
-							</h4>
-							<p class="text-xs text-slate-600 leading-relaxed">
-								Equipamiento industrial para dispensado de agua
-								fría/caliente y racks organizadores de bidones.
-							</p>
-						</div>
-					</div>
-
-					<div
-						class="pt-6 border-t border-slate-100 mt-6 flex items-center justify-between"
-					>
-						<span class="text-xs font-semibold text-slate-500"
-							>Equipamiento</span
-						>
-						<a
-							href="https://wa.me/51997673300?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20dispensadores"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="px-4 py-2 rounded-full bg-sky-50 group-hover:bg-sky-500 text-sky-600 group-hover:text-white font-semibold text-xs transition-colors"
-						>
-							Ver Detalles →
-						</a>
-					</div>
-				</article>
-			</div>
-		</div>
-	</section>-->
-
-	<!-- 4. SOLUCIONES CORPORATIVAS Y MAQUILA (BANNER CTA)
-	<section id="maquila" class="relative z-30 bg-slate-900 py-20 px-6">
-		<div
-			class="max-w-5xl mx-auto bg-gradient-to-r from-blue-900 via-sky-900 to-slate-900 border border-sky-400/30 p-8 sm:p-14 rounded-3xl text-center space-y-8 shadow-2xl relative overflow-hidden"
-		>
-			<div
-				class="absolute -right-20 -bottom-20 w-80 h-80 bg-sky-400/20 rounded-full blur-3xl pointer-events-none"
-			>
-			</div>
-
-			<span
-				class="text-sky-300 text-xs tracking-[0.3em] uppercase font-bold bg-sky-950/80 px-4 py-1.5 rounded-full inline-block border border-sky-400/30"
-			>
-				Servicio Maquila Corporativa
-			</span>
-
-			<h3
-				class="text-2xl sm:text-4xl font-extrabold text-white font-display max-w-3xl mx-auto leading-tight"
-			>
-				Potencia tu Marca con Botellas de Agua Personalizadas
-			</h3>
-
-			<p class="text-sky-100/80 font-light text-base max-w-2xl mx-auto">
-				Desarrollamos el envasado y etiquetado a la medida de tu
-				empresa. Atendemos pedidos al por mayor con despacho a nivel
-				nacional.
-			</p>
-
-			<div class="pt-4 flex flex-wrap justify-center gap-4">
-				<a
-					href="https://wa.me/51997673300"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="px-8 py-3.5 rounded-full bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-sky-500/30 transition-all hover:scale-105"
-				>
-					Solicitar Cotización Corporativa
-				</a>
-				<a
-					href="mailto:bytewolf626@gmail.com"
-					class="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider border border-white/20 transition-all hover:scale-105"
-				>
-					Contactar por Correo
-				</a>
-			</div>
-		</div>
-	</section> -->
-
-	<Footer />
 </Layout>
-
-<style>
-	#logo-mask {
-		mask-image: var(--mask-url);
-		-webkit-mask-image: var(--mask-url);
-		mask-position: center 18%;
-		-webkit-mask-position: center 18%;
-		mask-repeat: no-repeat;
-		-webkit-mask-repeat: no-repeat;
-		mask-size: clamp(10000vh, 4500%, 0vh);
-		-webkit-mask-size: clamp(10000vh, 4500%, 0vh);
-	}
-</style>
 
 <script>
 	import { gsap } from "gsap";
@@ -504,7 +124,7 @@ import SectionDelivery from "@/components/section-delivery/SectionDelivery.astro
 		if (!video) return;
 
 		video.pause(); // Pausamos el video porque GSAP controlará su reproducción
-		console.log(video.duration);
+		//console.log(video.duration);
 		// Objeto proxy para animar el tiempo del video sin modificar el DOM directamente en cada frame
 		const videoProxy = { currentTime: 0 };
 
@@ -557,6 +177,14 @@ import SectionDelivery from "@/components/section-delivery/SectionDelivery.astro
 				0.1,
 			)
 			.to(
+				"#main-header",
+				{
+					background: "rgba(255, 255, 255, 0.92)",
+					borderBottom: "rgba(11, 60, 115, 0.1)",
+				},
+				"<"
+			)
+			.to(
 				"#scroll-indicator",
 				{
 					color: "#000",
@@ -564,34 +192,13 @@ import SectionDelivery from "@/components/section-delivery/SectionDelivery.astro
 				},
 				0.5,
 			)
-
-			// C. ACHICAR MÁSCARA DEL LOGO (0.1 a 0.7)
-			// Una vez que el texto se fue (0.1), el logo empieza a encogerse.
-			.to(
-				"#logo-mask",
-				{
-					maskSize: "clamp(20vh, 25%, 30vh)",
-					duration: 0.6,
-					ease: "power2.inOut", // Acelera suave y frena suave
-				},
-				0.1,
-			)
-
+			
 			// D. OSCURECER EL VIDEO DE FONDO (0.5 a 0.8)
 			// A la mitad del achicamiento, el video empieza a apagarse para no distraer.
 			.to(
 				"#hero-key",
 				{
 					opacity: 0,
-					ease: "power1.inOut",
-					duration: 0.3,
-				},
-				0.5,
-			)
-			.to(
-				"#water-fall",
-				{
-					opacity: 1,
 					ease: "power1.inOut",
 					duration: 0.3,
 				},

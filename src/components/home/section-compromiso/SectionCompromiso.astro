@@ -1,0 +1,104 @@
+---
+import imgKey from '@/assets/logo.webp'
+import Button from '../../general/Button';
+import { compromisoText } from './text';
+---
+
+<section
+    id="compromiso"
+    class="absolute top-20 w-full h-screen overflow-hidden opacity-0"
+>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 z-10">
+        <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
+        >
+            <picture class="text-center col-span-1 lg:col-span-12">
+                <img
+                    src={imgKey.src}
+                    alt="LOGO EMPRESA"
+                    class="mx-auto w-60 h-auto hidden lg:block"
+                />
+            </picture>
+            <!-- Columna Izquierda: Título Principal y Subtítulo -->
+            <div class="lg:col-span-6 flex flex-col gap-6">
+                <!-- Etiqueta superior -->
+                <div class="inline-flex items-center gap-3">
+                    <span class="w-8 h-[2px] bg-secondary"></span>
+                    <span
+                        class="text-secondary font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
+                    >
+                        Para tu equipo
+                    </span>
+                </div>
+
+                <!-- Título impactante con palabra resaltada en gradiente -->
+                <h2
+                    class="sm:text-2xl md:text-4xl lg:text-6xl font-extrabold text-text font-display leading-[1.1] tracking-tight"
+                >
+                    Soluciones que <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+                        >fluyen</span
+                    > con tu ritmo laboral.
+                </h2>
+
+                <!-- Intro -->
+                <p
+                    class="text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
+                >
+                    Agua pura, práctica y pensada para el día a día de tu
+                    equipo.
+                </p>
+            </div>
+
+            <!-- Columna Derecha: Contenido profundo y CTA -->
+            <div
+                class="lg:col-span-6 lg:col-start-7 flex flex-col gap-6 text-text/80 leading-relaxed"
+            >
+                <!-- Frase Destacada con borde lateral -->
+                <p
+                    class="text-xl md:text-2xl text-text font-semibold border-l-4 border-secondary pl-6 py-1"
+                >
+                    En Jalsuri no solo entregamos agua: <br
+                        class="hidden sm:block"
+                    />
+                    <span class="text-primary">brindamos tranquilidad.</span>
+                </p>
+
+                <!-- Párrafos descriptivos -->
+                <div
+                    class="flex flex-col gap-4 pl-0 sm:pl-7 text-[15px] sm:text-base"
+                >
+                    <p>
+                        Nos especializamos en abastecer espacios corporativos
+                        con <strong
+                            >agua ozonizada segura y de alta calidad</strong
+                        >, diseñada para acompañar cada jornada en oficinas,
+                        hospitales, clínicas y más.
+                    </p>
+                    <p>
+                        Nuestros bidones y dispensadores ergonómicos están
+                        pensados para ofrecer comodidad, eficiencia y un <strong
+                            >menor impacto ambiental</strong
+                        >.
+                    </p>
+                </div>
+
+                <!-- Llamada a la Acción (Botón) -->
+                <div class="pt-6 pl-0 sm:pl-7">
+                    <Button
+                        client:load
+                        type="button"
+                        variant="primary"
+                        text={compromisoText.cta.text}
+                        href={compromisoText.cta.href}
+                        className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-primary text-background font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full hover:bg-secondary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 shadow-md"
+                    />
+                    <p class="mt-4 text-xs text-text/50 font-medium">
+                        Descubre cómo hidratar tu entorno de forma más
+                        consciente y responsable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

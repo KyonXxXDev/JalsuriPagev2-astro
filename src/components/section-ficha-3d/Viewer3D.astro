@@ -34,17 +34,9 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 	<!-- Halo de estudio: el modelo flota sobre él (sin tarjeta que lo encierre) -->
 	<div
 		aria-hidden="true"
-		class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-[14%] w-[78%] aspect-square rounded-full bg-linear-to-br from-primary/30 via-secondary/20 to-transparent blur-xl"
+		class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-[8%] w-[80%] max-w-[560px] aspect-square rounded-full bg-linear-to-br from-primary/20 via-secondary/10 to-transparent blur-2xl"
 	>
 	</div>
-
-	<!-- Suelo de estudio (profundidad sin coste de render) -->
-	<div
-		aria-hidden="true"
-		class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-[13%] w-[56%] h-10 rounded-[50%] bg-linear-to-b from-text/30 via-text/10 to-transparent blur-[7px]"
-	>
-	</div>
-
 	<!-- Imagen de respaldo: se muestra como tarjeta y desaparece al cargar
 	     el modelo 3D (los .glb siguen en preparación). La leyenda vive dentro
 	     de la tarjeta para que no compita con el botón de acción. -->
@@ -52,7 +44,7 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 		class="poster absolute inset-0 grid place-items-center p-5 sm:p-6 transition-opacity duration-700"
 	>
 		<figure
-			class="w-full max-w-[24rem] sm:max-w-[30rem] rounded-2xl overflow-hidden bg-white ring-1 ring-slate-900/10 shadow-2xl shadow-text/20"
+			class="w-full max-w-[24rem] sm:max-w-[30rem] -translate-y-14 lg:translate-y-0 rounded-2xl overflow-hidden bg-white ring-1 ring-slate-900/10 shadow-2xl shadow-text/20"
 		>
 			<img
 				src={poster}
@@ -75,7 +67,7 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 	<!-- Estado de carga -->
 	<div
 		data-carga
-		class="absolute top-14 left-4 flex justify-start transition-opacity duration-300"
+		class="absolute top-14 right-4 flex justify-start transition-opacity duration-300"
 	>
 		<span
 			class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/85 text-white text-[10px] font-bold uppercase tracking-wider shadow-md"
@@ -89,7 +81,7 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 	<!-- Badge de estado (se intercambia cuando el modelo está listo) -->
 	<span
 		data-badge-ref
-		class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/90 text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm"
+		class="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/90 text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm"
 	>
 		<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 			<path
@@ -107,21 +99,6 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 		Modelo 3D en preparación
 	</span>
 
-	<span
-		data-badge-3d
-		class="hidden absolute top-4 left-4 items-center gap-2 px-3 py-1.5 rounded-full bg-primary/95 text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm shadow-md"
-	>
-		<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.687 6m11.316 0A8.001 8.001 0 0019.318 6M9 21l3-3m0 0l3 3m-3-3V9"
-			></path>
-		</svg>
-		Vista 3D interactiva
-	</span>
-
 	<slot />
 </div>
 
@@ -130,7 +107,6 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	// Sólo tipos (se eliminan en el build: three.js se importa de forma diferida)
 	import type { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-	import type { KTX2Loader } from "three/addons/loaders/KTX2Loader.js";
 	import type {
 		Group,
 		Material,
@@ -151,7 +127,7 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 	// móvil se aleja para dejar hueco al titular y a las olas de características.
 	const CAM_Z_ESC = 3.4;
 	const CAM_Z_MOVIL = 6.2;
-	const ALTURA_OBJETIVO = 1;
+	const ALTURA_OBJETIVO = 1.3;
 	// Anclaje vertical del modelo dentro del escenario (0 = centro exacto).
 	const BASE_ESC = 0;
 	const BASE_MOVIL = 0.42;
@@ -162,7 +138,7 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 	const INICIO_MOVIL = 0.62;
 	const FIN_MOVIL = -0.15;
 	const ROT_INICIO = -0.45; // vista de presentación (3/4)
-	const LEAN = -0.18; // inclinación de "héroe" (≈10°), fija en pantalla
+	const LEAN = -0.40; // inclinación de "héroe" (≈10°), fija en pantalla
 	const REDUCIDO = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	const ES_GRANDE = () => window.matchMedia("(min-width: 1024px)").matches;
 	// Cada ficha mide 200vh con el escenario anclado: el modelo vive entre el
@@ -272,7 +248,8 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 		const seccion = contenedor.closest<HTMLElement>("section");
 		if (!canvas) return;
 
-		const estado = { y: inicioY(), rot: 0 };
+		const yFuera = 2.5;
+		const estado = { y: yFuera, rot: 0, lean: LEAN };
 		const disposables: Array<() => void> = [];
 		let sucio = true;
 		let visible = false;
@@ -499,11 +476,8 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 				const centro = caja.getCenter(new THREE.Vector3());
 				const escala = ALTURA_OBJETIVO / Math.max(tam.y, 0.0001);
 
-				// inclinado = inclinación fija en pantalla + descenso (position.y)
-				//   └ pivote = gira sobre su propio eje Y (rotación con el scroll)
-				//       └ interior = escala y centra el modelo (sin tocar el glTF)
 				const inclinado = new THREE.Group();
-				inclinado.rotation.z = LEAN;
+				inclinado.rotation.z = estado.lean;
 
 				pivote = new THREE.Group();
 				const interior = new THREE.Group();
@@ -536,43 +510,68 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 				// ---- Render bajo demanda ----
 				render = () => {
 					inclinado.position.y = baseY() + estado.y;
+					inclinado.rotation.z = estado.lean;
 					pivote.rotation.y = ROT_INICIO + estado.rot;
 					renderer.render(escena, camara);
 				};
 
 				// ---- Scroll: desciende y gira sincronizado con el progreso ----
 				if (seccion && !REDUCIDO) {
-					gsap
-						.timeline({
-							scrollTrigger: {
-								trigger: seccion,
-								// La sección mide 200vh y el escenario queda anclado:
-								// el modelo se anima durante todo ese tramo.
-								start: INICIO_SCROLL,
-								end: FIN_SCROLL,
-								scrub: 0.7,
-								invalidateOnRefresh: true,
-								onRefresh: () => {
-									sucio = true;
-								},
+					const tl = gsap.timeline({
+						scrollTrigger: {
+							trigger: seccion,
+							// La sección mide 200vh y el escenario queda anclado:
+							// el modelo se anima durante todo ese tramo.
+							start: INICIO_SCROLL,
+							end: FIN_SCROLL,
+							scrub: 0.7,
+							invalidateOnRefresh: true,
+							onRefresh: () => {
+								sucio = true;
 							},
-						})
-						.fromTo(
-							estado,
-							{ y: inicioY, rot: 0 },
-							{
-								y: finY,
-								rot: () => (ES_GRANDE() ? Math.PI * 2 : Math.PI),
-								ease: "none",
-								onUpdate: () => {
-									sucio = true;
-								},
+						},
+					});
+					const totalRot = () => (ES_GRANDE() ? Math.PI * 2 : Math.PI);
+
+					tl.fromTo(
+						estado,
+						{ y: yFuera, rot: 0, lean: LEAN },
+						{
+							y: inicioY,
+							rot: () => totalRot() * 0.2,
+							lean: LEAN * 0.5,
+							duration: 0.25,
+							ease: "power1.out",
+							onUpdate: () => {
+								sucio = true;
 							},
-						);
+						},
+					)
+					.to(estado, {
+						y: finY,
+						rot: () => totalRot() * 0.8,
+						lean: -LEAN * 0.5,
+						duration: 0.5,
+						ease: "none",
+						onUpdate: () => {
+							sucio = true;
+						},
+					})
+					.to(estado, {
+						y: -yFuera,
+						rot: totalRot,
+						lean: -LEAN,
+						duration: 0.25,
+						ease: "power1.in",
+						onUpdate: () => {
+							sucio = true;
+						},
+					});
 				} else {
 					// Sin movimiento (prefers-reduced-motion): vista de llegada fija
 					estado.y = finY();
 					estado.rot = ES_GRANDE() ? Math.PI * 2 : Math.PI;
+					estado.lean = -LEAN;
 				}
 
 				matarTweenPoster();
