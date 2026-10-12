@@ -2,30 +2,22 @@
 import Layout from "../layouts/Layout.astro";
 
 import FilaFlotante from "@/components/section-ficha-3d/FilaFlotante.astro";
-import fichas from "@/data/fichas.json";
+import fichas from "@/data/fichas.json" with { type: 'json' };
 
-import imgBidon85 from "@/assets/img/PORTADA-WEB-JALSURI-BIDON-8.5-LITROS_2.webp";
-import imgCaja20 from "@/assets/img/20LT-OKAS.webp";
 import imgBidon20 from "@/assets/img/bidon.webp";
 import Viewer3D from "@/components/section-ficha-3d/Viewer3D.astro";
 
-// Visual de cada formato. Los modelos 3D están en preparación:
-// por ahora se muestra el material gráfico del producto.
+// Visual del producto para respaldo cuando el .glb no esté disponible
 const visuales: Record<string, ImageMetadata> = {
-	"bidon-8-10": imgBidon85,
-	"caja-20": imgCaja20,
 	"bidon-20": imgBidon20,
 };
 
-const PDF = "/fichas-tecnicas/ficha-tecnica-jalsuri.pdf";
+const producto = fichas.productos[0];
+const visual = visuales[producto.id];
+const grupoIzq = producto.datos.slice(0, 4);
+const grupoDer = producto.datos.slice(4);
 
-// Ambiente de fondo por ficha: cada formato cambia sutilmente el color de la
-// sección (como en la referencia, que cambia de fondo entre productos).
-const fondos = [
-	"bg-linear-to-b from-white via-slate-50/70 to-primary/[0.06]",
-	"bg-linear-to-b from-primary/[0.06] via-slate-50/70 to-secondary/[0.08]",
-	"bg-linear-to-b from-secondary/[0.08] via-slate-50/70 to-primary/[0.06]",
-];
+const PDF = "/fichas-tecnicas/ficha-tecnica-jalsuri.pdf";
 
 const solicitar = (nombre: string) =>
 	`https://wa.me/51997673300?text=${encodeURIComponent(
@@ -34,175 +26,205 @@ const solicitar = (nombre: string) =>
 ---
 
 <Layout
-	title="Ficha Técnica | Bidón 8.5L, Caja 20L y Bidón 20L – Jalsuri"
-	description="Especificaciones técnicas de los formatos Jalsuri: bidón de 8.5L y 10L, caja de 20L y bidón de 20L. Descarga la ficha técnica en PDF."
+	title="Ficha Técnica | Bidón 20L – Jalsuri"
+	description="Especificaciones técnicas y certificaciones del Bidón 20L Jalsuri. Formato estándar retornable con dispensador y comodato para hogares y empresas."
 >
-	
-	<main>
-		<!-- ======================= FICHAS (200vh CADA UNA) ======================= -->
-		{
-			fichas.productos.map((p, i) => {
-				const visual = visuales[p.id];
-				const fondo = fondos[i % fondos.length];
-				// Dos grupos de características: flotan a izquierda y derecha del
-				// modelo en escritorio; en dos olas centradas abajo en móvil/tablet.
-				const grupoIzq = p.datos.slice(0, 4);
-				const grupoDer = p.datos.slice(4);
-
-				return (
-					<section
-						id={p.id}
-						data-ficha
-						class="relative h-[200vh]"
+	<main class="relative w-full">
+		<!-- ======================= ESCENARIO BIDÓN 20L (200vh) ======================= -->
+		<div id="escenario-bidon" class="relative w-full h-[200vh]">
+			<!-- Visor 3D Sticky: Permanece activo y centrado durante ambas secciones -->
+			<div class="sticky top-0 h-screen w-full overflow-hidden pointer-events-none z-10">
+				<!-- Burbujas decorativas del fondo -->
+				<div class="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 opacity-70">
+					<svg
+						class="w-[340px] sm:w-[460px] lg:w-[540px] h-auto text-secondary/30 fill-current"
+						viewBox="0 0 500 500"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
 					>
+						<circle cx="250" cy="250" r="190" class="text-primary/10 fill-current" />
+						<circle cx="140" cy="140" r="115" class="text-secondary/20 fill-current" />
+						<circle cx="370" cy="360" r="105" class="text-primary/15 fill-current" />
+						<circle cx="410" cy="110" r="85"  class="text-secondary/25 fill-current" />
+						<circle cx="90"  cy="320" r="70"  class="text-primary/12 fill-current" />
+						<circle cx="320" cy="80"  r="55"  class="text-secondary/20 fill-current" />
+					</svg>
+				</div>
 
-						<!-- ESCENARIO: queda anclado en pantalla durante los 200vh -->
-						<div class="sticky top-0 h-screen overflow-hidden">
-							<div
-								class="absolute inset-x-0 top-24 sm:top-28 z-10 px-4 text-center"
-								data-titulo
-							>
-								<div class="w-full z-50">
+				<Viewer3D
+					data-viewer-3d
+					modelos={producto.modelos}
+					poster={visual.src}
+					posterAlt={`Producto: ${producto.nombre}`}
+					nombre={producto.nombre}
+				/>
+			</div>
 
-									<h2
-										class="text-start text-balance font-display font-black text-text tracking-[-0.035em] leading-[0.9] text-[clamp(6rem,13vw,5.5rem)]"
-									>
-										{p.nombre}
-									</h2>
-									
-								</div>
-							</div>
-							{/* */}
-							<div class="absolute inset-0 pt-24 sm:pt-28 z-20">
-								<div class="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
-    <svg 
-    class="w-[360px] sm:w-[480px] lg:w-[560px] h-auto text-secondary/30 fill-current"
-    viewBox="0 0 500 500"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
->
-    <!-- Soft bubble field -->
-    <circle cx="250" cy="250" r="190" class="text-primary/10 fill-current" />
-    <circle cx="140" cy="140" r="115" class="text-secondary/20 fill-current" />
-    <circle cx="370" cy="360" r="105" class="text-primary/15 fill-current" />
-    <circle cx="410" cy="110" r="85"  class="text-secondary/25 fill-current" />
-    <circle cx="90"  cy="320" r="70"  class="text-primary/12 fill-current" />
-    <circle cx="320" cy="80"  r="55"  class="text-secondary/20 fill-current" />
-
-    <!-- Decorative purity / ozone elements -->
-    <g stroke="currentColor" stroke-width="1.8" fill="none" class="text-primary/50">
-        
-        <!-- Ozone molecule (O₃) – refined -->
-        <g transform="translate(95, 385)">
-            <circle cx="0" cy="0" r="28" />
-            <circle cx="0" cy="-28" r="9" fill="currentColor" class="text-secondary/40" />
-            <circle cx="-24" cy="14" r="9" fill="currentColor" class="text-secondary/40" />
-            <circle cx="24"  cy="14" r="9" fill="currentColor" class="text-secondary/40" />
-        </g>
-
-        <!-- Spark of purity -->
-        <g transform="translate(400, 305)">
-            <path d="M0 -14 L0 14 M-14 0 L14 0 M-10 -10 L10 10 M10 -10 L-10 10" 
-                  stroke-linecap="round" />
-        </g>
-
-        <!-- Water crystal / snowflake motif -->
-        <g transform="translate(330, 175) scale(0.75)">
-            <line x1="0" y1="-22" x2="0" y2="22" stroke-linecap="round" />
-            <line x1="-19" y1="-11" x2="19" y2="11" stroke-linecap="round" />
-            <line x1="-19" y1="11"  x2="19" y2="-11" stroke-linecap="round" />
-            <!-- small accents -->
-            <line x1="-8" y1="-18" x2="8" y2="-18" stroke-linecap="round" stroke-width="1.4" />
-            <line x1="-8" y1="18"  x2="8" y2="18"  stroke-linecap="round" stroke-width="1.4" />
-        </g>
-
-        <!-- Extra small spark -->
-        <g transform="translate(175, 95) scale(0.6)">
-            <path d="M0 -12 L0 12 M-12 0 L12 0 M-8.5 -8.5 L8.5 8.5 M8.5 -8.5 L-8.5 8.5" 
-                  stroke-linecap="round" />
-        </g>
-    </g>
-</svg>
-</div>
-								<Viewer3D
-									modelos={p.modelos}
-									poster={visual.src}
-									posterAlt={`Producto: ${p.nombre}`}
-									nombre={p.nombre}
-								/>
-							</div>
-
-							<dl
-								class="hidden lg:flex flex-col gap-3 absolute left-5 xl:left-12 top-[62%] -translate-y-1/2 w-[17rem] xl:w-[19rem] z-30"
-								data-lado="izq"
-							>
-								{grupoIzq.map((d) => (
-									<FilaFlotante label={d.label} value={d.value} />
-								))}
-							</dl>
-							<dl
-								class="hidden lg:flex flex-col gap-3 absolute right-5 xl:right-12 top-[62%] -translate-y-1/2 w-[17rem] xl:w-[19rem] z-30"
-								data-lado="der"
-							>
-								{grupoDer.map((d) => (
-									<FilaFlotante label={d.label} value={d.value} />
-								))}
-							</dl>
-
-							<!-- Móvil/tablet: las mismas características en dos olas -->
-							<dl
-								class="lg:hidden absolute inset-x-4 bottom-20 z-30 flex flex-col gap-2"
-								data-ola="0"
-							>
-								{grupoIzq.map((d) => (
-									<FilaFlotante label={d.label} value={d.value} />
-								))}
-							</dl>
-							<dl
-								class="lg:hidden absolute inset-x-4 bottom-20 z-30 flex flex-col gap-2"
-								data-ola="1"
-							>
-								{grupoDer.map((d) => (
-									<FilaFlotante label={d.label} value={d.value} />
-								))}
-							</dl>
-
-							<!-- Capacidad del formato -->
-							<span
-								class="absolute top-28 sm:top-32 right-4 sm:right-8 lg:right-12 z-40 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur border border-primary/25 text-text text-xs font-extrabold shadow-sm"
-							>
-								{p.capacidad}
+			<!-- ================= SECCIÓN 1: TÍTULO Y PRESENTACIÓN (100vh) ================= -->
+			<section
+				id="seccion-titulo"
+				class="absolute top-0 inset-x-0 h-screen pt-24 sm:pt-28 pb-8 z-20 flex flex-col justify-between pointer-events-none"
+			>
+				<!-- Cabecera de la Ficha -->
+				<div class="max-w-4xl mx-auto px-4 sm:px-8 text-center pointer-events-auto" data-titulo-wrap>
+					<div class="inline-flex items-center justify-center gap-2 sm:gap-3 mb-3 flex-wrap">
+						<span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-wider">
+							{producto.categoria}
+						</span>
+						<span class="px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur border border-slate-200 text-text text-xs sm:text-sm font-extrabold shadow-xs">
+							Capacidad {producto.capacidad}
+						</span>
+					</div>
+					<h1 class="text-center text-balance font-display font-black text-text tracking-[-0.035em] leading-[0.92] text-5xl sm:text-7xl lg:text-8xl">
+						{producto.nombre}
+					</h1>
+					<p class="mt-4 max-w-xl mx-auto text-text/75 text-sm sm:text-base leading-relaxed text-balance">
+						{producto.resumen}
+					</p>
+					<div class="mt-4 flex flex-wrap justify-center gap-2">
+						{producto.chips.map((c) => (
+							<span class="px-3 py-1 rounded-full bg-white/80 backdrop-blur border border-primary/20 text-text text-xs font-semibold shadow-xs">
+								{c}
 							</span>
+						))}
+					</div>
+				</div>
 
-							<!-- Acción siempre disponible -->
-							<div class="absolute inset-x-0 bottom-5 z-40 flex justify-center px-4">
-								<a
-									href={solicitar(p.nombre)}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider shadow-lg shadow-primary/30 hover:bg-text hover:-translate-y-0.5 transition-all duration-300"
-								>
-									Cotizar este formato
-									<svg
-										class="w-4 h-4"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M14 5l7 7m0 0l-7 7m7-7H3"
-										/>
-									</svg>
-								</a>
-							</div>
+				<!-- Indicador inferior de scroll -->
+				<div class="flex flex-col items-center gap-2 pointer-events-auto text-text/60 text-xs font-semibold uppercase tracking-widest pb-4" data-scroll-indicator>
+					<span>Desliza para ver especificaciones técnicas</span>
+					<svg class="w-5 h-5 animate-bounce text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+					</svg>
+				</div>
+			</section>
+
+			<!-- ================= SECCIÓN 2: ESPECIFICACIONES TÉCNICAS (100vh) ================= -->
+			<section
+				id="seccion-especificaciones"
+				class="absolute top-[100vh] inset-x-0 h-screen pt-20 sm:pt-24 pb-8 z-20 flex flex-col justify-between pointer-events-none"
+			>
+				<!-- Badge superior de Especificaciones -->
+				<div class="max-w-4xl mx-auto px-4 text-center pointer-events-auto" data-specs-header>
+					<span class="px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur border border-primary/20 text-primary text-xs font-extrabold uppercase tracking-widest shadow-xs">
+						Especificaciones Técnicas &middot; {producto.nombre}
+					</span>
+				</div>
+
+				<!-- Columnas de Especificaciones Flotantes (Escritorio) -->
+				<dl
+					class="hidden lg:flex flex-col gap-3 absolute left-6 xl:left-14 top-1/2 -translate-y-1/2 w-[18rem] xl:w-[20rem] z-30 pointer-events-auto"
+					data-lado="izq"
+				>
+					{grupoIzq.map((d) => (
+						<FilaFlotante label={d.label} value={d.value} />
+					))}
+				</dl>
+				<dl
+					class="hidden lg:flex flex-col gap-3 absolute right-6 xl:right-14 top-1/2 -translate-y-1/2 w-[18rem] xl:w-[20rem] z-30 pointer-events-auto"
+					data-lado="der"
+				>
+					{grupoDer.map((d) => (
+						<FilaFlotante label={d.label} value={d.value} />
+					))}
+				</dl>
+
+				<!-- Móvil/tablet: olas centradas abajo -->
+				<dl
+					class="lg:hidden absolute inset-x-4 bottom-28 z-30 flex flex-col gap-2 pointer-events-auto"
+					data-ola="0"
+				>
+					{grupoIzq.map((d) => (
+						<FilaFlotante label={d.label} value={d.value} />
+					))}
+				</dl>
+				<dl
+					class="lg:hidden absolute inset-x-4 bottom-28 z-30 flex flex-col gap-2 pointer-events-auto"
+					data-ola="1"
+				>
+					{grupoDer.map((d) => (
+						<FilaFlotante label={d.label} value={d.value} />
+					))}
+				</dl>
+
+				<!-- Barra de Acciones: Cotizar y Descargar Ficha PDF -->
+				<div
+					class="relative z-40 px-4 flex flex-wrap items-center justify-center gap-3 pointer-events-auto"
+					data-cta
+				>
+					<a
+						href={solicitar(producto.nombre)}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider shadow-lg shadow-primary/30 hover:bg-text hover:-translate-y-0.5 transition-all duration-300"
+					>
+						Cotizar este formato
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+						</svg>
+					</a>
+					{PDF && (
+						<a
+							href={PDF}
+							download="ficha-tecnica-jalsuri.pdf"
+							class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/95 hover:bg-white text-text border border-slate-200 text-xs sm:text-sm font-bold uppercase tracking-wider shadow-md hover:-translate-y-0.5 transition-all duration-300"
+						>
+							<svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+							</svg>
+							Descargar Ficha PDF
+						</a>
+					)}
+				</div>
+			</section>
+		</div>
+
+		<!-- ======================= SECCIÓN DESCARGA PDF COMPLETA ========================== -->
+		<section class="py-16 sm:py-24">
+			<div class="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12">
+				<div class="relative overflow-hidden rounded-3xl bg-text text-white p-8 sm:p-14 text-center shadow-2xl shadow-primary/20">
+					<div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-16 w-72 h-72 rounded-full bg-primary/40 blur-3xl"></div>
+					<div aria-hidden="true" class="pointer-events-none absolute -bottom-28 -left-16 w-72 h-72 rounded-full bg-secondary/30 blur-3xl"></div>
+
+					<div class="relative">
+						<span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold tracking-[0.2em] uppercase text-white/90">
+							Documento Oficial
+						</span>
+						<h2 class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight">
+							Llévate la ficha técnica completa
+						</h2>
+						<p class="mt-4 text-white/80 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
+							Especificaciones químicas, microbiológicas y condiciones de servicio en un solo documento oficial DIGESA. Ideal para compartir con el área de compras o logística.
+						</p>
+
+						<div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+							<a
+								href={PDF}
+								download="ficha-tecnica-jalsuri.pdf"
+								class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white text-text font-extrabold text-sm uppercase tracking-wider shadow-xl shadow-black/20 hover:bg-secondary hover:text-white hover:-translate-y-1 transition-all duration-300"
+							>
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0 0l-4-4m4 4l4-4" />
+								</svg>
+								Descargar Ficha Técnica (PDF)
+							</a>
+							<a
+								href={solicitar("la ficha técnica del Bidón 20L y una cotización")}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-white/40 text-white font-bold text-sm uppercase tracking-wider hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
+							>
+								Consultar a un Asesor
+							</a>
 						</div>
-					</section>
-				);
-			})
-		}
+
+						<p class="mt-6 text-xs text-white/70 tracking-wide">
+							Actualizado: {fichas.actualizado} · Formato A4 · PDF descargable
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
 	</main>
 </Layout>
 
@@ -217,150 +239,87 @@ const solicitar = (nombre: string) =>
 	if (!reduceMotion) {
 		gsap.registerPlugin(ScrollTrigger);
 
-		// 1. Escenario de cada ficha (200vh con el modelo anclado en el centro):
-		//    el titular del inicio se desvanece y las características flotan
-		//    a los costados del modelo 3D (o en dos olas en móvil).
-		const escenarios = gsap.matchMedia();
+		const escenario = document.getElementById("escenario-bidon");
+		const viewer = escenario?.querySelector<HTMLElement>("[data-viewer-3d]");
+		const titulo = document.querySelector("[data-titulo-wrap]");
+		const scrollInd = document.querySelector("[data-scroll-indicator]");
+		const specsHeader = document.querySelector("[data-specs-header]");
+		const izq = document.querySelectorAll('[data-lado="izq"] [data-fila]');
+		const der = document.querySelectorAll('[data-lado="der"] [data-fila]');
+		const ola0 = document.querySelectorAll('[data-ola="0"] [data-fila]');
+		const ola1 = document.querySelectorAll('[data-ola="1"] [data-fila]');
 
-		// Escritorio (≥1024): dos columnas flotantes, izquierda y derecha.
-		escenarios.add("(min-width: 1024px)", () => {
-			gsap.utils.toArray<HTMLElement>("[data-ficha]").forEach((seccion) => {
-				const titulo = seccion.querySelector("[data-titulo]");
-				const izq = seccion.querySelectorAll('[data-lado="izq"] [data-fila]');
-				const der = seccion.querySelectorAll('[data-lado="der"] [data-fila]');
+		const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 
-				// Estado inicial explícito: las filas entran con el scroll.
-				gsap.set(izq, { opacity: 0, x: -40, y: 16 });
-				gsap.set(der, { opacity: 0, x: 40, y: 16 });
-
-				gsap
-					.timeline({
-						scrollTrigger: {
-							trigger: seccion,
-							start: "top top",
-							end: "bottom bottom",
-							scrub: 0.6,
-							invalidateOnRefresh: true,
-						},
-					})
-					.fromTo(
-						titulo,
-						{ opacity: 1, y: 0 },
-						{ opacity: 0, y: -70, duration: 0.24, ease: "none" },
-						0,
-					)
-					.to(
-						izq,
-						{
-							opacity: 1,
-							x: 0,
-							y: 0,
-							duration: 0.2,
-							stagger: 0.06,
-							ease: "power1.out",
-						},
-						0.08,
-					)
-					.to(
-						der,
-						{
-							opacity: 1,
-							x: 0,
-							y: 0,
-							duration: 0.2,
-							stagger: 0.06,
-							ease: "power1.out",
-						},
-						0.36,
-					)
-					// Reserva de recorrido: la última fila termina antes del final
-					// de la sección y no a la mitad del todo el scroll.
-					.to(titulo, { opacity: 0, duration: 0.26 }, 0.74);
-			});
-		});
-
-		// Móvil/tablet: las mismas características en dos olas centradas abajo.
-		escenarios.add("(max-width: 1023px)", () => {
-			gsap.utils.toArray<HTMLElement>("[data-ficha]").forEach((seccion) => {
-				const titulo = seccion.querySelector("[data-titulo]");
-				const ola0 = seccion.querySelectorAll('[data-ola="0"] [data-fila]');
-				const ola1 = seccion.querySelectorAll('[data-ola="1"] [data-fila]');
-
-				// Estado inicial explícito: fuera de cuadro hasta su ola.
-				gsap.set(ola0, { opacity: 0, y: 26 });
-				gsap.set(ola1, { opacity: 0, y: 26 });
-
-				gsap
-					.timeline({
-						scrollTrigger: {
-							trigger: seccion,
-							start: "top top",
-							end: "bottom bottom",
-							scrub: 0.6,
-							invalidateOnRefresh: true,
-						},
-					})
-					.fromTo(
-						titulo,
-						{ opacity: 1, y: 0 },
-						{ opacity: 0, y: -50, duration: 0.22, ease: "none" },
-						0,
-					)
-					.to(
-						ola0,
-						{
-							opacity: 1,
-							y: 0,
-							duration: 0.16,
-							stagger: 0.05,
-							ease: "power1.out",
-						},
-						0.1,
-					)
-					.to(
-						ola0,
-						{
-							opacity: 0,
-							y: -18,
-							duration: 0.12,
-							stagger: 0.03,
-							ease: "power1.in",
-						},
-						0.48,
-					)
-					.to(
-						ola1,
-						{
-							opacity: 1,
-							y: 0,
-							duration: 0.16,
-							stagger: 0.05,
-							ease: "power1.out",
-						},
-						0.54,
-					)
-					// Reserva de recorrido: la segunda ola termina antes del final.
-					.to(titulo, { opacity: 0, duration: 0.15 }, 0.85);
-			});
-		});
-
-		// 2. Encabezados y párrafos de cabecera.
-		gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
-			gsap.from(el, {
-				opacity: 0,
-				y: 20,
-				duration: 0.6,
-				ease: "power2.out",
+		if (escenario) {
+			const tl = gsap.timeline({
 				scrollTrigger: {
-					trigger: el,
-					start: "top 92%",
-					toggleActions: "play none none reverse",
+					trigger: escenario,
+					start: "top top",
+					end: "bottom bottom",
+					scrub: 0.6,
+					invalidateOnRefresh: true,
 				},
 			});
-		});
 
-		// 3. El movimiento del visual (descenso + giro 3D, o la imagen de
-		//    respaldo) vive dentro de Viewer3D.astro, que lo sincroniza con el
-		//    scroll de cada sección.
+			// Sincronización del Visor 3D: el bidón rota fluidamente entre ambas secciones
+			const sync3D = { progreso: 0 };
+			tl.to(
+				sync3D,
+				{
+					progreso: 1,
+					duration: 1,
+					ease: "none",
+					onUpdate: () => {
+						const fn = (viewer as any)?.actualizarProgreso3D;
+						if (typeof fn === "function") {
+							fn(sync3D.progreso);
+						}
+					},
+				},
+				0,
+			);
+
+			// Sección 1: El título y su indicador de scroll se desvanecen suavemente hacia la sección 2
+			tl.to(
+				[titulo, scrollInd],
+				{ opacity: 0, y: -35, duration: 0.3, ease: "power1.in" },
+				0.1,
+			);
+
+			// Sección 2: Entrada de especificaciones técnicas
+			if (isDesktop) {
+				gsap.set(izq, { opacity: 0, x: -35 });
+				gsap.set(der, { opacity: 0, x: 35 });
+				gsap.set(specsHeader, { opacity: 0, y: 15 });
+
+				tl.to(
+					specsHeader,
+					{ opacity: 1, y: 0, duration: 0.2, ease: "power1.out" },
+					0.45,
+				)
+				.to(
+					izq,
+					{ opacity: 1, x: 0, duration: 0.25, stagger: 0.05, ease: "power1.out" },
+					0.48,
+				)
+				.to(
+					der,
+					{ opacity: 1, x: 0, duration: 0.25, stagger: 0.05, ease: "power1.out" },
+					0.54,
+				);
+			} else {
+				gsap.set(ola0, { opacity: 0, y: 20 });
+				gsap.set(ola1, { opacity: 0, y: 20 });
+				gsap.set(specsHeader, { opacity: 0, y: 15 });
+
+				tl.to(specsHeader, { opacity: 1, y: 0, duration: 0.2, ease: "power1.out" }, 0.45)
+				  .to(ola0, { opacity: 1, y: 0, duration: 0.2, stagger: 0.04, ease: "power1.out" }, 0.48)
+				  .to(ola0, { opacity: 0, y: -16, duration: 0.15, stagger: 0.03, ease: "power1.in" }, 0.68)
+				  .to(ola1, { opacity: 1, y: 0, duration: 0.2, stagger: 0.04, ease: "power1.out" }, 0.72);
+			}
+		}
+
+		window.addEventListener("load", () => ScrollTrigger.refresh());
 	}
 </script>

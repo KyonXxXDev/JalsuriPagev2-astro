@@ -1,4 +1,6 @@
 ---
+import Button from "@/components/general/Button";
+
 const WA = "https://wa.me/51997673300";
 
 const pasos = [
@@ -54,15 +56,19 @@ const sellos = [
         class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-16"
     >
         <div
-            class="text-center max-w-3xl mx-auto flex flex-col items-center"
+            class="text-center max-w-3xl mx-auto flex flex-col items-center gap-4"
         >
-            <span
-                class="px-4 py-1.5 rounded-full bg-secondary/10 text-primary border border-secondary/30 text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm"
-            >
-                Calidad & Certificaciones
-            </span>
+            <div class="inline-flex items-center gap-3">
+                <span class="w-8 h-[2px] bg-secondary"></span>
+                <span
+                    class="text-secondary font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
+                >
+                    Calidad & Certificaciones
+                </span>
+                <span class="w-8 h-[2px] bg-secondary"></span>
+            </div>
             <h2
-                class="text-3xl sm:text-5xl font-extrabold text-text tracking-tight font-display leading-tight"
+                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text tracking-tight font-display leading-[1.1]"
             >
                 Tu salud es nuestro <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
@@ -70,7 +76,7 @@ const sellos = [
                 >
             </h2>
             <p
-                class="mt-4 text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
+                class="text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
             >
                 Cada lote de agua Jalsuri pasa por un proceso de purificación
                 certificado antes de llegar a tu hogar u oficina.
@@ -81,7 +87,7 @@ const sellos = [
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {
                 pasos.map((paso) => (
-                    <div class="relative bg-slate-50 rounded-3xl border border-slate-100 p-6 hover:border-sky-300 hover:shadow-lg hover:shadow-sky-500/10 transition-all duration-300">
+                    <div class="relative bg-white rounded-3xl border border-secondary/20 p-6 hover:border-secondary hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 shadow-sm">
                         <span class="text-4xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
                             {paso.n}
                         </span>
@@ -98,8 +104,12 @@ const sellos = [
 
         <!-- Sellos / Garantías -->
         <div
-            class="rounded-3xl bg-linear-to-r from-slate-900 via-sky-950 to-slate-900 border border-sky-400/20 p-8 sm:p-12 shadow-2xl"
+            class="rounded-3xl bg-gradient-to-br from-text via-[#002B5B] to-text border border-secondary/25 p-8 sm:p-12 shadow-2xl relative overflow-hidden"
         >
+            <div
+                class="absolute -right-20 -top-20 w-64 h-64 bg-secondary/15 rounded-full blur-3xl pointer-events-none"
+            >
+            </div>
             <h3
                 class="text-xl sm:text-2xl font-extrabold text-white font-display mb-8 text-center"
             >
@@ -109,18 +119,45 @@ const sellos = [
                 {
                     sellos.map((s) => (
                         <div class="flex items-start gap-4">
-                            <span class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/20 text-secondary text-xl">
-                                ✓
+                            <span class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/20 text-secondary border border-secondary/30">
+                                <svg
+                                    class="size-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M5 13l4 4L19 7"
+                                    />
+                                </svg>
                             </span>
                             <div>
                                 <h4 class="text-white font-bold">{s.title}</h4>
-                                <p class="text-sky-100/70 text-sm mt-1">
+                                <p class="text-white/70 text-sm mt-1">
                                     {s.desc}
                                 </p>
                             </div>
                         </div>
                     ))
                 }
+            </div>
+
+            <div
+                class="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10"
+            >
+                <p class="text-white/80 text-sm font-medium text-center sm:text-left">
+                    ¿Requieres documentación técnica o análisis microbiológicos para tu empresa?
+                </p>
+                <Button
+                    text="Ver Ficha Técnica"
+                    href="/ficha-tecnica"
+                    variant="secondary"
+                    size="sm"
+                    className="shrink-0"
+                />
             </div>
         </div>
     </div>

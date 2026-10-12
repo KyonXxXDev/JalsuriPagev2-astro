@@ -1,11 +1,14 @@
-interface ButtonProps {
-    text: string;
+export interface ButtonProps {
+    text?: string;
     href?: string;
     onClick?: () => void;
     className?: string;
-    variant?: "primary" | "secondary" | "outline";
+    variant?: "primary" | "secondary" | "outline" | "gradient" | "ghost" | "white";
+    size?: "sm" | "md" | "lg";
     children?: React.ReactNode;
     type?: "button" | "submit" | "reset";
+    target?: string;
+    rel?: string;
 }
 
 export default function Button({
@@ -14,40 +17,69 @@ export default function Button({
     onClick,
     className = "",
     variant = "primary",
+    size = "md",
     children,
     type = "button",
+    target,
+    rel,
 }: Readonly<ButtonProps>) {
-    // Clases base compartidas
+    // 1. Clases base globales
     const baseClasses =
-        "inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 transform active:scale-95 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 cursor-pointer";
-    
-    // Estilos según la variante basada en tus variables CSS y tema
-    const variantClasses = {
-        primary:
-            "bg-primary text-background hover:bg-secondary hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-1",
-        secondary:
-            "bg-secondary text-background hover:bg-primary hover:shadow-lg hover:shadow-secondary/25 hover:-translate-y-1",
-        outline:
-            "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-background hover:-translate-y-1 shadow-none",
+        "inline-flex items-center justify-center font-bold tracking-wider uppercase transition-all duration-300 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 cursor-pointer select-none";
+
+    // 2. Estilos por Tamaño
+    const sizeClasses = {
+        sm: "px-4 py-2 text-xs rounded-full gap-2",
+        md: "px-6 py-3.5 text-xs sm:text-sm rounded-full gap-2.5",
+        lg: "px-8 py-4 text-sm sm:text-base rounded-full gap-3",
     };
 
-    const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${className}`.trim();
+    // 3. Estilos por Variante
+    const variantClasses = {
+        primary:
+            "bg-primary text-background hover:bg-secondary hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5",
+        secondary:
+            "bg-secondary text-background hover:bg-primary hover:shadow-lg hover:shadow-secondary/25 hover:-translate-y-0.5",
+        outline:
+            "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-background hover:-translate-y-0.5",
+        gradient:
+            "bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-text text-background shadow-lg shadow-primary/25 hover:scale-[1.02]",
+        ghost:
+            "bg-transparent text-text hover:text-secondary hover:translate-x-1 shadow-none focus:ring-0 uppercase-none font-normal",
+        white:
+            "bg-white text-black hover:bg-black hover:text-white hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5",
 
-    // Si tiene href se renderiza como enlace <a>
+    };
+
+    const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`.trim();
+
+    // Contenido interno del botón
+    const content = (
+        <>
+            {text && <span>{text}</span>}
+            {children}
+        </>
+    );
+
+    // Renderizado como Enlace <a>
     if (href) {
         return (
-            <a href={href} className={combinedClasses} onClick={onClick}>
-                <span>{text}</span>
-                {children}
+            <a
+                href={href}
+                className={combinedClasses}
+                onClick={onClick}
+                target={target}
+                rel={target === "_blank" ? rel || "noopener noreferrer" : rel}
+            >
+                {content}
             </a>
         );
     }
 
-    // Si no tiene href se renderiza como <button>
+    // Renderizado como Botón <button>
     return (
         <button type={type} className={combinedClasses} onClick={onClick}>
-            <span>{text}</span>
-            {children}
+            {content}
         </button>
     );
 }

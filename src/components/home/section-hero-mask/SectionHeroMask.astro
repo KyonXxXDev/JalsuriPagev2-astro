@@ -1,0 +1,65 @@
+---
+import VideoKey from "@/assets/video/video-optimizado.mp4";
+import ScrollIndicator from "@/components/general/ScrollIndicator.astro";
+import SectionCompromiso from "../section-compromiso/SectionCompromiso.astro";
+import Button from "@/components/general/Button";
+import WhatsApp from "@/components/icons/WhatsApp.astro";
+import ChevronDown from "@/components/icons/ChevronDown.astro";
+---
+
+<!-- 1. HERO SECTION CON MÁSCARA Y VIDEO (SIN OVERLAY) -->
+<section id="hero-container" class="relative w-full h-screen overflow-hidden">
+    <picture id="hero-key" class="h-screen w-full block overflow-hidden fixed">
+        <!-- SIN OVERLAY DE OSCURECIMIENTO - Video 100% nítido y libre de capas oscuras -->
+        <div
+            class="absolute inset-0 bg-linear-to-t from-black/60 via-black/40 to-black/30 z-1 pointer-events-none"
+        >
+        </div>
+        <!-- Textos principales del Hero Corporativo -->
+        <div
+            id="hero-description"
+            class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+        >
+            <!-- Badge Superior Corporativo -->
+            <span
+                class="px-5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-sky-300 text-sky-700 text-xs md:text-sm font-bold tracking-[0.25em] uppercase mb-4 shadow-xl shadow-sky-900/10"
+            >
+                Pureza & Calidad Certificada
+            </span>
+
+            <!-- Título Principal Limpio -->
+            <h1
+                class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight drop-shadow-[0_4px_16px_rgba(2,132,199,0.7)] my-2 font-display"
+            >
+                Agua Purificada Jalsuri
+            </h1>
+            <!-- CTAs del Hero -->
+            <div
+                class="mt-8 flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
+            >
+                <Button variant="primary" class:list={'flex items-center'}>
+                    <WhatsApp class="size-4" />
+                    Pedir por WhatsApp
+                </Button>
+                <Button variant="white" href={'#productos'} class:list={'flex items-center'}>
+                    <ChevronDown class="size-4" />
+                    Ver presentaciones
+                </Button>
+            </div>
+        </div>
+
+        <video
+            id="hero-video"
+            src={VideoKey}
+            class="w-full h-full object-cover"
+            muted
+            playsinline
+            preload="auto"
+        >
+            Tu navegador no admite el elemento <code>video</code>.
+        </video>
+    </picture>
+    <SectionCompromiso />
+    <!-- Indicador Inferior de Scroll -->
+    <ScrollIndicator />
+</section>

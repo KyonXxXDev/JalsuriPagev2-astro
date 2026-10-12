@@ -7,9 +7,10 @@ export interface SectionWavesProps {
      * Por defecto blanco, igual que el HTML de referencia (waves.html).
      */
     color?: string;
+    background?: string;
 }
 
-const { flip = false, class: className, color = "#ffffff" } = Astro.props;
+const { flip = false, class: className, color = "#ffffff", background = "#ffffff" } = Astro.props;
 
 const uid = `wave-${Math.random().toString(36).slice(2, 9)}`;
 
@@ -34,7 +35,7 @@ const toRgb = (value: string): [number, number, number] => {
 // 4 capas translúcidas + capa sólida, exactamente como waves.html
 const [r, g, b] = toRgb(color);
 const layerY = [0, 3, 5, 7];
-const layerAlpha = [0.7, 0.5, 0.3, 1];
+const layerAlpha = [0.8, 0.7, 0.5, 0.8];
 const layerFill = layerAlpha.map((alpha) =>
     alpha === 1 ? `rgb(${r},${g},${b})` : `rgba(${r},${g},${b},${alpha})`,
 );
@@ -47,6 +48,9 @@ const layerFill = layerAlpha.map((alpha) =>
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 24 150 28"
         preserveAspectRatio="none"
+        style={{
+            backgroundColor: background,
+        }}
         shape-rendering="auto"
     >
         <defs>

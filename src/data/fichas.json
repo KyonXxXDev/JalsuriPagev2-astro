@@ -6,7 +6,7 @@
   "productos": [
     {
       "id": "bidon-20",
-      "orden": "03",
+      "orden": "01",
       "nombre": "Bidón 20L",
       "categoria": "Formato estándar",
       "capacidad": "20 L",

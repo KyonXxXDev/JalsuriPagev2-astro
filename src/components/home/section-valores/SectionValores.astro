@@ -2,7 +2,7 @@
 import type { ValorCardProps } from "@/components/types";
 
 import ShieldCheck from "@/components/icons/ShieldCheck.astro";
-import { Leaf } from "lucide-react";
+import Leaf from "@/components/icons/Leaf.astro";
 import Truck from "@/components/icons/Truck.astro";
 import Zap from "@/components/icons/Zap.astro";
 import ValorCard from "@/components/ValorCard.astro";
@@ -98,18 +98,22 @@ export const valores: ValorCardProps[] = [
     >
     </div>
 
-    <div class="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         <!-- Cabecera de la sección -->
         <div
-            class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"
+            class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center gap-4"
         >
-            <span
-                class="px-4 py-1.5 rounded-full bg-secondary/10 text-primary border border-secondary/30 text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm"
-            >
-                Nuestros Pilares
-            </span>
+            <div class="inline-flex items-center gap-3">
+                <span class="w-8 h-[2px] bg-secondary"></span>
+                <span
+                    class="text-secondary font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
+                >
+                    Nuestros Pilares
+                </span>
+                <span class="w-8 h-[2px] bg-secondary"></span>
+            </div>
             <h2
-                class="text-3xl sm:text-5xl font-extrabold text-text tracking-tight font-display leading-tight"
+                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text tracking-tight font-display leading-[1.1]"
             >
                 Principios que garantizan cada <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
@@ -117,7 +121,7 @@ export const valores: ValorCardProps[] = [
                 >
             </h2>
             <p
-                class="mt-4 text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
+                class="text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
             >
                 En Jalsuri combinamos innovación tecnológica, sostenibilidad
                 ambiental y servicio humano para elevar el estándar de

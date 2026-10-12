@@ -1,230 +1,200 @@
 ---
 import imgKey from "@/assets/logo.webp";
+import Button from "./general/Button";
+import WhatsApp from "./icons/WhatsApp.astro";
 
-interface Props {
-    solid?: boolean;
-}
-const { solid = false } = Astro.props;
-
+const navLinks = [
+    { href: "#hero-container", label: "Inicio" },
+    { href: "#compromiso", label: "Nosotros" },
+    { href: "#productos", label: "Productos" },
+    { href: "#calidad", label: "Calidad" },
+    { href: "#trayectoria", label: "Línea de Tiempo" },
+    { href: "#contacto", label: "Contacto" },
+];
 ---
+
 <!-- HEADER CORPORATIVO FIJO -->
 <header
     id="main-header"
-    class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-text/10 bg-background/50">
+    class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-3.5 transition-all duration-300 pointer-events-auto backdrop-blur-xl shadow-sm shadow-text/10 bg-background/50"
+>
     <div
         class="max-w-7xl mx-auto flex justify-between items-center text-background"
     >
         <!-- Logo + Brand Name -->
         <a
             href="/#hero-container"
-            class="flex items-center gap-3 group focus:outline-none"
+            class="flex items-center gap-2 group focus:outline-none"
         >
             <div
-                class="p-1 rounded-xl border border-secondary/30 transition-transform group-hover:scale-105"
+                class="p-1 rounded-xl border border-secondary/30 transition-transform group-hover:scale-105 bg-background/50"
             >
                 <img
                     src={imgKey.src}
                     alt="Jalsuri Logo"
-                    class="h-9 w-auto object-contain"
+                    class="h-10 sm:h-12 w-auto object-contain drop-shadow-sm"
                 />
             </div>
         </a>
 
         <!-- Navigation Menu (Desktop) -->
-        <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium">
-            <a
-                href="/#hero-container"
-                class="text-text hover:text-primary transition-colors py-1 relative group"
-            >
-                Inicio
-                <span
-                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
-                ></span>
-            </a>
-            <a
-                href="/#compromiso"
-                class="text-text hover:text-primary transition-colors py-1 relative group"
-            >
-                Nosotros
-                <span
-                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
-                ></span>
-            </a>
-            <a
-                href="/#productos"
-                class="text-text hover:text-primary transition-colors py-1 relative group"
-            >
-                Productos
-                <span
-                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
-                ></span>
-            </a>
-            <a
-                href="/#calidad"
-                class="text-text hover:text-primary transition-colors py-1 relative group"
-            >
-                Calidad
-                <span
-                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
-                ></span>
-            </a>
-            <a
-                href="/#trayectoria"
-                class="text-text hover:text-primary transition-colors py-1 relative group"
-            >
-                Línea de Tiempo
-                <span
-                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
-                ></span>
-            </a>
-            <a
-                href="/#contacto"
-                class="text-text hover:text-primary transition-colors py-1 relative group"
-            >
-                Contacto
-                <span
-                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
-                ></span>
-            </a>
+        <nav
+            class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium"
+        >
+            {
+                navLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        class="text-text hover:text-primary transition-colors py-1 relative group"
+                    >
+                        {link.label}
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </a>
+                ))
+            }
         </nav>
 
-        <!-- Right CTA Button & Mobile Toggle -->
+        <!-- Right CTA Button (Desktop) & Mobile Toggle Checkbox -->
         <div class="flex items-center gap-4">
-            <a
-                href="https://wa.me/51997673300"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-text text-background font-semibold text-xs tracking-wider uppercase shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-            >
-                <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+            <div class="hidden lg:block">
+                <Button
+                    href="https://wa.me/51997673300"
+                    target="_blank"
+                    variant="primary"
+                    size="sm"
+                    className="flex justify-center items-center"
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                    ></path>
-                </svg>
-                Cotizar Ahora
-            </a>
+                    <WhatsApp class="size-4 text-white" />
+                    Cotizar Ahora
+                </Button>
+            </div>
 
-            <!-- Mobile Menu Toggle Button -->
-            <button
-                id="mobile-menu-btn"
-                aria-label="Toggle Navigation Menu"
-                class="lg:hidden p-2 rounded-xl text-text hover:text-primary hover:bg-primary/10 focus:outline-none transition-colors"
+            <!-- Mobile Menu Toggle (Checkbox + Label Animation) -->
+            <label
+                class="bar"
+                for="mobile-menu-checkbox"
+                aria-label="Abrir menú de navegación"
             >
-                <svg
-                    id="menu-icon-open"
-                    class="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                    ></path>
-                </svg>
-                <svg
-                    id="menu-icon-close"
-                    class="w-6 h-6 hidden"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    ></path>
-                </svg>
-            </button>
+                <input type="checkbox" id="mobile-menu-checkbox" />
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </label>
         </div>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
+    <!-- Mobile Navigation Drawer (Oculto por defecto con "hidden") -->
     <div
         id="mobile-menu"
-        class="hidden lg:hidden mt-3 pt-4 border-t border-secondary/20 flex flex-col gap-3 pb-2 text-text font-medium text-sm animate-fadeIn"
+        class="hidden lg:hidden mt-4 pt-4 border-t border-secondary/20 flex flex-col gap-3 pb-4 px-2 text-text font-medium text-sm animate-fadeIn"
     >
-        <a
-            href="/#hero-container"
-            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            >Inicio</a
-        >
-        <a
-            href="/#compromiso"
-            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            >Nosotros</a
-        >
-        <a
-            href="/#productos"
-            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            >Productos</a
-        >
-        <a
-            href="/#calidad"
-            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            >Calidad</a
-        >
-        <a
-            href="/#trayectoria"
-            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            >Línea de Tiempo</a
-        >
-        <a
-            href="/#contacto"
-            class="px-3 py-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            >Contacto</a
-        >
-        <a
-            href="https://wa.me/51997673300"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-2 text-center py-2.5 rounded-full bg-gradient-to-r from-secondary to-primary text-background font-semibold text-xs uppercase tracking-wider shadow-md"
-        >
-            Cotizar Vía WhatsApp
-        </a>
+        <nav class="flex flex-col gap-1">
+            {
+                navLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        class="px-4 py-2.5 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors duration-200"
+                    >
+                        {link.label}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <div class="pt-2 sm:hidden flex justify-center">
+            <Button
+                text="Cotizar Ahora"
+                href="https://wa.me/51997673300"
+                target="_blank"
+                variant="gradient"
+                size="sm"
+                className="w-full justify-center hover:animate-pulse"
+            >
+                <WhatsApp class="size-4 text-white" />
+            </Button>
+        </div>
     </div>
 </header>
 
-<script>
-    // Menú móvil del Header. Vive aquí (y no en la página) para que
-    // funcione en todas las rutas que incluyen el componente.
-    const mobileBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const iconOpen = document.getElementById("menu-icon-open");
-    const iconClose = document.getElementById("menu-icon-close");
+<!-- Estilos CSS para el icono animado de hamburguesa a cruz -->
+<style>
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        display: none;
+        visibility: hidden;
+    }
 
-    if (mobileBtn && mobileMenu && iconOpen && iconClose) {
-        mobileBtn.addEventListener("click", () => {
-            const isHidden = mobileMenu.classList.contains("hidden");
-            if (isHidden) {
+    .bar {
+        display: none;
+        position: relative;
+        cursor: pointer;
+        width: 36px;
+        height: 28px;
+    }
+
+    .bar span {
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        background: var(--color-text);
+        border-radius: 100px;
+        display: inline-block;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        left: 0;
+    }
+
+    .bar span.top {
+        top: 0;
+    }
+
+    .bar span.middle {
+        top: 12px;
+    }
+
+    .bar span.bottom {
+        bottom: 0;
+    }
+
+    /* Animaciones cuando el checkbox está activo */
+    #mobile-menu-checkbox:checked ~ span.top {
+        transform: rotate(45deg);
+        transform-origin: 10% 10%;
+        top: 2px;
+    }
+
+    #mobile-menu-checkbox:checked ~ span.bottom {
+        transform: rotate(-45deg);
+        transform-origin: 10% 90%;
+        bottom: 2px;
+    }
+
+    #mobile-menu-checkbox:checked ~ span.middle {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+</style>
+
+<script>
+    const checkbox = document.getElementById(
+        "mobile-menu-checkbox",
+    ) as HTMLInputElement;
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (checkbox && mobileMenu) {
+        // Sincronizar apertura/cierre del menú móvil con el estado del input checkbox
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
                 mobileMenu.classList.remove("hidden");
-                iconOpen.classList.add("hidden");
-                iconClose.classList.remove("hidden");
             } else {
                 mobileMenu.classList.add("hidden");
-                iconOpen.classList.remove("hidden");
-                iconClose.classList.add("hidden");
             }
         });
 
-        // Cerrar el menú al navegar a un enlace del índice.
+        // Cerrar automáticamente el menú al hacer clic en cualquier enlace interno
         mobileMenu.querySelectorAll("a").forEach((link) => {
             link.addEventListener("click", () => {
                 mobileMenu.classList.add("hidden");
-                iconOpen.classList.remove("hidden");
-                iconClose.classList.add("hidden");
+                checkbox.checked = false;
             });
         });
     }

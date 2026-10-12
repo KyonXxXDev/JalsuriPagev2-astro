@@ -1,91 +1,17 @@
 ---
-import SectionCompromiso from "@/components/home/section-compromiso/SectionCompromiso.astro";
 import Layout from "../layouts/Layout.astro";
-import VideoKey from "@/assets/video/video-optimizado.mp4";
-import ScrollIndicator from "@/components/general/ScrollIndicator.astro";
 import SectionValores from "@/components/home/section-valores/SectionValores.astro";
 import SectionProductos from "@/components/home/section-productos/SectionProductos.astro";
 import SectionCalidad from "@/components/home/section-calidad/SectionCalidad.astro";
 import SectionTrayectoria from "@/components/home/section-trayectoria/SectionTrayectoria.astro";
 import SectionDelivery from "@/components/home/section-delivery/SectionDelivery.astro";
-import ClientsSlider from "@/components/ClientsSlider.jsx"
+import SectionHeroMask from "@/components/home/section-hero-mask/SectionHeroMask.astro";
 
 ---
 
 <Layout>
-	<!-- 1. HERO SECTION CON MÁSCARA Y VIDEO (SIN OVERLAY) -->
-	<section
-		id="hero-container"
-		class="relative w-full h-screen overflow-hidden"
-	>
-		<picture
-			id="hero-key"
-			class="h-screen w-full block overflow-hidden fixed"
-		>
-			<!-- SIN OVERLAY DE OSCURECIMIENTO - Video 100% nítido y libre de capas oscuras -->
-			<div
-				class="absolute inset-0 bg-linear-to-t from-black/40 via-black/20 to-black/30 z-1 pointer-events-none"
-			>
-			</div>
-			<!-- Textos principales del Hero Corporativo -->
-			<div
-				id="hero-description"
-				class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
-			>
-				<!-- Badge Superior Corporativo -->
-				<span
-					class="px-5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-sky-300 text-sky-700 text-xs md:text-sm font-bold tracking-[0.25em] uppercase mb-4 shadow-xl shadow-sky-900/10"
-				>
-					Pureza & Calidad Certificada
-				</span>
-
-				<!-- Título Principal Limpio -->
-				<h1
-					class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight drop-shadow-[0_4px_16px_rgba(2,132,199,0.7)] my-2 font-display"
-				>
-					Agua Purificada Jalsuri
-				</h1>
-				<!-- CTAs del Hero -->
-				<div
-					class="mt-8 flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
-				>
-					<a
-						href="https://wa.me/51997673300?text=Hola,%20deseo%20hacer%20un%20pedido"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-extrabold text-sm uppercase tracking-wider shadow-xl shadow-primary/40 hover:bg-secondary hover:-translate-y-1 transition-all duration-300"
-					>
-						Pedir por WhatsApp
-					</a>
-					<a
-						href="#productos"
-						class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/90 text-primary font-bold text-sm uppercase tracking-wider backdrop-blur-md border border-white/60 hover:bg-white hover:-translate-y-1 transition-all duration-300"
-					>
-						Ver presentaciones
-					</a>
-				</div>
-			</div>
-
-			<video
-				id="hero-video"
-				src={VideoKey}
-				class="w-full h-full object-cover"
-				muted
-				playsinline
-				preload="auto"
-			>
-				Tu navegador no admite el elemento <code>video</code>.
-			</video>
-		</picture>
-		<SectionCompromiso />
-
-		<!-- Indicador Inferior de Scroll -->
-		<ScrollIndicator />
-	</section>
+	<SectionHeroMask />
 	<SectionValores />
-	<section id="clientes">
-		<ClientsSlider client:load />
-	</section>
 	<SectionProductos />
 	<SectionCalidad />
 	<SectionTrayectoria />

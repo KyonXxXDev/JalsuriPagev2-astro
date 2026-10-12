@@ -9,20 +9,14 @@ import SectionWaves from "@/components/section-waves/SectionWaves.astro";
   encima de la imagen de fondo fijo que vendrá después.
 -->
 <footer
-    class="bg-text text-background relative overflow-hidden z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.1)]"
+    class="bg-primary text-white relative overflow-hidden z-10"
 >
     <!-- CIERRE CON "SIMPLE CSS WAVES" (waves.html):
          banda con gradiente de marca y doble tira de olas animadas:
          la superior en el color de la sección anterior (enlaza con el
          contenido) y la inferior en el color del footer (enlaza con el
          cuerpo del footer). El gradiente se transparenta entre ambas. -->
-    <div
-        class="relative z-20 w-full bg-linear-to-tr from-primary to-secondary pointer-events-none"
-        aria-hidden="true"
-    >
-        <SectionWaves flip color="#f8fafc" />
-        <SectionWaves color="#0B3C73" />
-    </div>
+    <SectionWaves color="#0084FF" background="#FFFFFF" />
     <!-- CAPA SUPERIOR: Contenido y Enlaces (z-30) -->
     <div
         class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-30 pt-10 sm:pt-14"
@@ -289,9 +283,11 @@ import SectionWaves from "@/components/section-waves/SectionWaves.astro";
 
     <!-- CAPA SUPERIOR FINAL: Copyright (z-40) -->
     <!-- Se subió el z-index principal a z-40 para que quede nativamente por encima de todo -->
+    <div class="w-full h-2 shadow-[0_-10px_30px_rgba(0,0,0,0.3)] "></div>
     <div
-        class="relative z-40 max-w-full mx-auto px-4 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-white tracking-wide uppercase bg-text/80 backdrop-blur-md"
+        class="relative z-40 max-w-full mx-auto px-4 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-white tracking-wide uppercase bg-primary/50 backdrop-blur-md"
     >
+        
         <p>
             © {new Date().getFullYear()} JALSURI. Todos los derechos reservados.
         </p>
