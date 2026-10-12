@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 378 209" width="378" height="209">
+  <defs>
+    <linearGradient id="degradado" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.16" stop-color="#2FF5FE"/>
+      <stop offset="0.75" stop-color="#208EE7"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#degradado)" fill-rule="evenodd" d="M189 0L378 189L358 209L279 130L230.5 178.5L189 137L147.5 178.5L99 130L20 209L0 189Z M189 40L119 110L147.5 138.5L189 97L230.5 138.5L259 110Z"/>
+</svg>

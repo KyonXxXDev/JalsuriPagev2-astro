@@ -10,5 +10,4 @@ export { default as Leaf } from "./icons/Leaf.astro";
 export { default as Truck } from "./icons/Truck.astro";
 export { default as Zap } from "./icons/Zap.astro";
 export { default as Reload } from "./icons/Reload.astro";
-export { default as ValorCard } from "./ValorCard.astro";
 export * from "./types";

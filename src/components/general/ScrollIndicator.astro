@@ -1,12 +1,21 @@
 ---
 import ChevronDown from "../icons/ChevronDown.astro";
+
+interface Props {
+    color: string;
+}
+
+const { color = "text-sky-50" } = Astro.props;
 ---
 
-<div
+<button
+    type="button"
     id="scroll-indicator"
-    class="fixed w-full bottom-0 z-20 flex flex-col items-center justify-end pointer-events-none text-sky-50"
+    data-scroll-indicator
+    class={`fixed w-full bottom-0 z-20 flex flex-col items-center justify-end pointer-events-auto cursor-pointer focus:outline-none ${color}`}
+    aria-label="Desliza para explorar"
 >
-    <div class="flex flex-col items-center gap-1.5 px-4 py-2">
+    <div class="flex flex-col items-center gap-1.5 px-4 py-2 hover:opacity-80 transition-opacity">
         <span
             class="text-[10px] tracking-[0.3em] uppercase font-bold drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]"
         >
@@ -16,4 +25,4 @@ import ChevronDown from "../icons/ChevronDown.astro";
             class="h-auto w-10 animate-bounce drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]"
         />
     </div>
-</div>
+</button>

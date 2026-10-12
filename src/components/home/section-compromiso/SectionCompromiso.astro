@@ -1,8 +1,8 @@
 ---
-import imgKey from '@/assets/logo.webp'
-import Button from '../../general/Button';
-import { compromisoText } from './text';
-import ClientsSlider from '@/components/ClientsSlider';
+import imgKey from "@/assets/logo.webp";
+import Button from "../../general/Button";
+import { compromisoText } from "./text";
+import ClientsSlider from "@/components/home/section-hero-mask/ClientsSlider";
 ---
 
 <section
@@ -24,7 +24,7 @@ import ClientsSlider from '@/components/ClientsSlider';
             <!-- Columna Izquierda: Impacto Visual Directo -->
             <div class="lg:col-span-6 flex flex-col gap-6">
                 <div class="inline-flex items-center gap-3">
-                    <span class="w-8 h-[2px] bg-secondary"></span>
+                    <span class="w-8 h-0.5 bg-secondary"></span>
                     <span
                         class="text-secondary font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
                     >
@@ -33,18 +33,20 @@ import ClientsSlider from '@/components/ClientsSlider';
                 </div>
 
                 <h2
-                    class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text font-display leading-[1.1] tracking-tight"
+                    class="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-text font-display leading-[1.1] tracking-tight"
                 >
                     Soluciones que <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+                        class="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary"
                         >fluyen</span
                     > con tu ritmo laboral.
                 </h2>
 
                 <p
-                    class="text-text/70 text-lg sm:text-xl font-medium leading-relaxed"
+                    class="text-text/70 text-sm sm:text-xl font-medium leading-relaxed"
                 >
-                    Más que agua pura para oficinas y clínicas: <strong class="text-text">brindamos tranquilidad total</strong> a tu espacio de trabajo.
+                    Más que agua pura para oficinas y clínicas: <strong
+                        class="text-text">brindamos tranquilidad total</strong
+                    > a tu espacio de trabajo.
                 </p>
             </div>
 
@@ -53,17 +55,27 @@ import ClientsSlider from '@/components/ClientsSlider';
                 class="lg:col-span-6 lg:col-start-7 flex flex-col gap-6 text-text/80"
             >
                 <!-- Lista editorial sin tarjetas -->
-                <ul class="flex flex-col gap-5 border-l-2 border-secondary/20 pl-6">
+                <ul
+                    class="flex flex-col gap-5 border-l-2 border-secondary/20 pl-6"
+                >
                     <li class="flex flex-col gap-1">
-                        <span class="text-xs font-bold uppercase tracking-wider text-primary">01 / Pureza</span>
-                        <p class="text-text/80 text-base leading-snug">
-                            Agua 100% ozonizada y segura para acompañar cada jornada con los estándares más altos de calidad.
+                        <span
+                            class="text-xs font-bold uppercase tracking-wider text-primary"
+                            >01 / Pureza</span
+                        >
+                        <p class="text-text/80 text-xs leading-snug">
+                            Agua 100% ozonizada y segura para acompañar cada
+                            jornada con los estándares más altos de calidad.
                         </p>
                     </li>
                     <li class="flex flex-col gap-1">
-                        <span class="text-xs font-bold uppercase tracking-wider text-primary">02 / Sostenibilidad</span>
-                        <p class="text-text/80 text-base leading-snug">
-                            Bidones y dispensadores ergonómicos diseñados para ofrecer eficiencia con un menor impacto ambiental.
+                        <span
+                            class="text-xs font-bold uppercase tracking-wider text-primary"
+                            >02 / Sostenibilidad</span
+                        >
+                        <p class="text-text/80 text-xs leading-snug">
+                            Bidones y dispensadores ergonómicos diseñados para
+                            ofrecer eficiencia con un menor impacto ambiental.
                         </p>
                     </li>
                 </ul>
@@ -82,7 +94,7 @@ import ClientsSlider from '@/components/ClientsSlider';
             </div>
         </div>
     </div>
-    <section id="clientes">
-		<ClientsSlider client:load />
-	</section>
+    <section id="clientes" class="hidden lg:block">
+        <ClientsSlider client:load />
+    </section>
 </section>

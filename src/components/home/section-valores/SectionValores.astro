@@ -5,7 +5,7 @@ import ShieldCheck from "@/components/icons/ShieldCheck.astro";
 import Leaf from "@/components/icons/Leaf.astro";
 import Truck from "@/components/icons/Truck.astro";
 import Zap from "@/components/icons/Zap.astro";
-import ValorCard from "@/components/ValorCard.astro";
+import ValorCard from "./ValorCard.astro";
 
 export const valores: ValorCardProps[] = [
     {
@@ -104,19 +104,19 @@ export const valores: ValorCardProps[] = [
             class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center gap-4"
         >
             <div class="inline-flex items-center gap-3">
-                <span class="w-8 h-[2px] bg-secondary"></span>
+                <span class="w-8 h-0.5 bg-secondary"></span>
                 <span
                     class="text-secondary font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
                 >
                     Nuestros Pilares
                 </span>
-                <span class="w-8 h-[2px] bg-secondary"></span>
+                <span class="w-8 h-0.5 bg-secondary"></span>
             </div>
             <h2
                 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text tracking-tight font-display leading-[1.1]"
             >
                 Principios que garantizan cada <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+                    class="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary"
                     >gota de pureza</span
                 >
             </h2>

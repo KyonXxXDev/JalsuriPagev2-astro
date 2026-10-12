@@ -10,7 +10,7 @@
       "nombre": "Bidón 20L",
       "categoria": "Formato estándar",
       "capacidad": "20 L",
-      "modelos": ["/models/bidon-20l.glb", "/models/bidon.glb"],
+      "modelos": ["/models/bidon-20l.glb"],
       "resumen": "El clásico botellón de 20 litros, compatible con dispensadores eléctricos y de mesa. Incluye programa de comodato y reposición.",
       "chips": ["Comodato", "Dispensador incluido", "Retornable"],
       "datos": [
