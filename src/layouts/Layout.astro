@@ -2,6 +2,7 @@
 import Header from "@/components/general/Header.astro";
 import "../styles/global.css";
 import Footer from "@/components/general/Footer.astro";
+import ContactButton from "@/components/general/ContactButton";
 
 interface Props {
     title?: string;
@@ -26,6 +27,7 @@ const {
     <body>
         <Header solid />
         <slot />
+        <ContactButton />
         <Footer />
     </body>
 </html>

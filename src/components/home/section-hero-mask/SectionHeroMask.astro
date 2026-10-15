@@ -63,3 +63,141 @@ import ChevronDown from "@/components/icons/ChevronDown.astro";
     <!-- Indicador Inferior de Scroll -->
     <ScrollIndicator />
 </section>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	import Lenis from "lenis";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	// =========================================================================
+	// 1. CONFIGURACIÓN DE SCROLL SUAVE (LENIS)
+	// =========================================================================
+	const lenis = new Lenis();
+
+	// Sincroniza Lenis con el motor de ScrollTrigger de GSAP
+	lenis.on("scroll", ScrollTrigger.update);
+
+	// Integra el "ticker" (reloj interno) de GSAP con Lenis para mayor fluidez
+	gsap.ticker.add((time) => {
+		lenis.raf(time * 1000);
+	});
+	gsap.ticker.lagSmoothing(0);
+
+	// =========================================================================
+	// 2. ANIMACIÓN PRINCIPAL DEL HERO (GSAP TIMELINE)
+	// =========================================================================
+	const video = document.getElementById(
+		"hero-video",
+	) as HTMLVideoElement | null;
+
+	const initTimeline = () => {
+		if (!video) return;
+
+		video.pause(); // Pausamos el video porque GSAP controlará su reproducción
+		//console.log(video.duration);
+		// Objeto proxy para animar el tiempo del video sin modificar el DOM directamente en cada frame
+		const videoProxy = { currentTime: 0 };
+
+		// Creamos la línea de tiempo. Scrub: 0.5 hace que la animación siga el scroll
+		// del usuario con un pequeño retraso suavizado de medio segundo.
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: "#hero-container",
+				start: "top top", // Empieza cuando el hero toca el borde superior
+				end: "+=400%", // Termina después de scrollear el equivalente a 3 pantallas
+				scrub: 0.5, // Suavizado del scroll
+				pin: true, // Fija la pantalla (no bajas de página hasta que acabe)
+				anticipatePin: 1,
+			},
+		});
+
+		/* 
+           LÓGICA DE TIEMPOS (De 0.0 a 1.0):
+           Imagina que toda la animación dura 1 "segundo" virtual.
+           Le decimos a GSAP en qué momento exacto arranca cada efecto.
+        */
+		tl
+			// A. REPRODUCCIÓN DEL VIDEO (0.0 a 1.0)
+			// Cubre todo el recorrido del scroll. El video avanza a medida que bajas.
+			.to(
+				videoProxy,
+				{
+					currentTime: video.duration * 1.2 || 0,
+					ease: "none",
+					duration: 1,
+					onUpdate: () => {
+						if (video) {
+							video.currentTime = videoProxy.currentTime;
+						}
+					},
+				},
+				0,
+			) // El '0' al final significa que empieza en el segundo 0
+
+			// B. DESVANECER TEXTOS E INDICADOR (0.0 a 0.1)
+			// Apenas el usuario roza el mouse para bajar, los textos desaparecen rápido.
+			.to(
+				"#hero-description",
+				{
+					opacity: 0,
+					y: -40,
+					duration: 0.1,
+					ease: "power1.out",
+				},
+				0.1,
+			)
+			.to(
+				"#main-header",
+				{
+					background: "rgba(255, 255, 255, 0.92)",
+					borderBottom: "rgba(11, 60, 115, 0.1)",
+				},
+				"<"
+			)
+			.to(
+				"#scroll-indicator",
+				{
+					color: "#000",
+					duration: 0.1,
+				},
+				0.5,
+			)
+			
+			// D. OSCURECER EL VIDEO DE FONDO (0.5 a 0.8)
+			// A la mitad del achicamiento, el video empieza a apagarse para no distraer.
+			.to(
+				"#hero-key",
+				{
+					opacity: 0,
+					ease: "power1.inOut",
+					duration: 0.3,
+				},
+				0.5,
+			)
+
+			// E. REVELAR SECCIÓN "COMPROMISO" (0.7 a 1.0)
+			// Cuando la máscara ya casi terminó de achicarse, el nuevo texto aparece de la nada.
+			.to(
+				"#compromiso",
+				{
+					opacity: 1,
+					duration: 0.3,
+					ease: "power2.out",
+				},
+				0.7,
+			);
+
+		ScrollTrigger.refresh();
+	};
+
+	// Asegurarnos de que el video haya cargado sus metadatos (duración) antes de iniciar
+	if (video) {
+		if (video.readyState >= 1) {
+			initTimeline();
+		} else {
+			video.addEventListener("loadedmetadata", initTimeline);
+		}
+	}
+</script>

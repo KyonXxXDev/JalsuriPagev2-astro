@@ -1,0 +1,67 @@
+---
+import type { Props } from "../types";
+
+const { class: classNameProp, className, ...rest } = Astro.props;
+const iconClass = classNameProp ?? className ?? "h-10 w-auto text-white";
+---
+
+<svg
+    viewBox="0 0 640 640"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class={iconClass}
+    {...rest}
+>
+    <g filter="url(#filter_shield_shadow)">
+        <!-- Shield Base -->
+        <path
+            d="M320 80L480 140V280C480 400 410 490 320 540C230 490 160 400 160 280V140L320 80Z"
+            fill="#00E5FF"
+            stroke="#19154A"
+            stroke-width="14"
+            stroke-linejoin="round"
+        ></path>
+        <!-- Inner Glow / Highlight -->
+        <path
+            d="M320 120L440 165V280C440 375 385 450 320 490V120Z"
+            fill="#80D8FF"
+            opacity="0.5"
+        ></path>
+        <!-- Checkmark -->
+        <path
+            d="M260 300L305 345L385 245"
+            stroke="#19154A"
+            stroke-width="18"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        ></path>
+    </g>
+
+    <defs>
+        <filter
+            id="filter_shield_shadow"
+            x="0"
+            y="0"
+            width="640"
+            height="640"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+        >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+            ></feColorMatrix>
+            <feOffset dx="22" dy="45"></feOffset>
+            <feComposite in2="hardAlpha" operator="out"></feComposite>
+            <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0.098 0 0 0 0 0.082 0 0 0 0 0.290 0 0 0 1 0"
+            ></feColorMatrix>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend>
+        </filter>
+    </defs>
+</svg>

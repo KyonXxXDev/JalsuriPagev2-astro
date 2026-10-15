@@ -1,0 +1,73 @@
+---
+import type { Props } from "../types";
+
+const { class: classNameProp, className, ...rest } = Astro.props;
+const iconClass = classNameProp ?? className ?? "h-10 w-auto text-white";
+---
+
+<svg
+    viewBox="0 0 640 640"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class={iconClass}
+    {...rest}
+>
+    <g filter="url(#filter_leaf_shadow)">
+        <!-- Leaf Shape -->
+        <path
+            d="M200 440C160 320 220 180 440 140C440 140 480 340 320 440C260 480 220 460 200 440Z"
+            fill="#00E676"
+            stroke="#19154A"
+            stroke-width="14"
+            stroke-linejoin="round"
+        ></path>
+        <!-- Leaf Vein / Center Detail -->
+        <path
+            d="M230 420Q320 320 410 170"
+            stroke="#19154A"
+            stroke-width="12"
+            stroke-linecap="round"
+        ></path>
+        <path
+            d="M310 330Q350 350 370 380"
+            stroke="#19154A"
+            stroke-width="10"
+            stroke-linecap="round"
+        ></path>
+        <!-- Water Drop Accent -->
+        <path
+            d="M170 260C170 230 200 180 200 180C200 180 230 230 230 260C230 278 216 290 200 290C184 290 170 278 170 260Z"
+            fill="#00B0FF"
+            stroke="#19154A"
+            stroke-width="10"
+        ></path>
+    </g>
+
+    <defs>
+        <filter
+            id="filter_leaf_shadow"
+            x="0"
+            y="0"
+            width="640"
+            height="640"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+        >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+            ></feColorMatrix>
+            <feOffset dx="22" dy="45"></feOffset>
+            <feComposite in2="hardAlpha" operator="out"></feComposite>
+            <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0.098 0 0 0 0 0.082 0 0 0 0 0.290 0 0 0 1 0"
+            ></feColorMatrix>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend>
+        </filter>
+    </defs>
+</svg>

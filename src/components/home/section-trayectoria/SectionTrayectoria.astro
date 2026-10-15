@@ -109,19 +109,13 @@ const milestones: Milestone[] = [
     },
 ];
 
-const filters = [
-    { id: "all", label: "Todos los Hitos", icon: "" },
-    { id: "planta", label: "Infraestructura & LPH", icon: icoIndustry },
-    { id: "cert", label: "Calidad & DIGESA", icon: icoAward },
-    { id: "maquila", label: "Maquila & rPET", icon: icoLeaf },
-];
 ---
 
 <section
     id="trayectoria"
-    class="relative z-30 py-24 overflow-hidden"
+    class="relative z-30 overflow-hidden bg-gradient-to-b from-white via-sky-50/25 to-white"
 >
-    <!-- Luces ambientales -->
+    <!-- Luces ambientales de fondo -->
     <div
         class="absolute top-1/4 -left-32 w-96 h-96 bg-sky-200/40 rounded-full blur-3xl pointer-events-none"
     >
@@ -131,96 +125,126 @@ const filters = [
     >
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
-        <!-- Cabecera de sección -->
-        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4 flex flex-col items-center">
-            <div class="inline-flex items-center gap-3">
-                <span class="w-8 h-0.5 bg-secondary"></span>
-                <span
-                    class="text-secondary font-bold text-xs md:text-sm tracking-[0.2em] uppercase"
+    <!-- Contenedor anclado (Pinned Wrapper) -->
+    <div
+        id="trayectoria-wrapper"
+        class="relative w-full h-screen overflow-hidden flex flex-col justify-between py-6 sm:py-8"
+    >
+        <!-- Header superior fijo dentro de la sección anclada -->
+        <header
+            class="relative z-20 px-6 sm:px-12 max-w-7xl mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-4 shrink-0"
+        >
+            <div class="space-y-1">
+                <div class="inline-flex items-center gap-2.5">
+                    <span class="w-6 h-0.5 bg-secondary"></span>
+                    <span
+                        class="text-secondary font-bold text-xs tracking-[0.2em] uppercase"
+                    >
+                        Evolución Estratégica
+                    </span>
+                    <span class="w-6 h-0.5 bg-secondary"></span>
+                </div>
+                <h2
+                    class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text tracking-tight font-display leading-tight"
                 >
-                    Evolución Estratégica
-                </span>
-                <span class="w-8 h-0.5 bg-secondary"></span>
+                    Línea de Tiempo <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+                        >Profesional Corporativa</span
+                    >
+                </h2>
+                <p class="text-text/70 text-xs sm:text-sm max-w-2xl">
+                    Más de una década de escalamiento en LPH, certificaciones sanitarias DIGESA/HACCP, resina rPET y maquila corporativa.
+                </p>
             </div>
-            <h2
-                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text tracking-tight font-display leading-[1.1]"
-            >
-                Línea de Tiempo <span
-                    class="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary"
-                    >Profesional Corporativa</span
+
+            <!-- Navegación interactiva por años y control de hitos -->
+            <div class="flex items-center gap-2.5 sm:gap-3 shrink-0 flex-wrap">
+                <div
+                    class="flex items-center p-1 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/80 shadow-xs"
                 >
-            </h2>
-            <p class="text-text/70 text-lg sm:text-xl font-medium leading-relaxed">
-                Trayectoria de Jalsuri: escalamiento de capacidad instalada en
-                LPH, certificaciones microbiológicas DIGESA, adopción de rPET
-                sustentable y liderazgo en maquetación 3D.
-            </p>
+                    {
+                        milestones.map((m, idx) => (
+                            <button
+                                type="button"
+                                class:list={[
+                                    "timeline-step-btn px-2.5 sm:px-3 py-1 text-xs font-bold rounded-xl transition-all duration-200 cursor-pointer",
+                                    idx === 0
+                                        ? "bg-primary text-white shadow-sm shadow-primary/30"
+                                        : "text-slate-500 hover:text-primary hover:bg-slate-50",
+                                ]}
+                                data-step-index={idx}
+                                aria-label={`Ir al hito ${m.year}`}
+                            >
+                                {m.year.split(" ")[0]}
+                            </button>
+                        ))
+                    }
+                </div>
 
-            <!-- Filtros por categoría de hito -->
-            <div class="flex flex-wrap justify-center gap-2 pt-2">
-                {
-                    filters.map((f) => (
-                        <button
-                            type="button"
-                            data-tl-filter={f.id}
-                            data-active={f.id === "all" ? "true" : "false"}
-                            aria-pressed={f.id === "all" ? "true" : "false"}
-                            class="tl-filter inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-semibold bg-white text-text border border-secondary/20 hover:border-primary transition-all shadow-sm data-[active=true]:bg-primary data-[active=true]:text-white data-[active=true]:border-primary data-[active=true]:font-extrabold data-[active=true]:shadow-md data-[active=true]:shadow-primary/25 cursor-pointer"
-                        >
-                            {f.icon && (
-                                <span
-                                    class="w-3.5 h-3.5 inline-block"
-                                    set:html={f.icon}
-                                />
-                            )}
-                            {f.label}
-                        </button>
-                    ))
-                }
+                <div
+                    class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary border border-primary/20 text-xs font-bold"
+                >
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    <span>Desliza para explorar</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-3.5 h-3.5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </div>
             </div>
-        </div>
+        </header>
 
-        <!-- Estructura vertical de la línea de tiempo -->
-        <div class="relative py-4">
-            <!-- Columna vertebral -->
+        <!-- Track horizontal de paneles -->
+        <div class="relative w-full flex-1 flex items-center overflow-hidden my-auto">
+            <!-- Línea conectora horizontal central -->
             <div
-                class="absolute top-0 bottom-0 left-6 lg:left-1/2 -ml-0.5 w-1 bg-linear-to-b from-secondary via-primary to-text rounded-full opacity-40"
+                class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gradient-to-r from-secondary/30 via-primary/40 to-secondary/30 pointer-events-none z-0"
             >
             </div>
 
-            <div class="space-y-12">
+            <!-- Contenedor horizontal que se traslada con GSAP -->
+            <div
+                id="panels-container"
+                class="flex flex-nowrap items-center h-full will-change-transform z-10"
+            >
                 {
-                    milestones.map((m, i) => {
-                        const reversed = i % 2 === 1;
-                        return (
+                    milestones.map((m, idx) => (
+                        <article
+                            id={`panel-${idx + 1}`}
+                            class="panel w-screen h-full shrink-0 flex items-center justify-center px-4 sm:px-8 lg:px-12 py-2 sm:py-4 select-none"
+                            data-index={idx}
+                        >
                             <div
                                 class:list={[
-                                    "tl-item relative flex flex-col items-center justify-between w-full group",
-                                    reversed
-                                        ? "lg:flex-row-reverse"
-                                        : "lg:flex-row",
+                                    "relative w-full max-w-4xl mx-auto rounded-3xl p-6 sm:p-8 lg:p-10 transition-all duration-300 overflow-hidden backdrop-blur-xl border",
+                                    m.highlight
+                                        ? "bg-white/95 border-primary/40 shadow-2xl shadow-primary/15 ring-2 ring-primary/20"
+                                        : "bg-white/90 border-slate-200/90 shadow-xl shadow-slate-200/60",
                                 ]}
-                                data-category={m.category}
                             >
-                                <!-- Tarjeta del hito -->
-                                <div class="order-1 pl-14 lg:pl-0 lg:w-[46%] w-full">
-                                    <article
-                                        class:list={[
-                                            "p-6 rounded-3xl border transition-all duration-300 space-y-3",
-                                            m.highlight
-                                                ? "bg-white border-secondary shadow-xl shadow-primary/10"
-                                                : "bg-white border-slate-200/80 shadow-sm group-hover:border-secondary group-hover:shadow-lg group-hover:shadow-primary/10",
-                                        ]}
-                                    >
-                                        <div
-                                            class="flex items-center justify-between gap-3"
-                                        >
+                                <!-- Marca de agua gigante del año -->
+                                <span
+                                    class="absolute -bottom-8 -right-4 font-display font-black text-7xl sm:text-9xl lg:text-[180px] leading-none select-none pointer-events-none text-slate-100/90 -z-0 tracking-tighter"
+                                    aria-hidden="true"
+                                >
+                                    {m.year.split(" ")[0]}
+                                </span>
+
+                                <div class="relative z-10 space-y-4 sm:space-y-6">
+                                    <!-- Fila superior: Badges y número de hito -->
+                                    <div class="flex items-center justify-between gap-3 flex-wrap">
+                                        <div class="flex items-center gap-2.5 flex-wrap">
                                             <span
                                                 class:list={[
-                                                    "text-xs font-bold text-white px-3 py-1 rounded-lg inline-flex items-center gap-1.5",
+                                                    "px-3.5 py-1.5 rounded-xl font-black text-xs sm:text-sm text-white inline-flex items-center gap-2 shadow-xs",
                                                     m.highlight
-                                                        ? "bg-linear-to-r from-primary to-text"
+                                                        ? "bg-gradient-to-r from-primary to-secondary"
                                                         : "bg-text",
                                                 ]}
                                             >
@@ -230,137 +254,294 @@ const filters = [
                                                 />
                                                 {m.year}
                                             </span>
+
                                             <span
                                                 class:list={[
-                                                    "text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-md border",
+                                                    "text-[10px] sm:text-xs uppercase tracking-wider font-extrabold px-3 py-1 rounded-xl border",
                                                     m.highlight
-                                                        ? "text-text bg-secondary/10 border-secondary/30"
-                                                        : "text-slate-500 bg-slate-50 border-slate-100",
+                                                        ? "text-primary bg-primary/10 border-primary/30"
+                                                        : "text-slate-600 bg-slate-50 border-slate-200/80",
                                                 ]}
                                             >
                                                 {m.tag}
                                             </span>
                                         </div>
 
-                                        <h3
-                                            class="text-lg font-bold text-text group-hover:text-primary transition-colors"
+                                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-xs font-bold">
+                                            <span>Hito</span>
+                                            <span class="text-primary font-black">0{idx + 1}</span>
+                                            <span>/</span>
+                                            <span>0{milestones.length}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fila central: Icono + Título + Descripción -->
+                                    <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 pt-2">
+                                        <div
+                                            class:list={[
+                                                "w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-105",
+                                                m.highlight
+                                                    ? "bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/30"
+                                                    : "bg-sky-50 text-primary border border-sky-100 shadow-sm",
+                                            ]}
                                         >
-                                            {m.title}
-                                        </h3>
+                                            <span
+                                                class="w-7 h-7 sm:w-8 sm:h-8 block"
+                                                set:html={m.icon}
+                                            />
+                                        </div>
 
-                                        <p class="text-sm text-text/70 leading-relaxed">
-                                            {m.desc}
-                                        </p>
+                                        <div class="space-y-2 flex-1">
+                                            <h3
+                                                class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-text font-display leading-tight tracking-tight"
+                                            >
+                                                {m.title}
+                                            </h3>
+                                            <p class="text-text/75 text-sm sm:text-base leading-relaxed max-w-3xl">
+                                                {m.desc}
+                                            </p>
+                                        </div>
+                                    </div>
 
-                                        <dl
-                                            class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 text-[11px]"
-                                        >
-                                            {m.stats.map((s) => (
-                                                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                                                    <dt class="text-slate-500 block text-[9px] uppercase font-bold tracking-wider">
-                                                        {s.label}
-                                                    </dt>
-                                                    <dd class="text-text font-extrabold">
-                                                        {s.value}
-                                                    </dd>
-                                                </div>
-                                            ))}
-                                        </dl>
-                                    </article>
-                                </div>
-
-                                <!-- Nodo circular sobre la columna vertebral -->
-                                <div
-                                    class:list={[
-                                        "absolute left-6 lg:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center w-12 h-12 rounded-full transition-transform duration-300 group-hover:scale-110",
-                                        m.highlight
-                                            ? "bg-primary text-white border-2 border-transparent shadow-lg shadow-primary/30"
-                                            : "bg-white text-primary border-2 border-primary shadow-md",
-                                    ]}
-                                >
-                                    <span
-                                        class="w-5 h-5 block"
-                                        set:html={m.icon}
-                                    />
+                                    <!-- Estadísticas / Métricas clave -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-slate-100">
+                                        {m.stats.map((s) => (
+                                            <div class="bg-slate-50/90 p-3.5 sm:p-4 rounded-2xl border border-slate-100/90 flex flex-col justify-center">
+                                                <span class="text-slate-400 block text-[10px] sm:text-xs uppercase font-bold tracking-wider mb-1">
+                                                    {s.label}
+                                                </span>
+                                                <span class="text-text font-black text-sm sm:text-base">
+                                                    {s.value}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        );
-                    })
+                        </article>
+                    ))
                 }
             </div>
         </div>
+
+        <!-- Footer inferior con barra de progreso y navegación -->
+        <footer
+            class="relative z-20 px-6 sm:px-12 max-w-7xl mx-auto w-full flex items-center justify-between gap-4 text-xs font-semibold text-slate-500 shrink-0"
+        >
+            <div class="flex items-center gap-2">
+                <span class="text-slate-400">Inicio:</span>
+                <span class="font-bold text-text">2012</span>
+            </div>
+
+            <!-- Barra de progreso continua -->
+            <div class="flex-1 max-w-md mx-2 sm:mx-6 flex flex-col items-center gap-1.5">
+                <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden p-0.5">
+                    <div
+                        id="timeline-progress-bar"
+                        class="h-full bg-gradient-to-r from-primary to-secondary w-0 rounded-full transition-all duration-75"
+                    >
+                    </div>
+                </div>
+                <div class="flex items-center justify-between w-full text-[10px] text-slate-400 font-bold">
+                    <span id="timeline-step-counter">01 / 0{milestones.length}</span>
+                    <span>Desplazamiento horizontal</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <span class="text-slate-400">Meta:</span>
+                <span class="font-bold text-primary">2026</span>
+            </div>
+        </footer>
     </div>
 </section>
 
 <script>
-    const root = document.getElementById("trayectoria");
+    
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    if (root) {
-        const buttons = Array.from(
-            root.querySelectorAll<HTMLButtonElement>("[data-tl-filter]"),
-        );
-        const items = Array.from(root.querySelectorAll<HTMLElement>(".tl-item"));
+gsap.registerPlugin(ScrollTrigger);
 
-        // --- Filtros por categoría ---
-        buttons.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const category = btn.dataset.tlFilter ?? "all";
+let cleanup: (() => void) | undefined;
 
-                buttons.forEach((b) => {
-                    const active = b === btn;
-                    b.dataset.active = String(active);
-                    b.setAttribute("aria-pressed", String(active));
-                });
+function initTimelinePanels() {
+    cleanup?.();
+    cleanup = undefined;
 
-                items.forEach((item) => {
-                    const match =
-                        category === "all" ||
-                        item.dataset.category === category;
-                    item.style.display = match ? "" : "none";
-                });
-            });
+    const section = document.querySelector<HTMLElement>("#trayectoria");
+    const wrapper = document.querySelector<HTMLElement>(
+        "#trayectoria-wrapper",
+    );
+    const container = document.querySelector<HTMLElement>(
+        "#panels-container",
+    );
+    const panels = gsap.utils.toArray<HTMLElement>(
+        "#panels-container .panel",
+    );
+    const buttons = gsap.utils.toArray<HTMLButtonElement>(
+        ".timeline-step-btn",
+    );
+
+    if (!section || !wrapper || !container || panels.length < 2) return;
+
+    const totalPanels = panels.length;
+    const ctx = gsap.context(() => {
+        let activeIndex = -1;
+
+        // Medir el desplazamiento horizontal real.
+        const getDistance = () =>
+            Math.max(0, container.scrollWidth - wrapper.clientWidth);
+
+        // Mover el contenedor completo, no cada panel individual.
+        const horizontalTween = gsap.to(container, {
+            x: () => -getDistance(),
+            ease: "none",
+            scrollTrigger: {
+                id: "trayectoria-horizontal",
+                trigger: wrapper,
+                pin: wrapper,
+                start: "top top",
+                end: () => `+=${getDistance()}`,
+                scrub: 0.6,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+
+                snap: {
+                    snapTo: (progress) => {
+                        const steps = totalPanels - 1;
+                        return Math.round(progress * steps) / steps;
+                    },
+                    duration: { min: 0.15, max: 0.35 },
+                    ease: "power1.inOut",
+                },
+
+                onUpdate: (self) => {
+                    const progress = self.progress;
+
+                    const bar = document.querySelector<HTMLElement>(
+                        "#timeline-progress-bar",
+                    );
+
+                    if (bar) {
+                        bar.style.width = `${progress * 100}%`;
+                    }
+
+                    const index = Math.min(
+                        totalPanels - 1,
+                        Math.round(progress * (totalPanels - 1)),
+                    );
+
+                    if (index === activeIndex) return;
+                    activeIndex = index;
+
+                    buttons.forEach((button, i) => {
+                        const isActive = i === index;
+
+                        button.classList.toggle("bg-primary", isActive);
+                        button.classList.toggle("text-white", isActive);
+                        button.classList.toggle(
+                            "shadow-sm",
+                            isActive,
+                        );
+                        button.classList.toggle(
+                            "shadow-primary/30",
+                            isActive,
+                        );
+
+                        button.classList.toggle(
+                            "text-slate-500",
+                            !isActive,
+                        );
+                        button.setAttribute(
+                            "aria-current",
+                            isActive ? "step" : "false",
+                        );
+                    });
+
+                    const counter = document.querySelector<HTMLElement>(
+                        "#timeline-step-counter",
+                    );
+
+                    if (counter) {
+                        counter.textContent =
+                            `${String(index + 1).padStart(2, "0")} / ` +
+                            `${String(totalPanels).padStart(2, "0")}`;
+                    }
+                },
+            },
         });
 
-        // --- Revelado al hacer scroll (solo si hay soporte) ---
-        if ("IntersectionObserver" in window) {
-            items.forEach((el) => el.classList.add("tl-anim"));
+        // Navegación directa a cada hito.
+        buttons.forEach((button) => {
+            const handleClick = () => {
+                const index = Number(button.dataset.stepIndex ?? 0);
+                const trigger = horizontalTween.scrollTrigger;
 
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("tl-in");
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
-            );
+                if (!trigger) return;
 
-            items.forEach((el) => observer.observe(el));
-        }
+                const progress = index / (totalPanels - 1);
+                const target = trigger.start +
+                    (trigger.end - trigger.start) * progress;
+
+                // Compatible con Lenis cuando está integrado con GSAP.
+                gsap.to(window, {
+                    scrollTo: { y: target, autoKill: true },
+                    duration: 0.8,
+                    ease: "power2.out",
+                });
+            };
+
+            button.addEventListener("click", handleClick);
+
+            listeners.push(() => {
+                button.removeEventListener("click", handleClick);
+            });
+        });
+    }, section);
+
+    function refresh() {
+        ScrollTrigger.refresh();
     }
+
+    const listeners: Array<() => void> = [];
+
+    // Esperar a que el navegador calcule el layout.
+    requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+    });
+
+    window.addEventListener("resize", refresh);
+
+    cleanup = () => {
+        listeners.forEach((remove) => remove());
+        window.removeEventListener("resize", refresh);
+        ctx.revert();
+    };
+}
+
+document.addEventListener("astro:page-load", initTimelinePanels);
+document.addEventListener("astro:before-swap", () => {
+    cleanup?.();
+    cleanup = undefined;
+});
+
+// Primera carga y navegación de Astro.
+if (document.readyState !== "loading") {
+    initTimelinePanels();
+} else {
+    document.addEventListener(
+        "DOMContentLoaded",
+        initTimelinePanels,
+        { once: true },
+    );
+}
+
 </script>
 
 <style>
-    .tl-anim {
-        opacity: 0;
-        transform: translateY(28px);
-        transition:
-            opacity 0.6s ease,
-            transform 0.6s ease;
-    }
-
-    .tl-anim.tl-in {
-        opacity: 1;
-        transform: none;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .tl-anim {
-            opacity: 1;
-            transform: none;
-            transition: none;
-        }
+    #panels-container {
+        backface-visibility: hidden;
+        transform: translateZ(0);
     }
 </style>

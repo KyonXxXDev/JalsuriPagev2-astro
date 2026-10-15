@@ -155,7 +155,7 @@ const solicitar = (nombre: string) =>
 			>
 				<div class="outer w-full h-full overflow-hidden">
 					<div
-						class="inner w-full h-full overflow-hidden pt-20 sm:pt-24 pb-8 px-4 sm:px-8 flex flex-col justify-between pointer-events-none"
+						class="inner w-full h-full overflow-hidden pt-24 sm:pt-28 pb-8 px-4 sm:px-8 flex flex-col justify-between pointer-events-none"
 						data-specs-wrap
 					>
 						<!-- Badge superior de Especificaciones -->
@@ -296,11 +296,9 @@ const solicitar = (nombre: string) =>
 				</div>
 			</section>
 		</div>
-	</main>
-</Layout>
 
-<!--
-		<section class="py-16 sm:py-24">
+		<!-- ======================= SECCIÓN DESCARGA OFICIAL PDF ======================= -->
+		<section class="relative z-30 py-16 sm:py-24 bg-gradient-to-b from-slate-50 via-white to-slate-100">
 			<div class="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12">
 				<div
 					class="relative overflow-hidden rounded-3xl bg-text text-white p-8 sm:p-14 text-center shadow-2xl shadow-primary/20"
@@ -316,14 +314,14 @@ const solicitar = (nombre: string) =>
 					>
 					</div>
 
-					<div class="relative">
+					<div class="relative z-10">
 						<span
 							class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold tracking-[0.2em] uppercase text-white/90"
 						>
 							Documento Oficial
 						</span>
 						<h2
-							class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight"
+							class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-white"
 						>
 							Llévate la ficha técnica completa
 						</h2>
@@ -378,19 +376,17 @@ const solicitar = (nombre: string) =>
 				</div>
 			</div>
 		</section>
--->
+	</main>
+</Layout>
 
 <script>
 	import { gsap } from "gsap";
-	import { Observer } from "gsap/all";
 
 	const reduceMotion = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
 	).matches;
 
 	if (!reduceMotion) {
-		gsap.registerPlugin(Observer);
-
 		const escenario = document.getElementById("escenario-bidon");
 		const viewer =
 			escenario?.querySelector<HTMLElement>("[data-viewer-3d]");
@@ -427,13 +423,13 @@ const solicitar = (nombre: string) =>
 			const dFactor = fromTop ? -1 : 1;
 
 			const tl = gsap.timeline({
-				defaults: { duration: 1.15, ease: "power2.inOut" },
+				defaults: { duration: 0.95, ease: "power2.inOut" },
 				onComplete: () => {
 					animating = false;
 				},
 			});
 
-			// 1. Salida de la sección actual (si existe)
+			// 1. Salida de la sección actual
 			if (currentIndex >= 0 && currentIndex !== index) {
 				gsap.set(sections[currentIndex], { zIndex: 0 });
 				tl.to(
@@ -447,7 +443,7 @@ const solicitar = (nombre: string) =>
 				);
 			}
 
-			// 2. Entrada de la sección destino con efecto counter-slide
+			// 2. Entrada de la sección destino con counter-slide
 			gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
 			tl.fromTo(
 				outerWrappers[index],
@@ -461,12 +457,12 @@ const solicitar = (nombre: string) =>
 				0,
 			);
 
-			// 3. Sincronización del modelo 3D (0 = Sección 1, 1 = Sección 2)
+			// 3. Sincronización del modelo 3D (0 = Sección 0, 1 = Sección 1)
 			tl.to(
 				sync3D,
 				{
 					progreso: index,
-					duration: 1.15,
+					duration: 0.95,
 					ease: "power2.inOut",
 					onUpdate: () => {
 						const fn = (viewer as any)?.actualizarProgreso3D;
@@ -478,28 +474,28 @@ const solicitar = (nombre: string) =>
 				0,
 			);
 
-			// 4. Animaciones de entrada específicas para los elementos de cada sección
+			// 4. Micro-animaciones de contenido
 			if (index === 0) {
 				tl.fromTo(
 					tituloWrap,
-					{ opacity: 0, y: -25 },
-					{ opacity: 1, y: 0, duration: 0.5, ease: "power1.out" },
-					0.35,
+					{ opacity: 0, y: -20 },
+					{ opacity: 1, y: 0, duration: 0.45, ease: "power1.out" },
+					0.3,
 				);
 				if (chipsWrap) {
 					tl.fromTo(
 						chipsWrap,
 						{ opacity: 0, y: 15 },
-						{ opacity: 1, y: 0, duration: 0.4, ease: "power1.out" },
-						0.45,
+						{ opacity: 1, y: 0, duration: 0.35, ease: "power1.out" },
+						0.4,
 					);
 				}
 				if (scrollInd) {
 					tl.fromTo(
 						scrollInd,
 						{ opacity: 0, y: 15 },
-						{ opacity: 1, y: 0, duration: 0.4, ease: "power1.out" },
-						0.5,
+						{ opacity: 1, y: 0, duration: 0.35, ease: "power1.out" },
+						0.45,
 					);
 				}
 			} else if (index === 1) {
@@ -507,32 +503,32 @@ const solicitar = (nombre: string) =>
 					specsHeader,
 					{ opacity: 0, y: 15 },
 					{ opacity: 1, y: 0, duration: 0.35, ease: "power1.out" },
-					0.35,
+					0.3,
 				);
 
 				if (isDesktop) {
 					tl.fromTo(
 						izq,
-						{ opacity: 0, x: -35 },
+						{ opacity: 0, x: -30 },
 						{
 							opacity: 1,
 							x: 0,
-							duration: 0.4,
-							stagger: 0.05,
+							duration: 0.35,
+							stagger: 0.04,
+							ease: "power1.out",
+						},
+						0.35,
+					).fromTo(
+						der,
+						{ opacity: 0, x: 30 },
+						{
+							opacity: 1,
+							x: 0,
+							duration: 0.35,
+							stagger: 0.04,
 							ease: "power1.out",
 						},
 						0.4,
-					).fromTo(
-						der,
-						{ opacity: 0, x: 35 },
-						{
-							opacity: 1,
-							x: 0,
-							duration: 0.4,
-							stagger: 0.05,
-							ease: "power1.out",
-						},
-						0.45,
 					);
 				} else {
 					tl.fromTo(
@@ -541,31 +537,31 @@ const solicitar = (nombre: string) =>
 						{
 							opacity: 1,
 							y: 0,
-							duration: 0.35,
-							stagger: 0.04,
+							duration: 0.3,
+							stagger: 0.03,
 							ease: "power1.out",
 						},
-						0.4,
+						0.35,
 					).fromTo(
 						ola1,
 						{ opacity: 0, y: 20 },
 						{
 							opacity: 1,
 							y: 0,
-							duration: 0.35,
-							stagger: 0.04,
+							duration: 0.3,
+							stagger: 0.03,
 							ease: "power1.out",
 						},
-						0.5,
+						0.45,
 					);
 				}
 
 				if (cta) {
 					tl.fromTo(
 						cta,
-						{ opacity: 0, y: 20 },
+						{ opacity: 0, y: 15 },
 						{ opacity: 1, y: 0, duration: 0.35, ease: "power1.out" },
-						0.6,
+						0.55,
 					);
 				}
 			}
@@ -581,28 +577,82 @@ const solicitar = (nombre: string) =>
 		// Inicializar directamente en la Sección 0 (Presentación)
 		gotoSection(0, 1);
 
-		// Observer para scroll con rueda de ratón y gestos táctiles / swipe
-		Observer.create({
-			target: window,
-			type: "wheel,touch,pointer",
-			wheelSpeed: -1,
-			onDown: () => !animating && gotoSection(currentIndex - 1, -1),
-			onUp: () => !animating && gotoSection(currentIndex + 1, 1),
-			tolerance: 15,
-			preventDefault: true,
-		});
+		// Control de navegación natural por rueda del ratón
+		window.addEventListener(
+			"wheel",
+			(e) => {
+				if (animating) {
+					e.preventDefault();
+					return;
+				}
 
-		// Navegación por teclado (Flechas Arriba/Abajo, Espacio, PageUp/PageDown)
+				// En Sección 0: si gira hacia abajo, pasa a Sección 1
+				if (currentIndex === 0 && e.deltaY > 10) {
+					e.preventDefault();
+					gotoSection(1, 1);
+					return;
+				}
+
+				// En Sección 1 al tope superior: si gira hacia arriba, vuelve a Sección 0
+				if (currentIndex === 1 && window.scrollY <= 5 && e.deltaY < -10) {
+					e.preventDefault();
+					gotoSection(0, -1);
+					return;
+				}
+
+				// En cualquier otro caso (por ejemplo, en Sección 1 girando hacia abajo),
+				// dejamos fluir el scroll nativo libremente para ver el PDF y Footer.
+			},
+			{ passive: false },
+		);
+
+		// Control táctil para móviles (Swipe Up / Down)
+		let touchStartY = 0;
+		window.addEventListener(
+			"touchstart",
+			(e) => {
+				touchStartY = e.touches[0].clientY;
+			},
+			{ passive: true },
+		);
+
+		window.addEventListener(
+			"touchend",
+			(e) => {
+				if (animating) return;
+				const touchEndY = e.changedTouches[0].clientY;
+				const deltaY = touchStartY - touchEndY; // positivo = deslizar hacia arriba (bajar)
+
+				if (currentIndex === 0 && deltaY > 40) {
+					gotoSection(1, 1);
+				} else if (
+					currentIndex === 1 &&
+					window.scrollY <= 5 &&
+					deltaY < -40
+				) {
+					gotoSection(0, -1);
+				}
+			},
+			{ passive: true },
+		);
+
+		// Navegación por teclado
 		window.addEventListener("keydown", (e) => {
 			if (animating) return;
 			if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
-				gotoSection(currentIndex + 1, 1);
+				if (currentIndex === 0) {
+					e.preventDefault();
+					gotoSection(1, 1);
+				}
 			} else if (e.key === "ArrowUp" || e.key === "PageUp") {
-				gotoSection(currentIndex - 1, -1);
+				if (currentIndex === 1 && window.scrollY <= 5) {
+					e.preventDefault();
+					gotoSection(0, -1);
+				}
 			}
 		});
 
-		// Navegación interactiva al hacer clic
+		// Navegación por clicks en elementos interactivos
 		scrollInd?.addEventListener("click", (e) => {
 			e.stopPropagation();
 			if (!animating && currentIndex === 0) {
@@ -613,6 +663,7 @@ const solicitar = (nombre: string) =>
 		specsHeader?.addEventListener("click", (e) => {
 			e.stopPropagation();
 			if (!animating && currentIndex === 1) {
+				window.scrollTo({ top: 0, behavior: "smooth" });
 				gotoSection(0, -1);
 			}
 		});

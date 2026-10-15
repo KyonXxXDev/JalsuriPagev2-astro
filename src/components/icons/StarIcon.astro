@@ -1,0 +1,76 @@
+---
+import type { Props } from "../types";
+
+const { class: classNameProp, className, ...rest } = Astro.props;
+const iconClass = classNameProp ?? className ?? "h-10 w-auto text-white";
+---
+
+<svg
+    viewBox="0 0 640 640"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class={iconClass}
+    {...rest}
+>
+    <g filter="url(#filter_star_shadow)">
+        <!-- Relleno amarillo de la estrella -->
+        <path
+            d="M320 65L392.8 212.4L555.5 236L437.8 350.7L465.5 512.8L320 436.2L174.5 512.8L202.2 350.7L84.5 236L247.2 212.4L320 65Z"
+            fill="#FFD600"
+        ></path>
+        <!-- Borde exterior violeta oscuro -->
+        <path
+            d="M320 72L390.6 215L548.5 238L434.3 349.3L461.2 506.6L320 432.3L178.8 506.6L205.7 349.3L91.5 238L249.4 215L320 72Z"
+            stroke="#200B3B"
+            stroke-width="14"
+            stroke-linejoin="round"
+        ></path>
+    </g>
+    <!-- Detalles internos decorativos (espiral y destellos) -->
+    <path
+        d="M320 280C330 280 338 288 338 298C338 312 324 322 310 320C290 317 282 295 290 278C300 255 332 248 352 262"
+        stroke="#200B3B"
+        stroke-width="10"
+        stroke-linecap="round"
+    ></path>
+    <path
+        d="M210 270Q230 260 250 268"
+        stroke="#200B3B"
+        stroke-width="8"
+        stroke-linecap="round"
+    ></path>
+    <path
+        d="M230 420Q250 405 275 412"
+        stroke="#200B3B"
+        stroke-width="8"
+        stroke-linecap="round"
+    ></path>
+
+    <defs>
+        <filter
+            id="filter_star_shadow"
+            x="0"
+            y="0"
+            width="640"
+            height="640"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+        >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+            ></feColorMatrix>
+            <feOffset dx="22" dy="45"></feOffset>
+            <feComposite in2="hardAlpha" operator="out"></feComposite>
+            <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0.125 0 0 0 0 0.043 0 0 0 0 0.231 0 0 0 1 0"
+            ></feColorMatrix>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend>
+        </filter>
+    </defs>
+</svg>

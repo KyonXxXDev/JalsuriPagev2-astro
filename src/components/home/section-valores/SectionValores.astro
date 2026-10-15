@@ -1,11 +1,10 @@
 ---
 import type { ValorCardProps } from "@/components/types";
-
-import ShieldCheck from "@/components/icons/ShieldCheck.astro";
-import Leaf from "@/components/icons/Leaf.astro";
-import Truck from "@/components/icons/Truck.astro";
-import Zap from "@/components/icons/Zap.astro";
 import ValorCard from "./ValorCard.astro";
+import LeafRecycleIcon from "@/components/icons/LeafRecycleIcon.astro";
+import DeliveryTruckIcon from "@/components/icons/DeliveryTruckIcon.astro";
+import OzoneAtomIcon from "@/components/icons/OzoneAtomIcon.astro";
+import ShieldCheckIcon from "@/components/icons/ShieldCheckIcon.astro";
 
 export const valores: ValorCardProps[] = [
     {
@@ -14,7 +13,7 @@ export const valores: ValorCardProps[] = [
         description:
             "Sometemos cada lote a rigurosos procesos de microfiltración y ozonización garantizando la máxima nitidez y seguridad bacteriológica.",
         badge: "Calidad Certificada",
-        icon: ShieldCheck,
+        icon: ShieldCheckIcon,
         // Nuevos campos del reverso
         backTitle: "El Proceso Jalsuri",
         backDescription:
@@ -33,7 +32,7 @@ export const valores: ValorCardProps[] = [
         description:
             "Promovemos el modelo circular con bidones retornables de larga vida útil, reduciendo significativamente la huella de plástico.",
         badge: "Responsabilidad Ambiental",
-        icon: Leaf,
+        icon: LeafRecycleIcon,
         // Nuevos campos del reverso
         backTitle: "Impacto Positivo",
         backDescription:
@@ -52,7 +51,7 @@ export const valores: ValorCardProps[] = [
         description:
             "Respetamos el flujo de trabajo de tu equipo. Garantizamos entregas programadas sin demoras para que nunca falte hidratación.",
         badge: "Atención Corporativa",
-        icon: Truck,
+        icon: DeliveryTruckIcon,
         // Nuevos campos del reverso
         backTitle: "Entregas sin estrés",
         backDescription:
@@ -71,7 +70,7 @@ export const valores: ValorCardProps[] = [
         description:
             "Implementamos tecnología de vanguardia en purificación por ozono, asegurando un sabor fresco, liviano y altamente saludable.",
         badge: "Tecnología de Punta",
-        icon: Zap,
+        icon: OzoneAtomIcon,
         // Nuevos campos del reverso
         backTitle: "El Poder del Ozono",
         backDescription:

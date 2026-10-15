@@ -1,0 +1,101 @@
+---
+import type { Props } from "../types";
+
+const { class: classNameProp, className, ...rest } = Astro.props;
+const iconClass = classNameProp ?? className ?? "h-10 w-auto text-white";
+---
+
+<svg
+    viewBox="0 0 640 640"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class={iconClass}
+    {...rest}
+>
+    <g filter="url(#filter_rocket_shadow)">
+        <!-- Fuego del propulsor -->
+        <path
+            d="M205 405C170 425 140 485 140 485C140 485 198 465 225 430Z"
+            fill="#FF5722"
+            stroke="#200B3B"
+            stroke-width="10"
+            stroke-linejoin="round"
+        ></path>
+        <path
+            d="M185 425C165 438 150 470 150 470C150 470 185 458 200 438Z"
+            fill="#FFC107"
+        ></path>
+
+        <!-- Alerón Izquierdo -->
+        <path
+            d="M280 340L210 320C170 320 150 370 180 410L240 380Z"
+            fill="#00BFA5"
+            stroke="#200B3B"
+            stroke-width="12"
+            stroke-linejoin="round"
+        ></path>
+        <!-- Alerón Derecho -->
+        <path
+            d="M400 220L470 290C500 320 480 370 430 360L380 290Z"
+            fill="#00BFA5"
+            stroke="#200B3B"
+            stroke-width="12"
+            stroke-linejoin="round"
+        ></path>
+
+        <!-- Cuerpo del Cohete -->
+        <path
+            d="M490 120C490 120 330 140 230 300C190 364 220 410 270 410C410 330 490 120 490 120Z"
+            fill="#1DE9B6"
+            stroke="#200B3B"
+            stroke-width="14"
+            stroke-linejoin="round"
+        ></path>
+
+        <!-- Punta/Punta superior -->
+        <path
+            d="M490 120C460 140 415 175 415 175L455 215C455 215 475 160 490 120Z"
+            fill="#00BFA5"
+            stroke="#200B3B"
+            stroke-width="10"
+        ></path>
+
+        <!-- Ojo de buey/Ventana -->
+        <circle
+            cx="370"
+            cy="230"
+            r="35"
+            fill="#FFFFFF"
+            stroke="#200B3B"
+            stroke-width="12"
+        ></circle>
+    </g>
+
+    <defs>
+        <filter
+            id="filter_rocket_shadow"
+            x="0"
+            y="0"
+            width="640"
+            height="640"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+        >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+            ></feColorMatrix>
+            <feOffset dx="22" dy="45"></feOffset>
+            <feComposite in2="hardAlpha" operator="out"></feComposite>
+            <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0.125 0 0 0 0 0.043 0 0 0 0 0.231 0 0 0 1 0"
+            ></feColorMatrix>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend>
+        </filter>
+    </defs>
+</svg>

@@ -80,12 +80,9 @@ const {
 
             <!-- Contenido Frontal Principal -->
             <div class="valor-card__front-content">
-                <span class="valor-card__eyebrow">
-                    AGUA PURIFICADA JALSURI
-                </span>
 
                 <div class="valor-card__icon">
-                    {Icon && <Icon class="size-14 text-white" />}
+                    {Icon && <Icon class="size-30 text-white" />}
                 </div>
 
                 <h3 class="valor-card__title">{title}</h3>
@@ -531,29 +528,18 @@ const {
 
     .valor-card__icon {
         display: grid;
-        width: 90px;
-        height: 90px;
-        margin-bottom: 18px;
-        color: white;
+        width: 120px;
+        height: 120px;
         place-items: center;
-        background: linear-gradient(
-            140deg,
-            var(--jalsuri-cyan),
-            var(--jalsuri-blue) 65%,
-            var(--jalsuri-deep)
-        );
-        border: 1px solid rgb(255 255 255 / 75%);
         border-radius: 26px;
-        box-shadow:
-            0 12px 28px rgb(0 132 255 / 22%),
-            inset 0 1px 0 rgb(255 255 255 / 35%);
+        filter: drop-shadow(0 0 10px rgba(89, 12, 212, 0.1));
         transition: transform 300ms ease;
     }
 
     .valor-card__title {
         margin: 0;
         color: var(--jalsuri-ink);
-        font-size: clamp(20px, 2vw, 25px);
+        font-size: clamp(20px, 2vw, 16px);
         font-weight: 700;
         line-height: 1.2;
         letter-spacing: -0.025em;
@@ -613,7 +599,7 @@ const {
     .valor-card__back-title {
         margin: 0 0 10px;
         color: white;
-        font-size: clamp(22px, 2vw, 26px);
+        font-size: clamp(22px, 2vw, 16px);
         font-weight: 700;
         line-height: 1.2;
     }

@@ -1,6 +1,4 @@
 ---
-import Viewer3DCanvas from "./Viewer3DCanvas";
-
 interface Props {
 	/** Rutas .glb en orden de prioridad. */
 	modelos: string[];
@@ -15,7 +13,7 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 ---
 
 <div
-	class="viewer-3d absolute inset-0 w-full h-full pointer-events-none"
+	class="viewer-3d absolute inset-0 w-full h-full pointer-events-none select-none"
 	data-viewer-3d
 	data-modelos={JSON.stringify(modelos)}
 	style="touch-action: pan-y;"
@@ -26,7 +24,8 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 		class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[80%] max-w-[500px] aspect-square rounded-full bg-linear-to-br from-primary/20 via-secondary/10 to-transparent blur-2xl"
 	>
 	</div>
-	<!-- Imagen de respaldo: se muestra cuando los .glb siguen en preparación -->
+
+	<!-- Imagen de respaldo (poster): se muestra al inicio mientras descarga el modelo 3D -->
 	<div
 		class="poster absolute inset-0 grid place-items-center p-5 sm:p-6 transition-opacity duration-700 pointer-events-auto"
 	>
@@ -36,7 +35,7 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 			<img
 				src={poster}
 				alt={posterAlt}
-				loading="lazy"
+				loading="eager"
 				class="block w-full aspect-video object-cover"
 			/>
 			<figcaption
@@ -47,8 +46,11 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 		</figure>
 	</div>
 
-	<!-- Canvas de react-three-fiber (ajustes en Viewer3DCanvas.tsx → CONFIG) -->
-	<Viewer3DCanvas client:only="react" modelos={modelos} />
+	<!-- Canvas WebGL interactivo Three.js -->
+	<canvas
+		class="webgl-canvas absolute inset-0 w-full h-full pointer-events-auto opacity-0 transition-opacity duration-700 cursor-grab active:cursor-grabbing"
+		style="touch-action: pan-y;"
+	></canvas>
 
 	<!-- Estado de carga -->
 	<div
@@ -58,16 +60,15 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 		<span
 			class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/85 text-white text-[10px] font-bold uppercase tracking-wider shadow-md"
 		>
-			<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"
-			></span>
+			<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
 			Cargando modelo 3D
 		</span>
 	</div>
 
-	<!-- Badge de estado -->
+	<!-- Badge de estado de referencia (oculto si carga el 3D) -->
 	<span
 		data-badge-ref
-		class="absolute top-4 right-4 sm:right-6 lg:right-8 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/90 text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm pointer-events-auto"
+		class="hidden absolute top-4 right-4 sm:right-6 lg:right-8 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text/90 text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm pointer-events-auto"
 	>
 		<svg
 			class="w-3.5 h-3.5"
@@ -85,10 +86,210 @@ const { modelos, poster, posterAlt, nombre } = Astro.props;
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				stroke-width="2"
-				d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12.01"></path>
+				d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12.01"
+			></path>
 		</svg>
-		Modelo 3D en preparación
+		Visual de referencia
 	</span>
 
 	<slot />
 </div>
+
+<script>
+	import * as THREE from "three";
+	import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+	import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+	import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
+	import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+	import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
+	const CONFIG = {
+		fov: 32,
+		altura: 1.15, // tamaño balanceado para no tocar el navbar
+		camZ: { escritorio: 3.5, movil: 5.8 },
+		baseY: { escritorio: -0.06, movil: 0.02 },
+		inicioY: { escritorio: 0.03, movil: 0.04 },
+		finY: { escritorio: -0.05, movil: -0.02 },
+		rotInicio: -0.45,
+		lean: -0.12,
+		vueltas: 0.75,
+		envIntensidad: 0.9,
+	};
+
+	const esGrande = () => window.matchMedia("(min-width: 1024px)").matches;
+	const pick = (v: { escritorio: number; movil: number }) =>
+		esGrande() ? v.escritorio : v.movil;
+
+	function initViewer(cont: HTMLElement) {
+		const canvas = cont.querySelector<HTMLCanvasElement>("canvas.webgl-canvas");
+		const poster = cont.querySelector<HTMLElement>(".poster");
+		const carga = cont.querySelector<HTMLElement>("[data-carga]");
+		const badgeRef = cont.querySelector<HTMLElement>("[data-badge-ref]");
+		if (!canvas) return;
+
+		let rutas: string[] = [];
+		try {
+			rutas = JSON.parse(cont.dataset.modelos || "[]");
+		} catch {
+			rutas = [];
+		}
+		if (!rutas.length) {
+			if (carga) carga.style.opacity = "0";
+			badgeRef?.classList.remove("hidden");
+			return;
+		}
+
+		let renderer: THREE.WebGLRenderer;
+		try {
+			renderer = new THREE.WebGLRenderer({
+				canvas,
+				antialias: true,
+				alpha: true,
+				powerPreference: "high-performance",
+			});
+		} catch (e) {
+			console.warn("WebGL no disponible:", e);
+			if (carga) carga.style.opacity = "0";
+			badgeRef?.classList.remove("hidden");
+			return;
+		}
+
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+		renderer.outputColorSpace = THREE.SRGBColorSpace;
+		renderer.toneMapping = THREE.ACESFilmicToneMapping;
+		renderer.toneMappingExposure = 1.05;
+		renderer.setClearColor(0x000000, 0);
+
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(CONFIG.fov, 1, 0.05, 50);
+		camera.position.set(0, 0, pick(CONFIG.camZ));
+
+		// Luces y Entorno
+		const pmrem = new THREE.PMREMGenerator(renderer);
+		const envScene = new RoomEnvironment();
+		const envTex = pmrem.fromScene(envScene, 0.04).texture;
+		scene.environment = envTex;
+		scene.environmentIntensity = CONFIG.envIntensidad;
+
+		const clave = new THREE.DirectionalLight(0xffffff, 2.2);
+		clave.position.set(2.6, 4, 3.4);
+		const relleno = new THREE.DirectionalLight(0xdcf3ff, 1.0);
+		relleno.position.set(-3.4, 1.4, 2.6);
+		const contra = new THREE.DirectionalLight(0xffffff, 1.4);
+		contra.position.set(0, 3, -4);
+		const ambiente = new THREE.AmbientLight(0xffffff, 0.4);
+		scene.add(clave, relleno, contra, ambiente);
+
+		// Controles de órbita interactivos (permite rotar el bidón al arrastrar)
+		const controls = new OrbitControls(camera, canvas);
+		controls.enableZoom = false;
+		controls.enablePan = false;
+		controls.enableDamping = true;
+		controls.dampingFactor = 0.05;
+		controls.rotateSpeed = 0.8;
+
+		// Jerarquía de grupos para transformaciones
+		const inclinado = new THREE.Group();
+		const pivote = new THREE.Group();
+		inclinado.add(pivote);
+		scene.add(inclinado);
+
+		let progresoActual = 0;
+
+		const aplicarProgreso = (p: number) => {
+			progresoActual = Math.max(0, Math.min(1, p));
+			const ease =
+				progresoActual * progresoActual * (3 - 2 * progresoActual);
+			const y =
+				pick(CONFIG.inicioY) +
+				(pick(CONFIG.finY) - pick(CONFIG.inicioY)) * ease;
+			inclinado.position.y = pick(CONFIG.baseY) + y;
+			inclinado.rotation.z = CONFIG.lean * (1 - 2 * ease);
+			pivote.rotation.y =
+				CONFIG.rotInicio +
+				Math.PI * 2 * CONFIG.vueltas * progresoActual;
+		};
+
+		aplicarProgreso(0);
+
+		// Ajuste de tamaño dinámico
+		const onResize = () => {
+			const rect = cont.getBoundingClientRect();
+			const width = Math.max(1, Math.round(rect.width));
+			const height = Math.max(1, Math.round(rect.height));
+			renderer.setSize(width, height, false);
+			camera.aspect = width / height;
+			camera.position.z = pick(CONFIG.camZ);
+			camera.updateProjectionMatrix();
+			aplicarProgreso(progresoActual);
+		};
+		onResize();
+		window.addEventListener("resize", onResize);
+
+		// Carga del modelo 3D
+		const draco = new DRACOLoader();
+		draco.setDecoderPath("/draco/");
+		const ktx2 = new KTX2Loader().detectSupport(renderer);
+		const loader = new GLTFLoader();
+		loader.setDRACOLoader(draco);
+		loader.setKTX2Loader(ktx2);
+
+		let indexModelo = 0;
+
+		const intentarCargar = () => {
+			if (indexModelo >= rutas.length) {
+				if (carga) carga.style.opacity = "0";
+				badgeRef?.classList.remove("hidden");
+				return;
+			}
+			const ruta = rutas[indexModelo++];
+			loader.load(
+				ruta,
+				(gltf) => {
+					const box = new THREE.Box3().setFromObject(gltf.scene);
+					const size = box.getSize(new THREE.Vector3());
+					const center = box.getCenter(new THREE.Vector3());
+					const scale = CONFIG.altura / Math.max(size.y, 0.0001);
+
+					const interior = new THREE.Group();
+					interior.add(gltf.scene);
+					interior.scale.setScalar(scale);
+					interior.position.copy(center).multiplyScalar(-scale);
+					pivote.add(interior);
+
+					// Ocultar carga y poster, mostrar canvas con transición suave
+					if (carga) carga.style.opacity = "0";
+					if (poster) poster.style.opacity = "0";
+					canvas.style.opacity = "1";
+				},
+				undefined,
+				(err) => {
+					console.warn("Fallo carga de modelo", ruta, err);
+					intentarCargar();
+				},
+			);
+		};
+		intentarCargar();
+
+		// Bucle de renderizado
+		let animId: number;
+		const tick = () => {
+			animId = requestAnimationFrame(tick);
+			controls.update();
+			renderer.render(scene, camera);
+		};
+		tick();
+
+		// Exponer API para sincronización con GSAP
+		(cont as any).actualizarProgreso3D = (p: number) => {
+			aplicarProgreso(p);
+			if (poster && poster.style.opacity !== "0") {
+				poster.style.transform = `translate3d(0, ${(p - 0.5) * 40}px, 0)`;
+			}
+		};
+	}
+
+	document.querySelectorAll<HTMLElement>("[data-viewer-3d]").forEach((el) => {
+		initViewer(el);
+	});
+</script>
